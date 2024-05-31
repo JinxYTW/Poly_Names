@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../css/styles.css">
+  <title>Sélection des rôles</title>
+</head>
+<body>
+  <div id="roleSelection">
+    <h1>Sélection des rôles</h1>
+    <button onclick="chooseRole('maitreintuition')">Maitre des Intuitions</button>
+    <button onclick="chooseRole('maitremot')">Maitre des Mots</button>
+  </div>
+  <script>
+    function chooseRole(role) {
+      const urlParams = new URLSearchParams(window.location.search);
+      const roomId = urlParams.get('room');
+      window.location.href = `${role}.html?room=${roomId}`;
+    }
+  </script>
+</body>
+</html>
