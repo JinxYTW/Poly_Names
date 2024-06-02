@@ -5,6 +5,7 @@ body {
     align-items: center;
     height: 100vh;
     margin: 0;
+    background-color: lightgrey; /* Ajoutez ceci pour vérifier */
   }
   
   #hub, #lobby, #roleSelection, #maitreintuition, #maitremot {
@@ -32,4 +33,33 @@ body {
   .visible-line {
     display: inline;
   }
+
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+}
+
+.card {
+  position: relative;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  aspect-ratio: 11/16;
+  font-size: 30px;
+
+  padding: 10px;
+  box-sizing: border-box;
   
+  border-radius: 5px;
+  background-color: #fff;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+
+  transition: transform 0.5s, opacity 0.5s;
+  transform-style: preserve-3d;
+
+  cursor: pointer;
+}
