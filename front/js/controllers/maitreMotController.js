@@ -7,8 +7,11 @@ class MaitreMotController {
     this.view = new MaitreMotView();
     this.grid = new Grid();
 
-    this.grid.addCard('Pomme', 'red', 1);
-    this.grid.addCard('Banane', 'yellow', 2);
+    for (let i = 0; i < 5; i++) {
+      this.grid.addCard('Starfield', 'red', i);
+      this.grid.addCard('CP2077', 'yellow', i + 5);
+    }
+    
 
     this.view.bindScreenClick(this.handleScreenClick.bind(this));
     this.view.renderGrid(this.grid.getAllCards());
@@ -16,6 +19,7 @@ class MaitreMotController {
 
   handleScreenClick() {
     this.view.hideInstructions();
+    this.view.showGrid();
   }
 }
 

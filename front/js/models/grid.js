@@ -11,7 +11,7 @@ class Grid {
             const card = new Card(word, color, id);
             this.cards.push(card);
         } else {
-            throw new Error("Grid is full");
+            throw new Error("Rille pleine");
         }
     }
 

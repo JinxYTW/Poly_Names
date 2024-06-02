@@ -2,15 +2,24 @@
     constructor() {
       this.instructionDiv = document.getElementById('maitremotinstruction');
       this.grilleDiv = document.getElementById('grille');
+      this.hint = document.getElementById('hint');
+      this.nbMots = document.getElementById('nbMots');
+      this.btn_definir = document.getElementById('btn_Definir');
+
+      this.hideGameElements();
+      
     }
   
     hideInstructions() {
       this.instructionDiv.style.display = 'none';
       this.grilleDiv.style.display = 'block';
+      
+      
     }
 
     showGrid() {
       this.grilleDiv.style.display = 'block';
+      this.showGameElements();
     }
   
     bindScreenClick(handler) {
@@ -29,6 +38,20 @@
         this.grilleDiv.appendChild(cardElement);
       });
     }
+
+    hideGameElements() {
+      this.hint.style.display = 'none';
+      this.nbMots.style.display = 'none';
+      this.btn_definir.style.display = 'none';
+    }
+  
+    showGameElements() {
+      this.hint.style.display = 'inline';
+      this.nbMots.style.display = 'inline';
+      this.btn_definir.style.display = 'inline';
+    }
+
+    
   }
 
   export { MaitreMotView}

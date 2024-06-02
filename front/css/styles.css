@@ -20,4 +20,16 @@ body {
   #grille {
     display: none;
   }
+
+  .hidden {
+    display: none;
+  }
+  
+  .visible {
+    display: block;
+  }
+
+  .visible-line {
+    display: inline;
+  }
   

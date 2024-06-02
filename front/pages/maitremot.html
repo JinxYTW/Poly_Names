@@ -1,23 +1,41 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="../css/styles.css">
   <title>Maître des mots</title>
-  
+
 </head>
+
 <body>
   <div id="maitremotinstruction">
     <h1>Vous êtes le maître des mots</h1>
-    <p>Vous avez été choisi pour être le maître des mots. Votre rôle est de donner des définitions pour aider les autres joueurs à deviner le mot secret.</p>
+    <p>Vous avez été choisi pour être le maître des mots. Votre rôle est de donner des définitions pour aider les autres
+      joueurs à deviner le mot secret.</p>
   </div>
-  
+
   <div id="grille">
-    
+
     <h2>Grille de jeu</h2>
-    
+
+  </div>
+
+  <div id="maitremot">
+
+    <input type="text" id="hint" placeholder="Entrez un indice">
+    <select id="nbMots">
+      <option value="0">_</option>
+      <option value="1">1 mot</option>
+      <option value="2">2 mots</option>
+      <option value="3">3 mots</option>
+      <option value="4">4 mots</option>
+      <option value="5">5 mots</option>
+    </select>
+    <button id="btn_Definir" disabled>Valider</button>
   </div>
   <script type="module" src="../js/maitremot.js"></script>
 </body>
+
 </html>
