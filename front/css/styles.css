@@ -5,8 +5,10 @@ body {
     align-items: center;
     height: 100vh;
     margin: 0;
-    background-color: lightgrey; /* Ajoutez ceci pour vérifier */
+    background-color: rgb(255, 255, 255); 
   }
+
+ 
   
   #hub, #lobby, #roleSelection, #maitreintuition, #maitremot {
     text-align: center;
@@ -39,21 +41,28 @@ body {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   gap: 10px;
+  background-color: #ffffff;
+
 }
 
 .card {
   position: relative;
 
-  display: flex;
+  display: inline-block;
   justify-content: center;
   align-items: center;
 
   aspect-ratio: 11/16;
   font-size: 30px;
 
+  width: 150px;
+  height: 80px;
+
+  margin: 5px;
   padding: 10px;
   box-sizing: border-box;
   
+  border:1 px solid black;
   border-radius: 5px;
   background-color: #fff;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);

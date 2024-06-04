@@ -6,6 +6,7 @@ class MaitreMotController {
   constructor() {
     this.view = new MaitreMotView();
     this.grid = new Grid();
+    
 
     // Test création de cartes
     for (let i = 0; i < 25; i++) {

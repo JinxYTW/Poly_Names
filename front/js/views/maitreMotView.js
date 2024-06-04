@@ -11,12 +11,16 @@ class MaitreMotView {
   }
 
   hideInstructions() {
+    console.log("Masquage des instructions"); 
     this.instructionDiv.classList.add('hidden');
     this.grilleDiv.classList.remove('hidden');
   }
 
   showGrid() {
-    this.grilleDiv.classList.remove('hidden');
+    console.log("Affichage de la grille");
+    
+    //this.grilleDiv.classList.add("visible");
+    this.grilleDiv.style.display = 'block';
     this.showGameElements();
   }
 
