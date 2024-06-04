@@ -7,10 +7,24 @@
   <title>Maître des intuitions</title>
 </head>
 <body>
+  <div id="turn">Tour: 0</div>
+  <div id="playerName1">Nom du joueur 1</div>
+  <div id="score">Score: 0</div>
+  <div id="playerName2">Nom du joueur 2</div>
+
   <div id="maitreintuitioninstruction">
     <h1>Vous êtes le maître des intuitions</h1>
-    <p>Vous avez été choisi pour être le maître des intuitions. Votre rôle est de donner des indices pour aider les autres joueurs à deviner le mot secret.</p>
-
+    <p>Vous avez été choisi pour être le maître des intuitions. Votre rôle est de sélectionner les cartes à retourner.</p>
   </div>
+
+  <div id="grille">
+    <div class="cards"></div>
+  </div>
+
+  <div id="chat">
+    <h2>Historique</h2>
+    <div id="chatContent"></div>
+  </div>
+  <script type="module" src="../js/maitreintuition.js"></script>
 </body>
 </html>
