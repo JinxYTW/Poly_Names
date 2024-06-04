@@ -6,6 +6,10 @@ class MaitreMotView {
     this.hint = document.getElementById('hint');
     this.nbMots = document.getElementById('nbMots');
     this.btn_definir = document.getElementById('btn_Definir');
+    this.score=document.getElementById('score');
+    this.turn=document.getElementById('turn');
+    this.playerName1=document.getElementById('playerName1');
+    this.playerName2=document.getElementById('playerName2');
 
     this.hideGameElements();
   }
@@ -40,16 +44,37 @@ class MaitreMotView {
     });
   }
 
+  updatePlayerNames(player1Name, player2Name) {
+    this.playerName1.textContent = player1Name;
+    this.playerName2.textContent = player2Name;
+  }
+
+  updateScore(player1Score, player2Score) {
+    this.score.textContent = `Score: ${player1Score} - ${player2Score}`;
+  }
+
+  updateTurn(turn) {
+    this.turn.textContent = `Tour: ${turn}`;
+  }
+
   hideGameElements() {
     this.hint.classList.add('hidden');
     this.nbMots.classList.add('hidden');
     this.btn_definir.classList.add('hidden');
+    this.score.classList.add('hidden');
+    this.turn.classList.add('hidden');
+    this.playerName1.classList.add('hidden');
+    this.playerName2.classList.add('hidden');
   }
 
   showGameElements() {
     this.hint.classList.remove('hidden');
     this.nbMots.classList.remove('hidden');
     this.btn_definir.classList.remove('hidden');
+    this.score.classList.remove('hidden');
+    this.turn.classList.remove('hidden');
+    this.playerName1.classList.remove('hidden');
+    this.playerName2.classList.remove('hidden');
   }
 }
 
