@@ -104,3 +104,25 @@ button {
   transition: transform 0.5s, opacity 0.5s;
   cursor: pointer;
 }
+
+#chat {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  width: 20%;
+  height: 20%;
+  border: 1px solid #000;
+  background-color: #fff;
+  overflow-y: auto;
+  padding: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+#chat h2 {
+  margin: 0;
+  font-size: 1.2em;
+}
+
+#chatContent {
+  margin-top: 10px;
+}

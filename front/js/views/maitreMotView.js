@@ -10,6 +10,9 @@ class MaitreMotView {
     this.turn=document.getElementById('turn');
     this.playerName1=document.getElementById('playerName1');
     this.playerName2=document.getElementById('playerName2');
+    this.chat=document.getElementById('chat');
+    this.chatContent = document.getElementById('chatContent');
+    
 
     this.hideGameElements();
   }
@@ -44,13 +47,13 @@ class MaitreMotView {
     });
   }
 
-  updatePlayerNames(player1Name, player2Name) {
+  updatePlayersName(player1Name, player2Name) {
     this.playerName1.textContent = player1Name;
     this.playerName2.textContent = player2Name;
   }
 
-  updateScore(player1Score, player2Score) {
-    this.score.textContent = `Score: ${player1Score} - ${player2Score}`;
+  updateScore( player2Score) {
+    this.score.textContent = `Score:  ${player2Score}`;
   }
 
   updateTurn(turn) {
@@ -65,6 +68,8 @@ class MaitreMotView {
     this.turn.classList.add('hidden');
     this.playerName1.classList.add('hidden');
     this.playerName2.classList.add('hidden');
+    this.chat.classList.add('hidden');
+    this.chatContent.classList.add('hidden');
   }
 
   showGameElements() {
@@ -75,6 +80,14 @@ class MaitreMotView {
     this.turn.classList.remove('hidden');
     this.playerName1.classList.remove('hidden');
     this.playerName2.classList.remove('hidden');
+    this.chat.classList.remove('hidden');
+    this.chatContent.classList.remove('hidden');
+  }
+
+  addHintToChat(hint, nbMots) {
+    const hintElement = document.createElement('div');
+    hintElement.textContent = `L'indice est ${hint},et corresponds à ${nbMots} mots`;
+    this.chatContent.appendChild(hintElement);
   }
 }
 

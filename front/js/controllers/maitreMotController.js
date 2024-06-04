@@ -26,6 +26,7 @@ class MaitreMotController {
     this.view.updatePlayersName(this.player1.getName(), this.player2.getName());
     this.view.updateScore(this.player1.getScore(), this.player2.getScore());
     this.view.updateTurn(this.turn.getTurn());
+    this.view.btn_definir.addEventListener('click', this.handleHintSubmission.bind(this));
   }
 
   handleScreenClick() {
@@ -41,6 +42,17 @@ class MaitreMotController {
   nextTurn() {
     this.turn.nextTurn();
     this.view.updateTurn(this.turn.getTurn());
+  }
+
+  handleHintSubmission() {
+    const hint = this.view.hint.value;
+    const nbMots = this.view.nbMots.value;
+
+    if (hint && nbMots > 0) {
+      this.view.addHintToChat(hint, nbMots);
+      this.view.hint.value = '';
+      this.view.nbMots.value = '0';
+    }
   }
 }
 
