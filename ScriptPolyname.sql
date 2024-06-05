@@ -11,13 +11,13 @@ CREATE DATABASE Poly_Names;
 USE Poly_Names;
 
 CREATE TABLE Partie (
-    id_partie INT PRIMARY KEY,
+    id_partie INT PRIMARY KEY AUTO_INCREMENT,
     score INT,
     unique_code VARCHAR(255)
 );
 
 CREATE TABLE Joueur (
-    id_joueur INT PRIMARY KEY,
+    id_joueur INT PRIMARY KEY AUTO_INCREMENT,
     pseudo VARCHAR(255),
     role VARCHAR(255),
     id_partie INT
@@ -41,9 +41,9 @@ CREATE TABLE Dictionnaire (
 );
 
 CREATE TABLE Carte (
-    id_carte INT PRIMARY KEY,
+    id_carte INT PRIMARY KEY AUTO_INCREMENT,
     mot VARCHAR(255),
-    etat VARCHAR(255),
+    etat BOOLEAN,
     id_couleur INT,
     id_mot INT
 );
