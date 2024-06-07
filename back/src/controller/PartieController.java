@@ -14,6 +14,7 @@ public class PartieController {
 
     }
     public ArrayList<Partie> findAll(WebServerContext context){
+        
         ArrayList<Partie> res=new ArrayList<>();
         try{
             PartieDao myDao=new PartieDao();
@@ -32,6 +33,7 @@ public class PartieController {
             PartieDao myDao = new PartieDao();
             Partie myPartie = myDao.createLobby();
             WebServerResponse myResponse = context.getResponse();
+            myResponse.json(myPartie);
             if (myPartie != null) {
                 myResponse.json("{ \"unique_code\": \"" + myPartie.unique_code() + "\" }");
             } 
