@@ -24,4 +24,22 @@ public class CarteController {
         }
         return res;
     } 
+    public ArrayList<Carte> genererCarte(WebServerContext context){
+        ArrayList<Carte> cartes=new ArrayList<>();
+        try{
+            CarteDao myDao=new CarteDao();
+            cartes=myDao.genererCarte();
+            WebServerResponse myResponse=context.getResponse();
+            myResponse.json("ok,25 cartes en plus dans la bdd");
+        }
+        catch(Exception e){
+            System.out.println(e.getMessage());
+            
+            System.out.println("là");
+        }
+        return cartes;
+    }
+
+    
+    
 }

@@ -1,7 +1,5 @@
 package controller;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.UUID;
 
 import dao.PartieDao;
 import models.Partie;
