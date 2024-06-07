@@ -6,11 +6,14 @@ export class HubController {
     this.room = new Room();
     this.view = new HubView();
 
-    this.view.bindCreateLobby(this.handleCreateLobby.bind(this));
+    this.view.bindCreateLobby();
+    
   }
-
+  
+/*
   handleCreateLobby() {
     const roomId = this.room.roomId;
     window.location.href = `lobby.html?room=${roomId}`;
   }
+    */
 }

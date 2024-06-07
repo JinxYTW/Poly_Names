@@ -31,7 +31,7 @@ CREATE TABLE Tour (
 );
 
 CREATE TABLE Couleur (
-    id_couleur INT PRIMARY KEY,
+    id_couleur INT PRIMARY KEY AUTO_INCREMENT,
     texte VARCHAR(255)
 );
 
@@ -41,9 +41,10 @@ CREATE TABLE Dictionnaire (
 );
 
 CREATE TABLE Carte (
-    id_carte INT PRIMARY KEY AUTO_INCREMENT,
+    id_carte INT PRIMARY KEY ,
     mot VARCHAR(255),
     etat BOOLEAN,
+    position INT,
     id_couleur INT,
     id_mot INT
 );
@@ -191,3 +192,7 @@ INSERT INTO Dictionnaire (texte) VALUES
 ('Medal of honor'),
 ('❤️Antoine Daniel❤️');
 
+INSERT INTO Couleur (texte) VALUES 
+('Bleu'),
+('Gris'),
+('Noir');

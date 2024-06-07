@@ -1,5 +1,7 @@
 package controller;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.UUID;
 
 import dao.PartieDao;
 import models.Partie;
@@ -24,4 +26,18 @@ public class PartieController {
         }
         return res;
     } 
+
+    public void createLobby(WebServerContext context) {
+        try {
+            PartieDao myDao = new PartieDao();
+            Partie myPartie = myDao.createLobby();
+            WebServerResponse myResponse = context.getResponse();
+            if (myPartie != null) {
+                myResponse.json(myPartie);
+            } 
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    
 }
