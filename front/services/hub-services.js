@@ -4,8 +4,8 @@ class HubServices{
 
     async handleCreateLobby() {
         try {
-          const response = await fetch('/api/createLobby', {
-            method: 'POST',
+          const response = await fetch('http://127.0.0.1:8081/api/createLobby', {
+            method: 'GET',
             headers: {
               'Content-Type': 'application/json'
             }
