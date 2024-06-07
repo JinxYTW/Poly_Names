@@ -26,18 +26,31 @@ public class PartieController {
         return res;
     } 
 
-    public void createLobby(WebServerContext context) {
+    public String createLobbyCode(WebServerContext context) {
         try {
             PartieDao myDao = new PartieDao();
-            Partie myPartie = myDao.createLobby();
+            Partie myPartie = myDao.createLobbyCode();
             WebServerResponse myResponse = context.getResponse();
             myResponse.json(myPartie);
             if (myPartie != null) {
                 myResponse.json("{ \"unique_code\": \"" + myPartie.unique_code() + "\" }");
+                return myPartie.unique_code();
+            } 
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return null;
+    }
+    public void createLobby(WebServerContext context,String uniqueCode) {
+        try {
+            PartieDao myDao = new PartieDao();
+            Partie myPartie = myDao.findByCode(uniqueCode);
+            WebServerResponse myResponse = context.getResponse();
+            if (myPartie != null) {
+                myResponse.json("Cest la partie qui est au code suivant :" + myPartie.unique_code());
             } 
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }
-    
 }

@@ -24,13 +24,13 @@ public class CarteController {
         }
         return res;
     } 
-    public ArrayList<Carte> genererCarte(WebServerContext context){
+    public ArrayList<Carte> genererCarte(String uniqueCode){
         ArrayList<Carte> cartes=new ArrayList<>();
         try{
             CarteDao myDao=new CarteDao();
-            cartes=myDao.genererCarte();
-            WebServerResponse myResponse=context.getResponse();
-            myResponse.json("ok,25 cartes en plus dans la bdd");
+            cartes=myDao.genererCarte(uniqueCode);
+            //WebServerResponse myResponse=context.getResponse();
+            //myResponse.json("ok,25 cartes en plus dans la bdd");
         }
         catch(Exception e){
             System.out.println(e.getMessage());

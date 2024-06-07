@@ -4,13 +4,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 import java.util.Random;
-import dao.DictionnaireDao;
 
 import database.PolyNameDatabase;
 import models.Carte;
 import models.Dictionnaire;
+import models.Partie;
 
 public class CarteDao {
     public CarteDao(){
@@ -41,24 +40,28 @@ public class CarteDao {
         }
     }
 
-    public ArrayList<Carte> genererCarte(){
+    public ArrayList<Carte> genererCarte(String uniqueCode){
         ArrayList<Carte> cartes = new ArrayList<>();
         try {
-            DictionnaireDao myDao=new DictionnaireDao();
-            ArrayList<Dictionnaire> mots =myDao.findAll();
+            
+            PolyNameDatabase myDatabase = new PolyNameDatabase();
+            DictionnaireDao myDictionnaireDao=new DictionnaireDao();
+            ArrayList<Dictionnaire> mots =myDictionnaireDao.findAll();
+            PartieDao myPartieDao=new PartieDao();
+            Partie partie =myPartieDao.findByCode(uniqueCode);
+            int id =partie.id_partie();
             Collections.shuffle(mots, new Random());
             for (int i = 0; i < 25; i++) {
                 Dictionnaire dict = mots.get(i);
-                
-                PolyNameDatabase myDatabase = new PolyNameDatabase();
                 String requestCreate = "INSERT INTO Carte (mot, etat, position, id_couleur, id_mot, id_partie) VALUES (?, ?, ?, ?, ?, ?)";
                 PreparedStatement prepStatCreate = myDatabase.prepareStatement(requestCreate);
                 prepStatCreate.setString(1, dict.texte());
                 prepStatCreate.setBoolean(2, false);
                 prepStatCreate.setInt(3, i);
                 prepStatCreate.setInt(4, 1);
-                prepStatCreate.setInt(5, 1);
-                prepStatCreate.setInt(6, 1);
+                prepStatCreate.setInt(5, myDictionnaireDao.getId(dict.texte()));
+                prepStatCreate.setInt(6, id);
+                System.out.println(prepStatCreate+dict.texte());
                 prepStatCreate.executeUpdate();
             }
 
@@ -66,7 +69,6 @@ public class CarteDao {
         } 
         catch(Exception e){
             System.out.println(e.getMessage());
-            System.out.println("ici");
             return cartes;
         }
         

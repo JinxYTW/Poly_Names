@@ -1,10 +1,13 @@
 import controller.CarteController;
 import controller.CouleurController;
 import controller.DictionnaireController;
+import controller.JoueurController;
 import controller.PartieController;
 import controller.TourController;
+import models.Partie;
 import webserver.WebServer;
 import webserver.WebServerContext;
+import webserver.WebServerResponse;
 
 public class App {
     public static void main(String[] args) throws Exception {
@@ -20,12 +23,16 @@ public class App {
         TourController my_controller_tour= new TourController();
         webserver.getRouter().get("/api/tour",(WebServerContext context) -> { my_controller_tour.findAll(context); } );
         CarteController my_controller_carte= new CarteController();
-        webserver.getRouter().get("/api/generateCarte",(WebServerContext context) -> { my_controller_carte.genererCarte(context); } );
-
 
 
         PartieController my_controller2= new PartieController();
-        webserver.getRouter().get("/api/createLobby",(WebServerContext context) -> { my_controller2.createLobby(context); } );     
+        webserver.getRouter().get("/api/createLobby", (WebServerContext context) -> {
+            String uniqueCode = my_controller2.createLobbyCode(context);
+            my_controller_carte.genererCarte(uniqueCode);
+            webserver.getRouter().get("/api/" + uniqueCode, (WebServerContext codeContext) -> {my_controller2.createLobby(codeContext, uniqueCode); });
+        });
+        JoueurController my_Controller3= new JoueurController();
+        webserver.getRouter().get("/api/detect",(WebServerContext context) -> { my_Controller3.detect(context); } );
 
         System.out.println("Hello, World!");
     }

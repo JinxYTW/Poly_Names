@@ -32,18 +32,10 @@ public class PartieDao {
             return res;
         }
     }
-
-    public Partie createLobby() {
-        Partie myPartie = null;
-        try {
+    public Partie findByCode(String uniqueCode){
+        try{
+            PolyNameDatabase myDatabase= new PolyNameDatabase();
             
-            String uniqueCode = UUID.randomUUID().toString().substring(0, 8); // Génère un ID unique de 8 caractères
-            PolyNameDatabase myDatabase = new PolyNameDatabase();
-            String requestCreate = "INSERT INTO partie (unique_code, score) VALUES (?, ?)";
-            PreparedStatement prepStatCreate = myDatabase.prepareStatement(requestCreate);
-            prepStatCreate.setString(1, uniqueCode);
-            prepStatCreate.setInt(2, 0);
-            prepStatCreate.executeUpdate();
             String requestRead = "SELECT * FROM partie WHERE unique_code = '" + uniqueCode + "'";
             PreparedStatement prepStatRead=myDatabase.prepareStatement(requestRead);
             ResultSet results = prepStatRead.executeQuery();   
@@ -54,6 +46,24 @@ public class PartieDao {
                 Partie myRecord = new Partie(id_partie,unique_code,score);
                 return myRecord;
                 }
+            } 
+        catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+        return null;
+    }
+    public Partie createLobbyCode() {
+        Partie myPartie = null;
+        try {
+            
+            String uniqueCode = UUID.randomUUID().toString().substring(0, 8); // Génère un ID unique de 8 caractères
+            PolyNameDatabase myDatabase = new PolyNameDatabase();
+            String requestCreate = "INSERT INTO partie (unique_code, score) VALUES (?, ?)";
+            PreparedStatement prepStatCreate = myDatabase.prepareStatement(requestCreate);
+            prepStatCreate.setString(1, uniqueCode);
+            prepStatCreate.setInt(2, 0);
+            prepStatCreate.executeUpdate();
+            return findByCode(uniqueCode);
             } 
             catch (Exception e) {
             System.out.println(e.getMessage());
