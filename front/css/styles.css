@@ -51,6 +51,10 @@ body {
   margin-bottom: 20px;
 }
 
+#maitremotinstruction #maitreintuitioninstruction #hub #lobby #roleSelection{
+  text-align: center;
+}
+
 #grille {
   display: none;
   width: 80%;
@@ -126,3 +130,24 @@ button {
 #chatContent {
   margin-top: 10px;
 }
+
+.index-badge {
+  position: absolute;
+  top: 0;
+  right: 0;
+  transform: translate(50%, -50%);
+  background-color: rgb(255, 255, 255);
+  border-radius: 50%; /* Pour forcer la forme du cercle */
+  width: 30px; /* Ajustez la largeur */
+  height: 30px; /* Ajustez la hauteur */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.index-badge img {
+  width: 80%; /* Ajustez la taille de l'image */
+  height: auto; /* Pour conserver les proportions */
+  border-radius: 50%; /* Pour forcer la forme du cercle */
+}
+

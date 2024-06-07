@@ -39,9 +39,20 @@ class MaitreIntuitionView {
         cardElement.classList.add('card');
         cardElement.textContent = card.word.getWord();
         cardElement.dataset.index = index;
+    
+        // Créer le span pour le rond avec l'image d'index
+        const indexBadge = document.createElement('span');
+        indexBadge.classList.add('index-badge');
+        const indexImage = document.createElement('img');
+        indexImage.src = "../img/click.png"; // Mettez votre chemin d'image ici
+        indexImage.alt = "Error";
+        indexBadge.appendChild(indexImage);
+        cardElement.appendChild(indexBadge);
+    
         this.cardsContainer.appendChild(cardElement);
       });
     }
+    
   
     updatePlayersName(player1Name, player2Name) {
       this.playerName1.textContent = player1Name;

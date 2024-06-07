@@ -5,7 +5,7 @@ class LobbyView  {
     }
   
     displayRoomLink(roomId) {
-      this.roomLink.value = `${window.location.origin}/front/pages/lobby.html?room=${roomId}`;
+      this.roomLink.value = `${window.location.origin}/front/pages/join.html?room=${roomId}`;
     }
   
     enableStartButton() {

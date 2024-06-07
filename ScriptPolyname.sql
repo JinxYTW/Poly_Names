@@ -2,7 +2,7 @@
 Partie (id_partie, score, unique_code)
 Joueur (id_joueur, pseudo, role, #id_partie)
 Tour (id_tour, indice, word_to_find_nb, #id_partie)
-Carte (id_carte, mot, etat, #id_couleur, #id_mot)
+Carte (id_carte, mot,position, etat, #id_couleur, #id_mot)
 Couleur (id_couleur, texte)
 Dictionnaire (id_mot, texte)
 */
@@ -31,7 +31,7 @@ CREATE TABLE Tour (
 );
 
 CREATE TABLE Couleur (
-    id_couleur INT PRIMARY KEY,
+    id_couleur INT PRIMARY KEY AUTO_INCREMENT,
     texte VARCHAR(255)
 );
 
@@ -41,9 +41,10 @@ CREATE TABLE Dictionnaire (
 );
 
 CREATE TABLE Carte (
-    id_carte INT PRIMARY KEY AUTO_INCREMENT,
+    id_carte INT PRIMARY KEY ,
     mot VARCHAR(255),
     etat BOOLEAN,
+    position INT,
     id_couleur INT,
     id_mot INT
 );
@@ -191,3 +192,7 @@ INSERT INTO Dictionnaire (texte) VALUES
 ('Medal of honor'),
 ('❤️Antoine Daniel❤️');
 
+INSERT INTO Couleur (texte) VALUES 
+('Bleu'),
+('Gris'),
+('Noir');
