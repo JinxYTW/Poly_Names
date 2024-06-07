@@ -2,7 +2,7 @@
 Partie (id_partie, score, unique_code)
 Joueur (id_joueur, pseudo, role, #id_partie)
 Tour (id_tour, indice, word_to_find_nb, #id_partie)
-Carte (id_carte, mot, etat, #id_couleur, #id_mot)
+Carte (id_carte, mot,position, etat, #id_couleur, #id_mot)
 Couleur (id_couleur, texte)
 Dictionnaire (id_mot, texte)
 */

@@ -33,7 +33,7 @@ public class PartieController {
             Partie myPartie = myDao.createLobby();
             WebServerResponse myResponse = context.getResponse();
             if (myPartie != null) {
-                myResponse.json(myPartie);
+                myResponse.json("{ \"unique_code\": \"" + myPartie.unique_code() + "\" }");
             } 
         } catch (Exception e) {
             System.out.println(e.getMessage());

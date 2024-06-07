@@ -3,6 +3,7 @@ package dao;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.List;
 
 import database.PolyNameDatabase;
 import models.Carte;
@@ -33,4 +34,29 @@ public class CarteDao {
             return res;
         }
     }
+
+    public ArrayList<Carte> genererCarte(){
+        ArrayList<Carte> cartes = new ArrayList<>();
+        try {
+            PolyNameDatabase my_Database= new PolyNameDatabase();
+            String request="SELECT texte FROM dictionnaire";
+            PreparedStatement prepStat=my_Database.prepareStatement(request);
+            ResultSet results = prepStat.executeQuery();   
+            List<String> mots = new ArrayList<>(); 
+            while (results.next()) {
+                mots.add(results.getString("texte"));
+            }
+
+
+
+            
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
+    
+    return cartes;
+    }
+
+    
+
 }
