@@ -29,6 +29,26 @@ public class App {
             my_controller_carte.genererCarte(uniqueCode);
             webserver.getRouter().get("/api/" + uniqueCode, (WebServerContext codeContext) -> {my_controller2.createLobby(codeContext, uniqueCode); });
         });
+
+        
+
+        webserver.getRouter().get("/api/joinLobby/:uniqueCode", (WebServerContext context) -> {
+            System.out.println("uniqueCodeRouter : " + context.getRequest().getParam("uniqueCode"));
+            String uniqueCode = context.getRequest().getParam( "uniqueCode");
+            my_controller2.joinLobby(context, uniqueCode);
+        });
+
+        webserver.getRouter().get("/api/updateScore/:uniqueCode", (WebServerContext context) -> {
+            String uniqueCode = context.getRequest().getParam("uniqueCode");
+            my_controller2.updateScore(context, uniqueCode);
+        });
+
+
+
+
+
+
+
         JoueurController my_Controller3= new JoueurController();
         webserver.getRouter().get("/api/detect",(WebServerContext context) -> { my_Controller3.detect(context); } );
 
