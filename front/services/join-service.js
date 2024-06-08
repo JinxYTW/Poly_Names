@@ -17,10 +17,10 @@ class joinService {
             if (response.ok) {
                 const data = await response.json();
                 console.log('Data : ', data);
-                console.log(`Lobby rejoint : ${data.unique_code}`);
-                const roomId = data.unique_code;
+                console.log(`Lobby rejoint : ${data}`);
+                const roomId = data;
                 console.log(`Room ID: ${roomId}`);
-                //window.location.href = `lobby.html?room=${roomId}`;
+                window.location.href = `lobby.html?room=${roomId}`;
             } else {
                 console.error('Lobby not found');
             }

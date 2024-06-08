@@ -12,18 +12,14 @@ class joinView {
         
         if (uniqueCode) {
             const roomId = await this.service.handleJoinLobby(uniqueCode);
-            console.log("ok")
-            console.log(`Room ID: ${roomId}`);}
+            }
              else {
             console.error('No room code provided');
         }
     }
     
 
-    redirection(roomId) {
-        console.log(`Redirection au lobby: ${roomId}`);
-        window.location.href = `lobby.html?room=${roomId}`;
-    }
+    
 }
 
 export { joinView };
