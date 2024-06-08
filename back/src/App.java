@@ -4,10 +4,8 @@ import controller.DictionnaireController;
 import controller.JoueurController;
 import controller.PartieController;
 import controller.TourController;
-import models.Partie;
 import webserver.WebServer;
 import webserver.WebServerContext;
-import webserver.WebServerResponse;
 
 public class App {
     public static void main(String[] args) throws Exception {
