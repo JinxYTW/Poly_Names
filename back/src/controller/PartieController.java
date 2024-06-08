@@ -57,8 +57,10 @@ public class PartieController {
     public void joinLobby(WebServerContext context, String uniqueCode) {
         try {
             PartieDao myDao = new PartieDao();
+            System.out.println("uniqueCodeController : " + uniqueCode);
             Partie myPartie = myDao.joinLobby(uniqueCode);
             WebServerResponse myResponse = context.getResponse();
+            System.out.println("myPartie : " + myPartie);
             if (myPartie != null) {
                 myResponse.json("Cest la partie qui est au code suivant :" + myPartie.unique_code());
             }

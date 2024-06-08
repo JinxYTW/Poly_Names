@@ -32,8 +32,11 @@ public class App {
             webserver.getRouter().get("/api/" + uniqueCode, (WebServerContext codeContext) -> {my_controller2.createLobby(codeContext, uniqueCode); });
         });
 
-        webserver.getRouter().get("/api/joinLobby", (WebServerContext context) -> {
-            String uniqueCode = context.getRequest().getParam( "room");
+        
+
+        webserver.getRouter().get("/api/joinLobby/:uniqueCode", (WebServerContext context) -> {
+            System.out.println("uniqueCodeRouter : " + context.getRequest().getParam("uniqueCode"));
+            String uniqueCode = context.getRequest().getParam( "uniqueCode");
             my_controller2.joinLobby(context, uniqueCode);
         });
 
