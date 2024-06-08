@@ -124,4 +124,6 @@ public class PartieDao {
         }
         return -1;
     }
+
+    
 }

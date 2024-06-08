@@ -1,3 +1,5 @@
+import { MaitreMotServices } from "../../services/maitremot-services.js";
+
 class MaitreMotView {
   constructor() {
     this.instructionDiv = document.getElementById('maitremotinstruction');
@@ -38,11 +40,11 @@ class MaitreMotView {
   renderGrid(cards) {
     console.log("Rendu de la carte ",cards);
     this.cardsContainer.innerHTML = '';
-    cards.forEach((card, index) => {
+    cards.forEach((card) => {
       const cardElement = document.createElement('div');
       cardElement.classList.add('card');
-      cardElement.textContent = card.word.getWord();
-      cardElement.dataset.index = index;
+      cardElement.textContent = card.mot; 
+      cardElement.dataset.index = card.position; 
       this.cardsContainer.appendChild(cardElement);
     });
   }

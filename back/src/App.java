@@ -51,6 +51,14 @@ public class App {
 
 
 
+        webserver.getRouter().get("/api/getCartes/:uniqueCode", (WebServerContext context) -> {
+            CarteController carteController = new CarteController();
+            String uniqueCode = context.getRequest().getParam("uniqueCode");
+            String cartesJson = carteController.getCards(uniqueCode);
+            context.getResponse().json(cartesJson);
+        });
+        
+
 
 
 

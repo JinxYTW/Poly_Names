@@ -1,7 +1,7 @@
 /*
-Partie (id_partie, score, unique_code)
+Partie (id_partie, score,nb_joueur, unique_code)
 Joueur (id_joueur, pseudo, role, #id_partie)
-Tour (id_tour, indice, word_to_find_nb, #id_partie)
+Tour (id_tour,tour, indice, word_to_find_nb, #id_partie)
 Carte (id_carte, mot,position, etat,id_partie, #id_couleur, #id_mot)
 Couleur (id_couleur, texte)
 Dictionnaire (id_mot, texte)
@@ -14,6 +14,7 @@ USE Poly_Names;
 
 CREATE TABLE Partie (
     id_partie INT PRIMARY KEY AUTO_INCREMENT,
+    nb_joueur INT,
     score INT,
     unique_code VARCHAR(255)
 );
@@ -27,6 +28,7 @@ CREATE TABLE Joueur (
 
 CREATE TABLE Tour (
     id_tour INT PRIMARY KEY AUTO_INCREMENT,
+    tour INT,
     indice VARCHAR(255),
     word_to_find_nb INT,
     id_partie INT

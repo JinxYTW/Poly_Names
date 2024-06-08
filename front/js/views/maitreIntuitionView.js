@@ -37,7 +37,7 @@ class MaitreIntuitionView {
       cards.forEach((card, index) => {
         const cardElement = document.createElement('div');
         cardElement.classList.add('card');
-        cardElement.textContent = card.word.getWord();
+        cardElement.textContent = card.mot.getWord();
         cardElement.dataset.index = index;
     
         // Créer le span pour le rond avec l'image d'index

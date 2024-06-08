@@ -1,20 +1,20 @@
 import { Word } from "./word.js";
 
 class Card {
-    #word;
+    #mot;
     #color;
     #id;
     #colorHidden;
 
-    constructor(word, color, id, colorHidden = false) {
-        this.#word = new Word(word);
+    constructor(mot, color, id, colorHidden = false) {
+        this.#mot = new Word(mot);
         this.#color = color;
         this.#id = id;
         this.#colorHidden = colorHidden;
     }
 
-    get word() {
-        return this.#word;
+    get mot() {
+        return this.#mot;
     }
 
     get color() {

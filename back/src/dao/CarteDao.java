@@ -6,6 +6,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+
 import database.PolyNameDatabase;
 import models.Carte;
 import models.Dictionnaire;
@@ -77,4 +80,5 @@ public class CarteDao {
         }
         
     }
+    
 }

@@ -2,6 +2,7 @@ import { MaitreMotView } from '../views/maitreMotView.js';
 import { Grid } from '../models/grid.js';
 import { Player } from '../models/player.js';
 import { Turn } from '../models/turn.js';
+import { MaitreMotServices } from '../../services/maitremot-services.js';
 
 
 class MaitreMotController {
@@ -11,22 +12,23 @@ class MaitreMotController {
     this.player1 = new Player('Joueur 1');
     this.player2 = new Player('Joueur 2');
     this.turn = new Turn();
-
-    
-
-    // Test création de cartes
-    for (let i = 0; i < 25; i++) {
-      const word = `Mot ${i + 1}`;
-      const color = i % 2 === 0 ? 'Bleu' : 'Gris';
-      this.grid.addCard(word, color, i);
-    }
+    this.services = new MaitreMotServices();
 
     this.view.bindScreenClick(this.handleScreenClick.bind(this));
+    this.view.btn_definir.addEventListener('click', this.handleHintSubmission.bind(this));
+
+    const uniqueCode = window.location.search.split('=')[1];
+  }
+
+    async loadAndDisplayCards() {
+    const cards = await this.services.getCartes(uniqueCode);
+    this.gris.setCards(cards);
     this.view.renderGrid(this.grid.getAllCards());
+    
     this.view.updatePlayersName(this.player1.getName(), this.player2.getName());
     this.view.updateScore(this.player1.getScore(), this.player2.getScore());
     this.view.updateTurn(this.turn.getTurn());
-    this.view.btn_definir.addEventListener('click', this.handleHintSubmission.bind(this));
+    
   }
 
   handleScreenClick() {

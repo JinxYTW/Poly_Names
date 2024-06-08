@@ -6,9 +6,9 @@
             this.cards = [];
         }
 
-        addCard(word, color, id) {
+        addCard(mot, color, id) {
             if (this.cards.length < this.size * this.size) {
-                const card = new Card(word, color, id);
+                const card = new Card(mot, color, id);
                 this.cards.push(card);
             } else {
                 throw new Error("Grille pleine");
