@@ -7,32 +7,7 @@
 </head>
 <body>
 
-    <script>
-        // Exécutez vos fonctions et effectuez vos requêtes fetch ici
-        fetch('https://example.com/api/join-lobby', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                lobbyId: 'your_lobby_id',
-                userId: 'your_user_id'
-            })
-        })
-        .then(response => {
-            if (response.ok) {
-                // Le lobby a été rejoint avec succès
-                console.log('Lobby rejoint avec succès !');
-            } else {
-                // Gérez les erreurs de requête
-                console.error('Erreur lors de la requête pour rejoindre le lobby.');
-            }
-        })
-        .catch(error => {
-            // Attrapez les erreurs de connexion ou les erreurs de traitement
-            console.error('Une erreur s\'est produite :', error);
-        });
-    </script>
     
+    <script type="module" src="../js/join.js"></script>   
 </body>
 </html>
