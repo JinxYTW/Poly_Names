@@ -114,4 +114,14 @@ public class PartieDao {
         }
         return myPartie;
     }
+
+    public int getScore(String uniqueCode) {
+        try {
+            Partie myPartie = findByCode(uniqueCode);
+            return myPartie.score();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return -1;
+    }
 }

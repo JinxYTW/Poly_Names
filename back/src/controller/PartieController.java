@@ -2,6 +2,7 @@ package controller;
 import java.util.ArrayList;
 
 import dao.PartieDao;
+import dao.TourDao;
 import models.Partie;
 
 import webserver.WebServerContext;
@@ -60,7 +61,6 @@ public class PartieController {
             System.out.println("uniqueCodeController : " + uniqueCode);
             Partie myPartie = myDao.joinLobby(uniqueCode);
             WebServerResponse myResponse = context.getResponse();
-            System.out.println("myPartie : " + myPartie);
             if (myPartie != null) {
                 myResponse.json( myPartie.unique_code());
             }
@@ -77,6 +77,20 @@ public class PartieController {
             if (myPartie != null) {
                 myResponse.json("Cest la partie qui est au code suivant :" + myPartie.unique_code());
             }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    public void getInfo(WebServerContext context, String uniqueCode){
+        try {
+            PartieDao myPartieDao = new PartieDao();
+            TourDao myTourDao= new TourDao();
+            int score = myPartieDao.getScore(uniqueCode);
+            int tour = myTourDao.getTour(uniqueCode);
+            WebServerResponse myResponse = context.getResponse();
+            String res="Score : "+score+" Tour : "+tour;
+            myResponse.json(res);
+            
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }

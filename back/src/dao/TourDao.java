@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 
 import database.PolyNameDatabase;
+import models.Partie;
 import models.Tour;
 
 public class TourDao {
@@ -31,5 +32,29 @@ public class TourDao {
             System.out.println(e.getMessage());
             return res;
         }
+    }
+    public int getTour(String uniqueCode) {
+        int res=-1;
+        try {            
+            PartieDao myPartieDao=new PartieDao();
+            Partie myPartie=myPartieDao.findByCode(uniqueCode);
+            int id =myPartie.id_partie();
+            if (myPartie != null) {
+                PolyNameDatabase myDatabase = new PolyNameDatabase();
+                String request = "SELECT * FROM tour WHEN id_partie== ?";
+                PreparedStatement prepStat = myDatabase.prepareStatement(request);
+                prepStat.setInt(1, id);
+                ResultSet results = prepStat.executeQuery();   
+                while (results.next()){
+                    final int tour=results.getInt("tour");
+                    res=tour;
+                    }
+                } 
+                return res;
+            }
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return res;
     }
 }

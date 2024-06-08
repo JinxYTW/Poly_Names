@@ -50,15 +50,19 @@ public class CarteDao {
             PartieDao myPartieDao=new PartieDao();
             Partie partie =myPartieDao.findByCode(uniqueCode);
             int id =partie.id_partie();
+            int couleur;
             Collections.shuffle(mots, new Random());
             for (int i = 0; i < 25; i++) {
+                if (i<8)couleur=1;
+                else if (i<23) couleur=2;
+                else couleur =3;
                 Dictionnaire dict = mots.get(i);
                 String requestCreate = "INSERT INTO Carte (mot, etat, position, id_couleur, id_mot, id_partie) VALUES (?, ?, ?, ?, ?, ?)";
                 PreparedStatement prepStatCreate = myDatabase.prepareStatement(requestCreate);
                 prepStatCreate.setString(1, dict.texte());
                 prepStatCreate.setBoolean(2, false);
                 prepStatCreate.setInt(3, i);
-                prepStatCreate.setInt(4, 1);
+                prepStatCreate.setInt(4, couleur);
                 prepStatCreate.setInt(5, myDictionnaireDao.getId(dict.texte()));
                 prepStatCreate.setInt(6, id);
                 System.out.println(prepStatCreate+dict.texte());

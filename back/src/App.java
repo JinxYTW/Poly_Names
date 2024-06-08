@@ -23,11 +23,11 @@ public class App {
         CarteController my_controller_carte= new CarteController();
 
 
-        PartieController my_controller2= new PartieController();
+        PartieController my_controller= new PartieController();
         webserver.getRouter().get("/api/createLobby", (WebServerContext context) -> {
-            String uniqueCode = my_controller2.createLobbyCode(context);
+            String uniqueCode = my_controller.createLobbyCode(context);
             my_controller_carte.genererCarte(uniqueCode);
-            webserver.getRouter().get("/api/" + uniqueCode, (WebServerContext codeContext) -> {my_controller2.createLobby(codeContext, uniqueCode); });
+            webserver.getRouter().get("/api/" + uniqueCode, (WebServerContext codeContext) -> {my_controller.createLobby(codeContext, uniqueCode); });
         });
 
         
@@ -35,12 +35,17 @@ public class App {
         webserver.getRouter().get("/api/joinLobby/:uniqueCode", (WebServerContext context) -> {
             System.out.println("uniqueCodeRouter : " + context.getRequest().getParam("uniqueCode"));
             String uniqueCode = context.getRequest().getParam( "uniqueCode");
-            my_controller2.joinLobby(context, uniqueCode);
+            my_controller.joinLobby(context, uniqueCode);
         });
 
         webserver.getRouter().get("/api/updateScore/:uniqueCode", (WebServerContext context) -> {
             String uniqueCode = context.getRequest().getParam("uniqueCode");
-            my_controller2.updateScore(context, uniqueCode);
+            my_controller.updateScore(context, uniqueCode);
+        });
+
+        webserver.getRouter().get("/api/getInfo/:uniqueCode", (WebServerContext context) -> {
+            String uniqueCode = context.getRequest().getParam("uniqueCode");
+            my_controller.getInfo(context, uniqueCode);
         });
 
 
