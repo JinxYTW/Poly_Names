@@ -22,7 +22,6 @@ public class App {
         webserver.getRouter().get("/api/tour",(WebServerContext context) -> { my_controller_tour.findAll(context); } );
         CarteController my_controller_carte= new CarteController();
 
-
         PartieController my_controller= new PartieController();
         webserver.getRouter().get("/api/createLobby", (WebServerContext context) -> {
             String uniqueCode = my_controller.createLobbyCode(context);
@@ -51,11 +50,9 @@ public class App {
 
 
         webserver.getRouter().get("/api/getCartes/:uniqueCode", (WebServerContext context) -> {
-            CarteController carteController = new CarteController();
             System.out.println("uniqueCodeRouter : " + context.getRequest().getParam("uniqueCode"));
             String uniqueCode = context.getRequest().getParam("uniqueCode");
-            String cartesJson = carteController.getCards(uniqueCode);
-            context.getResponse().json(cartesJson);
+            my_controller_carte.getCards(context,uniqueCode);
         });
         
 

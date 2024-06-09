@@ -6,12 +6,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
-
 import database.PolyNameDatabase;
 import models.Carte;
 import models.Dictionnaire;
+import models.Joueur;
 import models.Partie;
 
 public class CarteDao {
@@ -52,29 +50,38 @@ public class CarteDao {
             ArrayList<Dictionnaire> mots =myDictionnaireDao.findAll();
             PartieDao myPartieDao=new PartieDao();
             Partie partie =myPartieDao.findByCode(uniqueCode);
-            int id =partie.id_partie();
+            int id_partie =partie.id_partie();
             int couleur;
+            int id_carte=-1;
             Collections.shuffle(mots, new Random());
             for (int i = 0; i < 25; i++) {
                 if (i<8)couleur=1;
                 else if (i<23) couleur=2;
                 else couleur =3;
                 Dictionnaire dict = mots.get(i);
+                String texte=dict.texte();
+                int id_mot=myDictionnaireDao.getId(texte);
+
                 String requestCreate = "INSERT INTO Carte (mot, etat, position, id_couleur, id_mot, id_partie) VALUES (?, ?, ?, ?, ?, ?)";
                 PreparedStatement prepStatCreate = myDatabase.prepareStatement(requestCreate);
-                prepStatCreate.setString(1, dict.texte());
+                prepStatCreate.setString(1, texte);
                 prepStatCreate.setBoolean(2, false);
                 prepStatCreate.setInt(3, i);
                 prepStatCreate.setInt(4, couleur);
-                prepStatCreate.setInt(5, myDictionnaireDao.getId(dict.texte()));
-                prepStatCreate.setInt(6, id);
-                System.out.println(prepStatCreate+dict.texte());
+                prepStatCreate.setInt(5, id_mot);
+                prepStatCreate.setInt(6, id_partie);
                 prepStatCreate.executeUpdate();
 
-                //test
                 // Ajoutez la carte à la liste après insertion
-                //Problème de recuperationde l'id de la cartecar initialisation à 0 au lieu de AUTO_INCREMENT
-                Carte newCarte = new Carte(0, dict.texte(), false, i, couleur, myDictionnaireDao.getId(dict.texte()), id);
+                String requestSelect = "SELECT id_carte FROM Carte WHERE mot = ? AND id_partie = ?";
+                PreparedStatement prepStatSelect = myDatabase.prepareStatement(requestSelect);
+                prepStatSelect.setString(1, texte);
+                prepStatSelect.setInt(2, id_partie);
+                ResultSet results  = prepStatSelect.executeQuery();
+                while (results.next()){
+                    id_carte=results.getInt("id_carte");
+                }
+                Carte newCarte = new Carte(id_carte, texte, false, i, couleur, id_mot, id_partie);
                 cartes.add(newCarte);
             }
             System.out.println("Generated cartes: " + cartes);
