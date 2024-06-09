@@ -9,7 +9,6 @@ import java.util.Random;
 import database.PolyNameDatabase;
 import models.Carte;
 import models.Dictionnaire;
-import models.Joueur;
 import models.Partie;
 
 public class CarteDao {
