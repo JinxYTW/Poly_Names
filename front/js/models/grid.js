@@ -6,6 +6,10 @@
             this.cards = [];
         }
 
+        setCards(cards) {
+            this.cards = cards;
+        }   
+
         addCard(mot, color, id) {
             if (this.cards.length < this.size * this.size) {
                 const card = new Card(mot, color, id);

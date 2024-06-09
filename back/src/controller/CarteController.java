@@ -30,6 +30,7 @@ public class CarteController {
         try{
             CarteDao myDao=new CarteDao();
             cartes=myDao.genererCarte(uniqueCode);
+            System.out.println("Cartes générées pour le code unique " + uniqueCode + ": " + cartes);
             //WebServerResponse myResponse=context.getResponse();
             //myResponse.json("ok,25 cartes en plus dans la bdd");
         }
@@ -42,8 +43,10 @@ public class CarteController {
     }
 
     public String getCards(String uniqueCode) {
+        System.out.println("uniqueCodeCarteController: " + uniqueCode);
         ArrayList<Carte> cartes = genererCarte(uniqueCode);
         StringBuilder jsonArray = new StringBuilder("[");
+        System.out.println("ok");
         for (int i = 0; i < cartes.size(); i++) {
             Carte carte = cartes.get(i);
             jsonArray.append("{")
@@ -54,12 +57,13 @@ public class CarteController {
                     .append("\"id_couleur\":").append(carte.id_couleur()).append(",")
                     .append("\"id_mot\":").append(carte.id_mot()).append(",")
                     .append("\"id_partie\":").append(carte.id_partie())
-                    .append("}");
+                    .append("}");        
             if (i < cartes.size() - 1) {
                 jsonArray.append(",");
             }
         }
         jsonArray.append("]");
+        System.out.println("Cartes JSON: " + jsonArray.toString());
         return jsonArray.toString();
     }
     

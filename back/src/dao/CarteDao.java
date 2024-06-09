@@ -70,7 +70,14 @@ public class CarteDao {
                 prepStatCreate.setInt(6, id);
                 System.out.println(prepStatCreate+dict.texte());
                 prepStatCreate.executeUpdate();
+
+                //test
+                // Ajoutez la carte à la liste après insertion
+                //Problème de recuperationde l'id de la cartecar initialisation à 0 au lieu de AUTO_INCREMENT
+                Carte newCarte = new Carte(0, dict.texte(), false, i, couleur, myDictionnaireDao.getId(dict.texte()), id);
+                cartes.add(newCarte);
             }
+            System.out.println("Generated cartes: " + cartes);
 
             return cartes;
         } 

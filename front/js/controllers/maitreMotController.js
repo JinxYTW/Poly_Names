@@ -18,17 +18,27 @@ class MaitreMotController {
     this.view.btn_definir.addEventListener('click', this.handleHintSubmission.bind(this));
 
     const uniqueCode = window.location.search.split('=')[1];
+    console.log("Code unique MaitreMot: ",uniqueCode);
+    this.loadAndDisplayCards(uniqueCode);
   }
 
-    async loadAndDisplayCards() {
+  async loadAndDisplayCards(uniqueCode) {
+    console.log("Chargement et affichage des cartes");
     const cards = await this.services.getCartes(uniqueCode);
-    this.gris.setCards(cards);
-    this.view.renderGrid(this.grid.getAllCards());
+    console.log("Type des cartes reçues:", typeof cards);
+    console.log("Cartes reçues:", cards);
     
-    this.view.updatePlayersName(this.player1.getName(), this.player2.getName());
-    this.view.updateScore(this.player1.getScore(), this.player2.getScore());
-    this.view.updateTurn(this.turn.getTurn());
-    
+    if (Array.isArray(cards)) {
+      this.grid.setCards(cards);
+      console.log("Cartes: ", cards);
+      this.view.renderGrid(this.grid.getAllCards());
+  
+      this.view.updatePlayersName(this.player1.getName(), this.player2.getName());
+      this.view.updateScore(this.player1.getScore(), this.player2.getScore());
+      this.view.updateTurn(this.turn.getTurn());
+    } else {
+      console.error("Les cartes retournées ne sont pas un tableau:", cards);
+    }
   }
 
   handleScreenClick() {

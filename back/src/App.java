@@ -33,7 +33,6 @@ public class App {
         
 
         webserver.getRouter().get("/api/joinLobby/:uniqueCode", (WebServerContext context) -> {
-            System.out.println("uniqueCodeRouter : " + context.getRequest().getParam("uniqueCode"));
             String uniqueCode = context.getRequest().getParam( "uniqueCode");
             my_controller.joinLobby(context, uniqueCode);
         });
@@ -53,6 +52,7 @@ public class App {
 
         webserver.getRouter().get("/api/getCartes/:uniqueCode", (WebServerContext context) -> {
             CarteController carteController = new CarteController();
+            System.out.println("uniqueCodeRouter : " + context.getRequest().getParam("uniqueCode"));
             String uniqueCode = context.getRequest().getParam("uniqueCode");
             String cartesJson = carteController.getCards(uniqueCode);
             context.getResponse().json(cartesJson);
