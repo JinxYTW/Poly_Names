@@ -22,7 +22,8 @@ public class PartieDao {
                 final int id_partie=results.getInt("id_partie");
                 final String unique_code= results.getString("unique_code");
                 final int score=results.getInt("score");
-                Partie myRecord = new Partie(id_partie,unique_code,score);
+                final int nb_joueur=results.getInt("nb_joueur");
+                Partie myRecord = new Partie(id_partie,unique_code,score,nb_joueur);
                 res.add(myRecord);
                 }
                 return res;
@@ -43,7 +44,8 @@ public class PartieDao {
                 final int id_partie=results.getInt("id_partie");
                 final String unique_code= results.getString("unique_code");
                 final int score=results.getInt("score");
-                Partie myRecord = new Partie(id_partie,unique_code,score);
+                final int nb_joueur=results.getInt("nb_joueur");
+                Partie myRecord = new Partie(id_partie,unique_code,score,nb_joueur);
                 return myRecord;
                 }
             } 
@@ -63,6 +65,14 @@ public class PartieDao {
             prepStatCreate.setString(1, uniqueCode);
             prepStatCreate.setInt(2, 0);
             prepStatCreate.executeUpdate();
+
+            myPartie = findByCode(uniqueCode);
+            String  playerAdd ="UPDATE partie SET nb_joueur = ? WHERE unique_code = ?";
+            PreparedStatement prepStatAdd = myDatabase.prepareStatement(playerAdd);
+            prepStatAdd.setInt(1, myPartie.nb_joueur() + 1);
+            prepStatAdd.setString(2, uniqueCode);
+            prepStatAdd.executeUpdate();
+
             return findByCode(uniqueCode);
             } 
             catch (Exception e) {
@@ -79,9 +89,9 @@ public class PartieDao {
             System.out.println("myPartie : " + myPartie);
             if (myPartie != null) {
                 PolyNameDatabase myDatabase = new PolyNameDatabase();
-                String requestUpdate = "UPDATE partie SET score = ? WHERE unique_code = ?";
+                String requestUpdate = "UPDATE partie SET nb_joueur = ? WHERE unique_code = ?";
                 PreparedStatement prepStatUpdate = myDatabase.prepareStatement(requestUpdate);
-                prepStatUpdate.setInt(1, myPartie.score() + 1);
+                prepStatUpdate.setInt(1, myPartie.nb_joueur() + 1);
                 prepStatUpdate.setString(2, uniqueCode);
                 prepStatUpdate.executeUpdate();
 

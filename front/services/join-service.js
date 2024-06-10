@@ -20,7 +20,7 @@ class joinService {
                 console.log(`Lobby rejoint : ${data}`);
                 const roomId = data;
                 console.log(`Room ID: ${roomId}`);
-                window.location.href = `lobby.html?room=${roomId}`;
+                window.location.href = `waitingscreen.html?room=${roomId}`;
             } else {
                 console.error('Lobby not found');
             }
