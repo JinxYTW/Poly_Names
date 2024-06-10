@@ -93,7 +93,7 @@ public class PartieDao {
 
     public Partie joinLobby(String uniqueCode) {
         Partie myPartie = null;
-        System.out.println("uniqueCode : " + uniqueCode);
+        
         try {
             myPartie = findByCode(uniqueCode);
             System.out.println("myPartie : " + myPartie);

@@ -73,7 +73,7 @@ public class App {
             System.out.println("roleRouter : " + role);
             String roomId = context.getRequest().getParam("room");
             System.out.println("roomRouter : " + roomId);
-            System.out.println("chooseRoleRouter");
+            
             my_Controller3.chooseRole(context, role, roomId);
         });
         System.out.println("Hello, World!");
