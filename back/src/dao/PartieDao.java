@@ -57,25 +57,35 @@ public class PartieDao {
     public Partie createLobbyCode() {
         Partie myPartie = null;
         try {
-            
-            String uniqueCode = UUID.randomUUID().toString().substring(0, 8); // Génère un ID unique de 8 caractères
+            // Génère un ID unique de 8 caractères
+            String uniqueCode = UUID.randomUUID().toString().substring(0, 8); 
+    
+            // Initialise la connexion à la base de données
             PolyNameDatabase myDatabase = new PolyNameDatabase();
-            String requestCreate = "INSERT INTO partie (unique_code, score) VALUES (?, ?)";
+    
+            // Insère une nouvelle partie dans la table 'partie'
+            String requestCreate = "INSERT INTO partie (unique_code, score, nb_joueur) VALUES (?, ?, ?)";
             PreparedStatement prepStatCreate = myDatabase.prepareStatement(requestCreate);
             prepStatCreate.setString(1, uniqueCode);
             prepStatCreate.setInt(2, 0);
+            prepStatCreate.setInt(3, 1); // Initialise le nombre de joueurs à 1
             prepStatCreate.executeUpdate();
-
+    
+            // Récupère la partie nouvellement créée
             myPartie = findByCode(uniqueCode);
-            String  playerAdd ="UPDATE partie SET nb_joueur = ? WHERE unique_code = ?";
-            PreparedStatement prepStatAdd = myDatabase.prepareStatement(playerAdd);
-            prepStatAdd.setInt(1, myPartie.nb_joueur() + 1);
-            prepStatAdd.setString(2, uniqueCode);
-            prepStatAdd.executeUpdate();
-
-            return findByCode(uniqueCode);
-            } 
-            catch (Exception e) {
+    
+            // Ajoute un joueur 'Host' à la table 'joueur'
+            if (myPartie != null) {
+                String requestAddPlayer = "INSERT INTO joueur (pseudo, role, id_partie) VALUES (?, ?, ?)";
+                PreparedStatement prepStatAddPlayer = myDatabase.prepareStatement(requestAddPlayer);
+                prepStatAddPlayer.setString(1, "Host");
+                prepStatAddPlayer.setString(2, null); // role null
+                prepStatAddPlayer.setInt(3, myPartie.id_partie());
+                prepStatAddPlayer.executeUpdate();
+            }
+    
+            return myPartie;
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
         return myPartie;
@@ -94,6 +104,13 @@ public class PartieDao {
                 prepStatUpdate.setInt(1, myPartie.nb_joueur() + 1);
                 prepStatUpdate.setString(2, uniqueCode);
                 prepStatUpdate.executeUpdate();
+
+                String requestAddPlayer = "INSERT INTO joueur (pseudo, role, id_partie) VALUES (?, ?, ?)";
+                PreparedStatement prepStatAddPlayer = myDatabase.prepareStatement(requestAddPlayer);
+                prepStatAddPlayer.setString(1, "Challenger");
+                prepStatAddPlayer.setString(2, null); // role null
+                prepStatAddPlayer.setInt(3, myPartie.id_partie());
+                prepStatAddPlayer.executeUpdate();  
 
                 myPartie = findByCode(uniqueCode);
             }else{
