@@ -87,7 +87,7 @@ public class PartieDao {
         try {
             myPartie = findByCode(uniqueCode);
             System.out.println("myPartie : " + myPartie);
-            if (myPartie != null) {
+            if (myPartie != null && myPartie.nb_joueur() < 2) {
                 PolyNameDatabase myDatabase = new PolyNameDatabase();
                 String requestUpdate = "UPDATE partie SET nb_joueur = ? WHERE unique_code = ?";
                 PreparedStatement prepStatUpdate = myDatabase.prepareStatement(requestUpdate);
@@ -96,6 +96,8 @@ public class PartieDao {
                 prepStatUpdate.executeUpdate();
 
                 myPartie = findByCode(uniqueCode);
+            }else{
+                System.out.println("La partie est pleine ou introuvable.");
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());

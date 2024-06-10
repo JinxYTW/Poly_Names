@@ -23,6 +23,7 @@ class joinService {
                 window.location.href = `waitingscreen.html?room=${roomId}`;
             } else {
                 console.error('Lobby not found');
+                window.location.href = `cantjoin.html`;
             }
         } catch (error) {
             console.error('Error:', error);
