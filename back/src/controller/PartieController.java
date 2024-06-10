@@ -28,17 +28,21 @@ public class PartieController {
     } 
 
     public String createLobbyCode(WebServerContext context) {
+        WebServerResponse myResponse = context.getResponse();
         try {
             PartieDao myDao = new PartieDao();
             Partie myPartie = myDao.createLobbyCode();
-            WebServerResponse myResponse = context.getResponse();
+            
             myResponse.json(myPartie);
             if (myPartie != null) {
                 myResponse.json("{ \"unique_code\": \"" + myPartie.unique_code() + "\" }");
                 return myPartie.unique_code();
-            } 
+            } else {
+                myResponse.serverError("{ \"error\": \"Erreur lors de la création de la partie.\" }");
+            }
         } catch (Exception e) {
             System.out.println(e.getMessage());
+            myResponse.serverError("{ \"error\": \"Erreur lors de la création de la partie.\" }");
         }
         return null;
     }
@@ -58,11 +62,13 @@ public class PartieController {
     public void joinLobby(WebServerContext context, String uniqueCode) {
         try {
             PartieDao myDao = new PartieDao();
-            System.out.println("uniqueCodeController : " + uniqueCode);
             Partie myPartie = myDao.joinLobby(uniqueCode);
             WebServerResponse myResponse = context.getResponse();
+            
             if (myPartie != null) {
-                myResponse.json( myPartie.unique_code());
+                myResponse.json(myPartie.unique_code());
+            } else {
+                myResponse.status(404, "Trop de joueurs dans la partie");
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());

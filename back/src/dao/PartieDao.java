@@ -115,9 +115,13 @@ public class PartieDao {
                 myPartie = findByCode(uniqueCode);
             }else{
                 System.out.println("La partie est pleine ou introuvable.");
+                myPartie = null;
+
+                
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
+            myPartie = null;
         }
         return myPartie;
     }
