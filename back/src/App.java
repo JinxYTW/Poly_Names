@@ -12,6 +12,8 @@ public class App {
         WebServer webserver = new WebServer();
         webserver.listen(8080);
 
+        
+
         DictionnaireController my_controller_dictionnaire= new DictionnaireController();
         webserver.getRouter().get("/api/dictionnaire",(WebServerContext context) -> { my_controller_dictionnaire.findAll(context); } );
         CouleurController my_controller_couleur= new CouleurController();
@@ -28,6 +30,10 @@ public class App {
             my_controller_carte.genererCarte(uniqueCode);
             webserver.getRouter().get("/api/" + uniqueCode, (WebServerContext codeContext) -> {my_controller.createLobby(codeContext, uniqueCode); });
         });
+
+        
+
+        
 
         
 
@@ -62,6 +68,16 @@ public class App {
         JoueurController my_Controller3= new JoueurController();
         webserver.getRouter().get("/api/detect",(WebServerContext context) -> { my_Controller3.detect(context); } );
 
+        webserver.getRouter().get("/api/chooseRole/:role/:room", (WebServerContext context) -> {
+            String role = context.getRequest().getParam("role");
+            System.out.println("roleRouter : " + role);
+            String roomId = context.getRequest().getParam("room");
+            System.out.println("roomRouter : " + roomId);
+            System.out.println("chooseRoleRouter");
+            my_Controller3.chooseRole(context, role, roomId);
+        });
         System.out.println("Hello, World!");
     }
+    
+    
 }

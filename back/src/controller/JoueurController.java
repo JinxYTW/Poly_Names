@@ -48,4 +48,32 @@ public class JoueurController {
         }
         return dictionary;
     } 
+
+    public void chooseRole(WebServerContext context, String role, String roomId) {
+        System.out.println("chooseRoleController");
+        try {
+            System.out.println("role : " + role);
+            System.out.println("room : " + roomId);
+    
+            if ("randomchoice".equals(role)) {
+                int number = (int) (Math.random() * 2);
+                if (number == 0) {
+                    role = "maitreintuition";
+                } else {
+                    role = "maitremot";
+                }
+            }
+    
+            // Metttre à jour la base de données ici
+    
+            Map<String, String> response = new HashMap<>();
+            response.put("role", role);
+            response.put("room", roomId);
+    
+            context.getResponse().json(response);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+    
+        }
+    }
 }
