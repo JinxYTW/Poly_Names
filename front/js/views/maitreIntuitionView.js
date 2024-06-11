@@ -14,13 +14,13 @@ class MaitreIntuitionView {
     }
   
     hideInstructions() {
-      console.log("Masquage des instructions");
+      
       this.instructionDiv.classList.add('hidden');
       this.grilleDiv.classList.remove('hidden');
     }
   
     showGrid() {
-      console.log("Affichage de la grille");
+      
       this.grilleDiv.style.display = 'block';
       this.showGameElements();
     }
@@ -34,15 +34,21 @@ class MaitreIntuitionView {
     renderGrid(cards) {
       console.log("Rendu de la carte", cards);
       this.cardsContainer.innerHTML = '';
-      cards.forEach((card, index) => {
+      if (cards.length === 0) {
+        console.log("Aucune carte à afficher");
+        return;
+      }
+
+      cards.forEach((card) => {
         const cardElement = document.createElement('div');
         cardElement.classList.add('card');
-        cardElement.textContent = card.mot.getWord();
-        cardElement.dataset.index = index;
+        cardElement.textContent = card.mot
+        cardElement.dataset.index = card.position;
     
         // Créer le span pour le rond avec l'image d'index
         const indexBadge = document.createElement('span');
         indexBadge.classList.add('index-badge');
+        indexBadge.dataset.idPosition = card.position;
         const indexImage = document.createElement('img');
         indexImage.src = "../img/click.png"; // Mettez votre chemin d'image ici
         indexImage.alt = "Error";
@@ -50,6 +56,11 @@ class MaitreIntuitionView {
         cardElement.appendChild(indexBadge);
     
         this.cardsContainer.appendChild(cardElement);
+
+        indexBadge.addEventListener('click', (event) => {
+          const idPosition = event.target.closest('span').dataset.idPosition;
+          console.log("Span cliqué avec id_position:", idPosition);
+        });
       });
     }
     
