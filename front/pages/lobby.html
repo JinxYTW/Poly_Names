@@ -7,12 +7,14 @@
   <title>Salon</title>
 </head>
 <body>
-  <div id="lobby">
-    <h1>Salon de jeu</h1>
-    <p>Partagez ce lien avec votre ami :</p>
-    <input type="text" id="roomLink" readonly>
-    <p>En attente de joueurs...</p>
-    <button id="btn_Start" disabled>Démarrer le jeu</button>
+  <div id="lobby" class="background">
+    <div class="center-container">
+      <h1 class="title">Salon de jeu</h1>
+      <p class="instruction">Partagez ce lien avec votre ami :</p>
+      <input type="text" id="roomLink" readonly>
+      <p class="instruction">En attente de joueurs...</p>
+      <button id="btn_Start" disabled>Démarrer le jeu</button>
+    </div>
   </div>
   <script type="module" src="../js/lobby.js"></script>
 </body>

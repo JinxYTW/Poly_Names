@@ -49,6 +49,15 @@ class MaitreMotView {
       cardElement.classList.add('card');
       cardElement.textContent = card.mot; 
       cardElement.dataset.index = card.position; 
+      
+      if (card.id_couleur === 1) {
+        cardElement.classList.add('blue');
+      } else if (card.id_couleur === 2) {
+        cardElement.classList.add('grey');
+      } else if (card.id_couleur === 3) {
+        cardElement.classList.add('black');
+      }
+
       this.cardsContainer.appendChild(cardElement);
     });
   }
