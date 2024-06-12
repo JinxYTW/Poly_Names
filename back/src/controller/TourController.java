@@ -1,11 +1,15 @@
 package controller;
 import java.util.ArrayList;
 
+import com.google.gson.JsonObject;
+
 import dao.TourDao;
 import models.Tour;
 
 import webserver.WebServerContext;
 import webserver.WebServerResponse;
+
+import models.HintRequestBody;
 
 public class TourController {
     public TourController(){
@@ -24,4 +28,24 @@ public class TourController {
         }
         return res;
     } 
+
+    public void submitHint(WebServerContext context, String uniqueCode) {
+        try {
+            HintRequestBody requestBody = context.getRequest().extractBody(HintRequestBody.class);
+    
+            // Extraction des valeurs spécifiques du JSON
+            String indice = requestBody.getIndice();
+            int wordToFindNb = requestBody.getWordToFindNb();
+    
+            TourDao myDao = new TourDao();
+            myDao.addTour(indice, wordToFindNb, uniqueCode);
+    
+            WebServerResponse myResponse = context.getResponse();
+            myResponse.json("{\"status\":\"success\"}");
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            WebServerResponse myResponse = context.getResponse();
+            myResponse.json("{\"status\":\"error\"}");
+        }
+    }
 }

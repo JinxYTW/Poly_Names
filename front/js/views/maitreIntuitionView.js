@@ -44,6 +44,7 @@ class MaitreIntuitionView {
         cardElement.classList.add('card');
         cardElement.textContent = card.mot
         cardElement.dataset.index = card.position;
+        //Ajouter Couleur par def
     
         // Créer le span pour le rond avec l'image d'index
         const indexBadge = document.createElement('span');

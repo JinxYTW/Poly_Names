@@ -20,8 +20,7 @@ public class App {
         webserver.getRouter().get("/api/couleur",(WebServerContext context) -> { my_controller_couleur.findAll(context); } );
         PartieController my_controller_partie= new PartieController();
         webserver.getRouter().get("/api/partie",(WebServerContext context) -> { my_controller_partie.findAll(context); } );
-        TourController my_controller_tour= new TourController();
-        webserver.getRouter().get("/api/tour",(WebServerContext context) -> { my_controller_tour.findAll(context); } );
+        
         CarteController my_controller_carte= new CarteController();
 
         PartieController my_controller= new PartieController();
@@ -76,6 +75,17 @@ public class App {
             
             my_Controller3.chooseRole(context, role, roomId);
         });
+
+        TourController my_controller_tour= new TourController();
+        webserver.getRouter().get("/api/tour",(WebServerContext context) -> { my_controller_tour.findAll(context); } );
+
+        webserver.getRouter().get("/api/submitHint/:uniqueCode", (WebServerContext context) -> {
+            String uniqueCode = context.getRequest().getParam("uniqueCode");
+            my_controller_tour.submitHint(context, uniqueCode);
+        });
+
+
+
         System.out.println("Hello, World!");
     }
     

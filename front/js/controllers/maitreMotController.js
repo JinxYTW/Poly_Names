@@ -56,14 +56,20 @@ class MaitreMotController {
     this.view.updateTurn(this.turn.getTurn());
   }
 
-  handleHintSubmission() {
+  async handleHintSubmission() {
     const hint = this.view.hint.value;
     const nbMots = this.view.nbMots.value;
+    const uniqueCode = window.location.search.split('=')[1];
 
     if (hint && nbMots > 0) {
-      this.view.addHintToChat(hint, nbMots);
-      this.view.hint.value = '';
-      this.view.nbMots.value = '0';
+      const response = await this.services.submitHint(hint, nbMots, uniqueCode);
+      if (response.status === "success") {
+        this.view.addHintToChat(hint, nbMots);
+        this.view.hint.value = '';
+        this.view.nbMots.value = '0';
+      } else {
+        console.error("Erreur lors de la soumission de l'indice");
+      }
     }
   }
 }
