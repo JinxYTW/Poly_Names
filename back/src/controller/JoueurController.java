@@ -86,4 +86,34 @@ public class JoueurController {
     
         }
     }
+
+    public String getPlayer1(WebServerContext context, String unique_code){
+        String res="";
+        try{
+            JoueurDao myDao=new JoueurDao();
+            res=myDao.getPlayer1(unique_code);
+            WebServerResponse myResponse=context.getResponse();
+            myResponse.json(res);
+        }
+        catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+        return res;
+    }
+
+    public String getPlayer2(WebServerContext context, String unique_code){
+        String res="";
+        try{
+            JoueurDao myDao=new JoueurDao();
+            res=myDao.getPlayer2(unique_code);
+            WebServerResponse myResponse=context.getResponse();
+            myResponse.json(res);
+        }
+        catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+        return res;
+    }
+
+    
 }

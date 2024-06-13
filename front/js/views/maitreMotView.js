@@ -8,26 +8,41 @@ class MaitreMotView {
     this.hint = document.getElementById('hint');
     this.nbMots = document.getElementById('nbMots');
     this.btn_definir = document.getElementById('btn_Definir');
-    this.score=document.getElementById('score');
-    this.turn=document.getElementById('turn');
-    this.playerName1=document.getElementById('playerName1');
-    this.playerName2=document.getElementById('playerName2');
-    this.chat=document.getElementById('chat');
+    this.score = document.getElementById('score');
+    this.turn = document.getElementById('turn');
+    this.playerName1 = document.getElementById('playerName1');
+    this.playerName2 = document.getElementById('playerName2');
+    this.chat = document.getElementById('chat');
     this.chatContent = document.getElementById('chatContent');
-    
+
+    // Instance de MaitreMotServices
+    this.maitreMotServices = new MaitreMotServices();
+
+    // Appel pour mettre à jour les noms des joueurs
+    this.updatePlayersNames();
 
     this.hideGameElements();
   }
 
+  async updatePlayersNames() {
+    const uniqueCode = window.location.search.split('=')[1]; // Obtenez uniqueCode depuis l'URL
+
+    // Appel pour récupérer le nom du joueur 1
+    const player1Name = await this.maitreMotServices.getPlayer1Name(uniqueCode);
+    // Appel pour récupérer le nom du joueur 2
+    const player2Name = await this.maitreMotServices.getPlayer2Name(uniqueCode);
+
+    // Mise à jour des noms dans l'interface utilisateur
+    this.playerName1.textContent = player1Name;
+    this.playerName2.textContent = player2Name;
+  }
+
   hideInstructions() {
-     
     this.instructionDiv.classList.add('hidden');
     this.grilleDiv.classList.remove('hidden');
   }
 
   showGrid() {
-    
-    
     //this.grilleDiv.classList.add("visible");
     this.grilleDiv.style.display = 'block';
     this.showGameElements();
@@ -62,12 +77,7 @@ class MaitreMotView {
     });
   }
 
-  updatePlayersName(player1Name, player2Name) {
-    this.playerName1.textContent = player1Name;
-    this.playerName2.textContent = player2Name;
-  }
-
-  updateScore( player2Score) {
+  updateScore(player2Score) {
     this.score.textContent = `Score:  ${player2Score}`;
   }
 
@@ -101,7 +111,7 @@ class MaitreMotView {
 
   addHintToChat(hint, nbMots) {
     const hintElement = document.createElement('div');
-    hintElement.textContent = `L'indice est ${hint},et corresponds à ${nbMots} mots`;
+    hintElement.textContent = `L'indice est ${hint}, et correspond à ${nbMots} mots`;
     this.chatContent.appendChild(hintElement);
   }
 }
