@@ -5,6 +5,8 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.UUID;
 
+import com.google.gson.JsonObject;
+
 import database.PolyNameDatabase;
 import models.Partie;
 
@@ -104,6 +106,8 @@ public class PartieDao {
                 prepStatUpdate.setInt(1, myPartie.nb_joueur() + 1);
                 prepStatUpdate.setString(2, uniqueCode);
                 prepStatUpdate.executeUpdate();
+
+
 
                 String requestAddPlayer = "INSERT INTO joueur (pseudo, role, id_partie) VALUES (?, ?, ?)";
                 PreparedStatement prepStatAddPlayer = myDatabase.prepareStatement(requestAddPlayer);

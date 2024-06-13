@@ -1,6 +1,8 @@
 package controller;
 import java.util.ArrayList;
 
+import com.google.gson.JsonObject;
+
 import dao.PartieDao;
 import dao.TourDao;
 import models.Partie;
@@ -35,7 +37,13 @@ public class PartieController {
             
             myResponse.json(myPartie);
             if (myPartie != null) {
-                myResponse.json("{ \"unique_code\": \"" + myPartie.unique_code() + "\" }");
+                String code=myPartie.unique_code();
+                myResponse.json("{ \"unique_code\": \"" + code + "\" }");
+
+                JsonObject jsonObject = new JsonObject();
+                jsonObject.addProperty("UniqueCode", code);
+                jsonObject.addProperty("Joueur", "host");
+                context.getSSE().emit("lobby",jsonObject);
                 return myPartie.unique_code();
             } else {
                 myResponse.serverError("{ \"error\": \"Erreur lors de la création de la partie.\" }");
@@ -48,6 +56,7 @@ public class PartieController {
     }
     public void createLobby(WebServerContext context,String uniqueCode) {
         try {
+            System.err.println("ça marche");
             PartieDao myDao = new PartieDao();
             Partie myPartie = myDao.findByCode(uniqueCode);
             WebServerResponse myResponse = context.getResponse();
@@ -66,7 +75,13 @@ public class PartieController {
             WebServerResponse myResponse = context.getResponse();
             
             if (myPartie != null) {
-                myResponse.json(myPartie.unique_code());
+                String code=myPartie.unique_code();
+                myResponse.json(code);
+                
+                JsonObject jsonObject = new JsonObject();
+                jsonObject.addProperty("UniqueCode", code);
+                jsonObject.addProperty("Joueur", "Challenger");
+                context.getSSE().emit("lobby",jsonObject);
             } else {
                 myResponse.status(404, "Trop de joueurs dans la partie");
             }

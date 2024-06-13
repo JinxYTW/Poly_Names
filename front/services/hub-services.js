@@ -14,6 +14,7 @@ class HubServices{
             const data = await response.json();
             const roomId = data.unique_code; // Utilisez l'ID unique renvoyé par le backend
             window.location.href = `lobby.html?room=${roomId}`;
+            
           } else {
             console.error('Failed to create lobby');
           }
