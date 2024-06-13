@@ -3,6 +3,14 @@ class MaitreIntuitionServices {
 
     async getCartes(uniqueCode) {
         try {
+
+          const storedData = localStorage.getItem(`cartes_${uniqueCode}`);
+          if (storedData) {
+            console.log("Données stockées trouvées:", storedData);
+            return JSON.parse(storedData);
+          }
+
+
           const response = await fetch(`http://127.0.0.1:8080/api/getCartes/${uniqueCode}`,{
             method: 'GET',
             headers: {
@@ -14,11 +22,15 @@ class MaitreIntuitionServices {
             throw new Error('Erreur lors de la récupération des cartes');
           }
           const data = await response.json(); // Extraire les données JSON de la réponse
-          console.log("Réponse API parsée:", data);
-          console.log("Type de la réponse API parsée:", typeof data);
+
+          
           if (!Array.isArray(data)) {
             throw new Error('La réponse de l\'API n\'est pas un tableau');
           }
+
+          // Stocker les données dans sessionStorage pour une utilisation future
+          localStorage.setItem(`cartes_${uniqueCode}`, JSON.stringify(data));
+
           return data;
         } catch (error) {
           console.error("Erreur dans getCartes:", error);

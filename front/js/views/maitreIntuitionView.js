@@ -34,7 +34,6 @@ class MaitreIntuitionView {
     
   
     renderGrid(cards) {
-      console.log("Rendu de la carte", cards);
       this.cardsContainer.innerHTML = '';
       if (cards.length === 0) {
         console.log("Aucune carte à afficher");

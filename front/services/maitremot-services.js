@@ -5,6 +5,11 @@ class MaitreMotServices {
 
   async getCartes(uniqueCode) {
     try {
+      const storedData = localStorage.getItem(`cartes_${uniqueCode}`);
+      if (storedData) {
+        console.log("Données stockées trouvées:", storedData);
+        return JSON.parse(storedData);
+      }
       const response = await fetch(`http://127.0.0.1:8080/api/getCartes/${uniqueCode}`,{
         method: 'GET',
         headers: {
@@ -21,6 +26,7 @@ class MaitreMotServices {
       if (!Array.isArray(data)) {
         throw new Error('La réponse de l\'API n\'est pas un tableau');
       }
+      localStorage.setItem(`cartes_${uniqueCode}`, JSON.stringify(data));
       return data;
     } catch (error) {
       console.error("Erreur dans getCartes:", error);
