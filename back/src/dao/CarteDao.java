@@ -39,6 +39,32 @@ public class CarteDao {
             return res;
         }
     }
+    public ArrayList<Carte> findByCode(){
+        ArrayList<Carte> res=new ArrayList<>();
+        try{
+            PolyNameDatabase my_Database= new PolyNameDatabase();
+            PartieDao myPartieDao=new PartieDao();
+            String request="SELECT * FROM carte WHERE ";
+            PreparedStatement prepStat=my_Database.prepareStatement(request);
+            ResultSet results = prepStat.executeQuery();      
+            while (results.next()){
+                final int id_carte=results.getInt("id_carte");
+                final String mot= results.getString("mot");
+                final Boolean etat=results.getBoolean("etat");
+                final int position=results.getInt("position");
+                final int id_couleur=results.getInt("id_couleur");
+                final int id_mot=results.getInt("id_mot");
+                final int id_partie=results.getInt("id_partie");
+                Carte myRecord= new Carte(id_carte,mot,etat,position,id_couleur,id_mot,id_partie);
+                res.add(myRecord);
+                }
+                return res;
+            }
+        catch(Exception e){
+            System.out.println(e.getMessage());
+            return res;
+        }
+    }
     
 
     public ArrayList<Carte> genererCarte(String uniqueCode){
