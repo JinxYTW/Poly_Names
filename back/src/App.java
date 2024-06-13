@@ -110,6 +110,16 @@ public class App {
             my_Controller3.chooseRole(context, role, roomId);
         });
 
+        webserver.getRouter().get("/api/getPlayer1/:uniqueCode", (WebServerContext context) -> {
+            String uniqueCode = context.getRequest().getParam("uniqueCode");
+            my_Controller3.getPlayer1(context, uniqueCode);
+        });
+
+        webserver.getRouter().get("/api/getPlayer2/:uniqueCode", (WebServerContext context) -> {
+            String uniqueCode = context.getRequest().getParam("uniqueCode");
+            my_Controller3.getPlayer2(context, uniqueCode);
+        });
+
         TourController my_controller_tour= new TourController();
         webserver.getRouter().get("/api/tour",(WebServerContext context) -> { my_controller_tour.findAll(context); } );
 
