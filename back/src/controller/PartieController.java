@@ -40,10 +40,6 @@ public class PartieController {
                 String code=myPartie.unique_code();
                 myResponse.json("{ \"unique_code\": \"" + code + "\" }");
 
-                JsonObject jsonObject = new JsonObject();
-                jsonObject.addProperty("UniqueCode", code);
-                jsonObject.addProperty("Joueur", "host");
-                context.getSSE().emit("lobby",jsonObject);
                 return myPartie.unique_code();
             } else {
                 myResponse.serverError("{ \"error\": \"Erreur lors de la création de la partie.\" }");
@@ -77,11 +73,11 @@ public class PartieController {
             if (myPartie != null) {
                 String code=myPartie.unique_code();
                 myResponse.json(code);
-                
+                System.out.println("c'est bon");
                 JsonObject jsonObject = new JsonObject();
                 jsonObject.addProperty("UniqueCode", code);
                 jsonObject.addProperty("Joueur", "Challenger");
-                context.getSSE().emit("lobby",jsonObject);
+                context.getSSE().emit("lobbyChallenger",jsonObject);
             } else {
                 myResponse.status(404, "Trop de joueurs dans la partie");
             }

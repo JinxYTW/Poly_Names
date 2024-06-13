@@ -15,14 +15,14 @@ export class LobbyController {
       return;
     }
 
-    // Simuler la connexion de l'autre joueur
-    setTimeout(() => {
-      this.view.enableStartButton();
-    }, 3000); // Simule un délai de 3 secondes pour la connexion
+    
 
     this.view.bindStartGame(this.handleStartGame.bind(this, roomId));
   }
-
+  
+  showButton(){
+    this.view.enableStartButton();
+  }
   async listenForPlayerJoin(roomId) {
     const sseClient = new SSEClient(`http://${window.location.hostname}:8080/api/sse`);
     await sseClient.connect();
