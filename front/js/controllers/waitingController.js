@@ -5,6 +5,8 @@ class WaitingController {
         this.waitingView = new WaitingView();
     }
     giveRoleChallenger(role){
+
+        localStorage.setItem('role', role);
         console.log(role);
     }
 }

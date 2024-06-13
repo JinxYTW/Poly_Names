@@ -1,24 +1,21 @@
-import { WaitingController } from "./controllers/waitingController.js"; 
-
-document.addEventListener('DOMContentLoaded', () => {
-    new WaitingController();
-});
-
 import { SSEClient } from '../libs/sse-client.js';
 import { WaitingController } from "./controllers/waitingController.js"; 
 
 function roleGivenChallenger(data,myWaitingController){
+    
+    localStorage.setItem('test', "test");
     myWaitingController.giveRoleChallenger(data.role)
 }
 
 async function run(myWaitingController){
-  const baseUrl = "localhost:8080"; 
+    localStorage.setItem('test', "test");
+  const baseUrl = "localhost:8080/waitingSSE"; 
 
   const sseClientWaiting = new SSEClient(baseUrl);
   try {
       await sseClientWaiting.connect();
       //await sseClient.subscribe("lobbyHost", fonctionHost).then(console.log("abonnement canal lobbyHost"));
-      await sseClientWaiting.subscribe("roleGivenChallenger", (data) => roleGivenChallenger(data, myWaitingController));
+      await sseClientWaiting.subscribe("roleGivenChallenger", (data) => roleGivenChallenger(data, myWaitingController)).then(console.log("roleGivenChallenger up"));
       window.addEventListener('unload', () => {
         sseClientWaiting.disconnect();
       });
@@ -27,6 +24,7 @@ async function run(myWaitingController){
   }
 }
 document.addEventListener('DOMContentLoaded', () => {
+    localStorage.setItem('test', "test");
     const myWaitingController = new WaitingController();
     run(myWaitingController);
 });
