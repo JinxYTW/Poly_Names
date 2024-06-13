@@ -1,4 +1,4 @@
-import { WaitingServices } from "../../services/waiting-services";
+import { WaitingServices } from "../../services/waiting-services.js";
 
 class WaitingView {
     constructor() {

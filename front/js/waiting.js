@@ -23,6 +23,7 @@ async function run(myWaitingController){
       console.error("Failed to connect or subscribe to SSE:", error);
   }
 }
+
 document.addEventListener('DOMContentLoaded', () => {
     localStorage.setItem('test', "test");
     const myWaitingController = new WaitingController();
