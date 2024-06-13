@@ -74,6 +74,46 @@ public class CarteDao {
             return res;
         }
     }
+
+    public Carte findByCodeAndPosition(String uniqueCode,int pos, Boolean couleurBool){
+        Carte res =new Carte(0,"",false,0,0,0,0);
+        try{
+            PolyNameDatabase myDatabase= new PolyNameDatabase();
+            PartieDao myPartieDao=new PartieDao();
+            Partie myPartie=myPartieDao.findByCode(uniqueCode);
+            String request="SELECT * FROM carte WHERE id_partie = ?";
+            PreparedStatement prepStatSelect = myDatabase.prepareStatement(request);
+            prepStatSelect.setInt(1, myPartie.id_partie());
+            ResultSet results = prepStatSelect.executeQuery();      
+            while (results.next()){
+                final int id_carte=results.getInt("id_carte");
+                final String mot= results.getString("mot");
+                final Boolean etat=results.getBoolean("etat");
+                final int position=results.getInt("position");
+                final int id_mot=results.getInt("id_mot");
+                final int id_partie=results.getInt("id_partie");
+                if (couleurBool){
+                    final int id_couleur=results.getInt("id_couleur");
+                    if (position==pos){
+                        Carte myRecord= new Carte(id_carte,mot,etat,position,id_couleur,id_mot,id_partie);
+                        res=myRecord;
+                    }
+                }
+                else{
+                    if (position==pos){
+                        Carte myRecord= new Carte(id_carte,mot,etat,position,2,id_mot,id_partie);
+                        res=myRecord;
+                    }
+                }
+                
+                }
+                return res;
+            }
+        catch(Exception e){
+            System.out.println(e.getMessage());
+            return res;
+        }
+    }
     
 
     public ArrayList<Carte> genererCarte(String uniqueCode){

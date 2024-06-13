@@ -1,6 +1,7 @@
 package controller;
 import java.util.ArrayList;
 
+import com.google.gson.JsonObject;
 
 import dao.CarteDao;
 import models.Carte;
@@ -73,8 +74,19 @@ public class CarteController {
         try {
             CarteDao myDao = new CarteDao();
             myDao.submitCard(uniqueCode, position);
+            Carte myCarte=myDao.findByCodeAndPosition(uniqueCode,position,true);
             WebServerResponse myResponse = context.getResponse();
             myResponse.ok("Carte soumise");
+        
+            JsonObject jsonObject = new JsonObject();
+            jsonObject.addProperty("id_carte", myCarte.id_carte());
+            jsonObject.addProperty("mot", myCarte.mot());
+            jsonObject.addProperty("etat", myCarte.etat());
+            jsonObject.addProperty("position", myCarte.position());
+            jsonObject.addProperty("id_couleur", myCarte.id_couleur());
+            jsonObject.addProperty("id_mot", myCarte.id_mot());
+            jsonObject.addProperty("id_partie", myCarte.id_partie());
+            context.getSSE().emit("RetourneCarte",jsonObject);
             
         } catch (Exception e) {
             System.out.println(e.getMessage());

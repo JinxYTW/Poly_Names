@@ -44,7 +44,15 @@ class MaitreIntuitionController {
     }
   }
 
-
+  submitCard(id_carte,mot,etat,position,id_couleur,id_mot,id_partie){
+    console.log(id_carte);
+    console.log(mot);
+    console.log(etat);
+    console.log(position);
+    console.log(id_couleur);
+    console.log(id_mot);
+    console.log(id_partie);
+  }
 
   handleScreenClick() {
     this.view.hideInstructions();
