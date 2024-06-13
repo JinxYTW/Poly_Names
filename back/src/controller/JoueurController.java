@@ -10,6 +10,8 @@ import webserver.WebServerResponse;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.google.gson.JsonObject;
+
 
 public class JoueurController {
     public JoueurController(){
@@ -68,9 +70,19 @@ public class JoueurController {
             myDao.UpdatePlayer(roomId, role, "Host");
             if (role.equals("maitreintuition")){
                 myDao.UpdatePlayer(roomId, "maitremot", "Challenger");
+                
+                JsonObject jsonObject = new JsonObject();
+                jsonObject.addProperty("roomId", roomId);
+                jsonObject.addProperty("role", "maitremot");
+                context.getSSE().emit("roleGivenChallenger",jsonObject);
             }
             else if (role.equals("maitremot")){
                 myDao.UpdatePlayer(roomId, "maitreintuition", "Challenger");
+                
+                JsonObject jsonObject = new JsonObject();
+                jsonObject.addProperty("roomId", roomId);
+                jsonObject.addProperty("role", "maitreintuition");
+                context.getSSE().emit("roleGivenChallenger",jsonObject);
             }
             Map<String, String> response = new HashMap<>();
             response.put("role", role);

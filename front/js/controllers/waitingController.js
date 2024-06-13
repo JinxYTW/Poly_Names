@@ -4,6 +4,9 @@ class WaitingController {
     constructor() {
         this.waitingView = new WaitingView();
     }
+    giveRoleChallenger(role){
+        console.log(role);
+    }
 }
 
 export { WaitingController };
