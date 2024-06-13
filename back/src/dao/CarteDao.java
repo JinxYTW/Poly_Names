@@ -39,6 +39,7 @@ public class CarteDao {
             return res;
         }
     }
+    
 
     public ArrayList<Carte> genererCarte(String uniqueCode){
         ArrayList<Carte> cartes = new ArrayList<>();
@@ -53,10 +54,19 @@ public class CarteDao {
             int couleur;
             int id_carte=-1;
             Collections.shuffle(mots, new Random());
+
+            ArrayList<Integer> numbers = new ArrayList<>();
+            for (int i = 1; i <= 25; i++) {
+                numbers.add(i);
+            }
+            Collections.shuffle(numbers, new Random());
+            ArrayList<Integer> numbersBlue = new ArrayList<>(numbers.subList(0, 8));
+            ArrayList<Integer> numbersBlack = new ArrayList<>(numbers.subList(8, 10));
+
             for (int i = 0; i < 25; i++) {
-                if (i<8)couleur=1;
-                else if (i<23) couleur=2;
-                else couleur =3;
+                if (numbersBlue.contains(i))couleur=1;
+                else if (numbersBlack.contains(i)) couleur=3;
+                else couleur =2;
                 Dictionnaire dict = mots.get(i);
                 String texte=dict.texte();
                 int id_mot=myDictionnaireDao.getId(texte);
