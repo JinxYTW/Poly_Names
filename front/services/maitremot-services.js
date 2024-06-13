@@ -37,11 +37,14 @@ class MaitreMotServices {
         },
         body: JSON.stringify({ indice, wordToFindNb })
       });
+
       if (!response.ok) {
         throw new Error('Erreur lors de l\'envoi de l\'indice');
       }
-      const data = await response.json();
-      return data;
+
+      const data = await response.text();
+      return { status: "success", message: data };
+
     } catch (error) {
       console.error("Erreur dans submitHint:", error);
       return { status: "error" };

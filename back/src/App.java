@@ -69,9 +69,8 @@ public class App {
 
         webserver.getRouter().get("/api/chooseRole/:role/:room", (WebServerContext context) -> {
             String role = context.getRequest().getParam("role");
-            System.out.println("roleRouter : " + role);
             String roomId = context.getRequest().getParam("room");
-            System.out.println("roomRouter : " + roomId);
+            
             
             my_Controller3.chooseRole(context, role, roomId);
         });
@@ -79,8 +78,9 @@ public class App {
         TourController my_controller_tour= new TourController();
         webserver.getRouter().get("/api/tour",(WebServerContext context) -> { my_controller_tour.findAll(context); } );
 
-        webserver.getRouter().get("/api/submitHint/:uniqueCode", (WebServerContext context) -> {
+        webserver.getRouter().post("/api/submitHint/:uniqueCode", (WebServerContext context) -> {
             String uniqueCode = context.getRequest().getParam("uniqueCode");
+            System.out.println("uniqueCodeRouter : " + uniqueCode);
             my_controller_tour.submitHint(context, uniqueCode);
         });
 
