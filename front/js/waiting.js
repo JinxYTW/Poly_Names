@@ -3,13 +3,11 @@ import { WaitingController } from "./controllers/waitingController.js";
 
 function roleGivenChallenger(data,myWaitingController){
     
-    localStorage.setItem('test', "test");
     myWaitingController.giveRoleChallenger(data.role)
 }
 
 async function run(myWaitingController){
-    localStorage.setItem('test', "test");
-  const baseUrl = "localhost:8080/waitingSSE"; 
+  const baseUrl = "localhost:8080"; 
 
   const sseClientWaiting = new SSEClient(baseUrl);
   try {
