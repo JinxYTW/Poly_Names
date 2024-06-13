@@ -30,7 +30,6 @@ public class CarteController {
         try{
             CarteDao myDao=new CarteDao();
             cartes=myDao.genererCarte(uniqueCode);
-            System.out.println("Cartes générées pour le code unique " + uniqueCode + ": " + cartes);
             //WebServerResponse myResponse=context.getResponse();
             //myResponse.json("ok,25 cartes en plus dans la bdd");
         }

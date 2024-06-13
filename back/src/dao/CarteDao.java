@@ -93,7 +93,6 @@ public class CarteDao {
                 Carte newCarte = new Carte(id_carte, texte, false, i, couleur, id_mot, id_partie);
                 cartes.add(newCarte);
             }
-            System.out.println("Generated cartes: " + cartes);
 
             return cartes;
         } 

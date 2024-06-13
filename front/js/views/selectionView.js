@@ -16,9 +16,10 @@ class SelectionView {
     console.log('chooseRoleView');
     try {
       const { selectedRole, room } = await this.selectionServices.chooseRole(role);
+      
       if (selectedRole && room) {
         window.location.href = `${selectedRole}.html?room=${room}`;
-        
+        localStorage.setItem("room Challenger",room);
         const baseUrl = "localhost:8080"; 
         const sseClientRole = new SSEClient(baseUrl);
         await sseClientRole.connect();

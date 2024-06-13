@@ -52,7 +52,6 @@ public class JoueurController {
 
     public void chooseRole(WebServerContext context, String role, String roomId) {
         
-        System.out.println("chooseRoleController");
         try {
             
     
@@ -64,18 +63,15 @@ public class JoueurController {
                     role = "maitremot";
                 }
             }
-    
             // Mettre à jour la base de données ici
-
-            PolyNameDatabase myDatabase = new PolyNameDatabase();
-            String updatePlayer = "UPDATE Joueur SET role = ? WHERE id_partie = (SELECT id_partie FROM Partie WHERE unique_code = ?) AND pseudo = 'Host'";
-            java.sql.PreparedStatement prepStatUpdate = myDatabase.prepareStatement(updatePlayer);
-            prepStatUpdate.setString(1, role);
-            prepStatUpdate.setString(2, roomId);
-            prepStatUpdate.executeUpdate();
-
-
-    
+            JoueurDao myDao=new JoueurDao();
+            myDao.UpdatePlayer(roomId, role, "Host");
+            if (role.equals("maitreintuition")){
+                myDao.UpdatePlayer(roomId, "maitremot", "Challenger");
+            }
+            else if (role.equals("maitremot")){
+                myDao.UpdatePlayer(roomId, "maitreintuition", "Challenger");
+            }
             Map<String, String> response = new HashMap<>();
             response.put("role", role);
             response.put("room", roomId);

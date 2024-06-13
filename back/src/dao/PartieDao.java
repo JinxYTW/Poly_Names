@@ -78,12 +78,9 @@ public class PartieDao {
     
             // Ajoute un joueur 'Host' à la table 'joueur'
             if (myPartie != null) {
-                String requestAddPlayer = "INSERT INTO joueur (pseudo, role, id_partie) VALUES (?, ?, ?)";
-                PreparedStatement prepStatAddPlayer = myDatabase.prepareStatement(requestAddPlayer);
-                prepStatAddPlayer.setString(1, "Host");
-                prepStatAddPlayer.setString(2, null); // role null
-                prepStatAddPlayer.setInt(3, myPartie.id_partie());
-                prepStatAddPlayer.executeUpdate();
+                 
+                JoueurDao myJoueurDao=new JoueurDao();
+                myJoueurDao.AddPlayer("Host", null,myPartie.id_partie() );
             }
     
             return myPartie;
@@ -108,15 +105,6 @@ public class PartieDao {
                 prepStatUpdate.executeUpdate();
 
 
-
-                String requestAddPlayer = "INSERT INTO joueur (pseudo, role, id_partie) VALUES (?, ?, ?)";
-                PreparedStatement prepStatAddPlayer = myDatabase.prepareStatement(requestAddPlayer);
-                prepStatAddPlayer.setString(1, "Challenger");
-                prepStatAddPlayer.setString(2, null); // role null
-                prepStatAddPlayer.setInt(3, myPartie.id_partie());
-                prepStatAddPlayer.executeUpdate();  
-
-                myPartie = findByCode(uniqueCode);
             }else{
                 System.out.println("La partie est pleine ou introuvable.");
                 myPartie = null;

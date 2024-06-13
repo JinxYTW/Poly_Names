@@ -15,6 +15,9 @@ async function run(lobbyController){
       await sseClientLobby.connect();
       //await sseClient.subscribe("lobbyHost", fonctionHost).then(console.log("abonnement canal lobbyHost"));
       await sseClientLobby.subscribe("lobbyChallenger", (data) => joinLobbyChallenger(data, lobbyController));
+      window.addEventListener('unload', () => {
+        sseClientLobby.disconnect();
+      });
   } catch (error) {
       console.error("Failed to connect or subscribe to SSE:", error);
   }

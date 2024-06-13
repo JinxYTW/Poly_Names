@@ -73,7 +73,6 @@ public class PartieController {
             if (myPartie != null) {
                 String code=myPartie.unique_code();
                 myResponse.json(code);
-                System.out.println("c'est bon");
                 JsonObject jsonObject = new JsonObject();
                 jsonObject.addProperty("UniqueCode", code);
                 jsonObject.addProperty("Joueur", "Challenger");
