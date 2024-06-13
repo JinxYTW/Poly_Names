@@ -1,3 +1,5 @@
+import { MaitreIntuitionServices } from '../../services/maitreintuition-services.js';
+
 class MaitreIntuitionView {
     constructor() {
       this.instructionDiv = document.getElementById('maitreintuitioninstruction');
@@ -32,7 +34,6 @@ class MaitreIntuitionView {
     
   
     renderGrid(cards) {
-      console.log("Rendu de la carte", cards);
       this.cardsContainer.innerHTML = '';
       if (cards.length === 0) {
         console.log("Aucune carte à afficher");
@@ -58,9 +59,13 @@ class MaitreIntuitionView {
     
         this.cardsContainer.appendChild(cardElement);
 
-        indexBadge.addEventListener('click', (event) => {
+        indexBadge.addEventListener('click',async (event) => {
           const idPosition = event.target.closest('span').dataset.idPosition;
           console.log("Span cliqué avec id_position:", idPosition);
+
+          const uniqueCode = window.location.search.split('=')[1];
+          const maitreIntuitionServices = new MaitreIntuitionServices();
+          await maitreIntuitionServices.submitCard(uniqueCode, idPosition);
         });
       });
     }

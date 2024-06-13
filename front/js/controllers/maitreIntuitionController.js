@@ -5,7 +5,7 @@ import { Turn } from '../models/turn.js';
 import { MaitreIntuitionServices } from '../../services/maitreintuition-services.js';
 
 class MaitreIntuitionController {
-  constructor() {
+    constructor() {
     this.view = new MaitreIntuitionView();
     this.grid = new Grid();
     this.player1 = new Player('Joueur 1');

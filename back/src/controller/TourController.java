@@ -1,8 +1,6 @@
 package controller;
 import java.util.ArrayList;
 
-import com.google.gson.JsonObject;
-
 import dao.TourDao;
 import models.Tour;
 
@@ -41,7 +39,7 @@ public class TourController {
             myDao.addTour(indice, wordToFindNb, uniqueCode);
     
             WebServerResponse myResponse = context.getResponse();
-            myResponse.json("{\"status\":\"success\"}");
+            myResponse.ok("Indice ajouté");
         } catch (Exception e) {
             System.out.println(e.getMessage());
             WebServerResponse myResponse = context.getResponse();

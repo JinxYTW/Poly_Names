@@ -1,7 +1,7 @@
 /*
 Partie (id_partie, score,nb_joueur, unique_code)
 Joueur (id_joueur, pseudo, role, #id_partie)
-Tour (id_tour,tour, indice, word_to_find_nb, #id_partie)
+Tour (id_tour,tour, indice, word_to_find_nb,word_to_guess, #id_partie)
 Carte (id_carte, mot,position, etat,id_partie, #id_couleur, #id_mot)
 Couleur (id_couleur, texte)
 Dictionnaire (id_mot, texte)
@@ -31,6 +31,7 @@ CREATE TABLE Tour (
     tour INT,
     indice VARCHAR(255),
     word_to_find_nb INT,
+    word_to_guess INT,
     id_partie INT
 );
 
