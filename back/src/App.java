@@ -12,14 +12,15 @@ public class App {
         WebServer webserver = new WebServer();
         webserver.listen(8080);
 
+        
+
         DictionnaireController my_controller_dictionnaire= new DictionnaireController();
         webserver.getRouter().get("/api/dictionnaire",(WebServerContext context) -> { my_controller_dictionnaire.findAll(context); } );
         CouleurController my_controller_couleur= new CouleurController();
         webserver.getRouter().get("/api/couleur",(WebServerContext context) -> { my_controller_couleur.findAll(context); } );
         PartieController my_controller_partie= new PartieController();
         webserver.getRouter().get("/api/partie",(WebServerContext context) -> { my_controller_partie.findAll(context); } );
-        TourController my_controller_tour= new TourController();
-        webserver.getRouter().get("/api/tour",(WebServerContext context) -> { my_controller_tour.findAll(context); } );
+        
         CarteController my_controller_carte= new CarteController();
 
         PartieController my_controller= new PartieController();
@@ -28,6 +29,10 @@ public class App {
             my_controller_carte.genererCarte(uniqueCode);
             webserver.getRouter().get("/api/" + uniqueCode, (WebServerContext codeContext) -> {my_controller.createLobby(codeContext, uniqueCode); });
         });
+
+        
+
+        
 
         
 
@@ -62,6 +67,27 @@ public class App {
         JoueurController my_Controller3= new JoueurController();
         webserver.getRouter().get("/api/detect",(WebServerContext context) -> { my_Controller3.detect(context); } );
 
+        webserver.getRouter().get("/api/chooseRole/:role/:room", (WebServerContext context) -> {
+            String role = context.getRequest().getParam("role");
+            System.out.println("roleRouter : " + role);
+            String roomId = context.getRequest().getParam("room");
+            System.out.println("roomRouter : " + roomId);
+            
+            my_Controller3.chooseRole(context, role, roomId);
+        });
+
+        TourController my_controller_tour= new TourController();
+        webserver.getRouter().get("/api/tour",(WebServerContext context) -> { my_controller_tour.findAll(context); } );
+
+        webserver.getRouter().get("/api/submitHint/:uniqueCode", (WebServerContext context) -> {
+            String uniqueCode = context.getRequest().getParam("uniqueCode");
+            my_controller_tour.submitHint(context, uniqueCode);
+        });
+
+
+
         System.out.println("Hello, World!");
     }
+    
+    
 }

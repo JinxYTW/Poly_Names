@@ -7,27 +7,14 @@
   <title>Sélection des rôles</title>
 </head>
 <body>
-  <div id="roleSelection">
-    <h1>Sélection des rôles</h1>
-    <button onclick="chooseRole('maitreintuition')">Maitre des Intuitions</button>
-    <button onclick="chooseRole('randomchoice')">Hocus Pocus</button>
-    <button onclick="chooseRole('maitremot')">Maitre des Mots</button>
+  <div class="background">
+    <div class="center-container">
+      <h1 class="title">Sélection des rôles</h1>
+      <button id="intuitionjoin_btn" class="button">Maître des Intuitions</button>
+      <button id="randomjoin_btn" class="button">Hocus Pocus</button>
+      <button id="motjoin_btn" class="button">Maître des Mots</button>
+    </div>
   </div>
-  <script>
-    function chooseRole(role) {
-      const urlParams = new URLSearchParams(window.location.search);
-      const roomId = urlParams.get('room');
-      window.location.href = `${role}.html?room=${roomId}`;
-      if(role === 'randomchoice') {
-        number = Math.floor(Math.random() * 2); 
-        if(number === 0) {
-          window.location.href = `maitreintuition.html?room=${roomId}`;
-        } else {
-          window.location.href = `maitremot.html?room=${roomId}`;
-        }
-      }
-
-    }
-  </script>
+  <script type="module" src="../js/selection.js"></script>
 </body>
 </html>

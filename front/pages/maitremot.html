@@ -1,55 +1,46 @@
 <!DOCTYPE html>
 <html lang="fr">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="../css/styles.css">
   <title>Maître des mots</title>
-
 </head>
-
 <body>
-  <div id="turn">Tour: 0</div>
-  <div id="playerName1">Nom du joueur 1</div>
+  <div class="background">
+    <div id="turn" class="info-box">Tour: 0</div>
+    <div id="playerName1" class="info-box">Nom du joueur 1</div>
+    <div id="score" class="info-box">Score: 0</div>
+    <div id="playerName2" class="info-box">Nom du joueur 2</div>
 
-  <div id="score">Score: 0</div>
-  <div id="playerName2">Nom du joueur 2</div>
+    <div id="maitremotinstruction" class="center-container">
+      <h1 class="title">Vous êtes le maître des mots</h1>
+      <p>Vous avez été choisi pour être le maître des mots. Votre rôle est de donner des définitions pour aider les autres
+        joueurs à deviner le mot secret.</p>
+    </div>
 
-  <div id="maitremotinstruction">
-    <h1>Vous êtes le maître des mots</h1>
-    <p>Vous avez été choisi pour être le maître des mots. Votre rôle est de donner des définitions pour aider les autres
-      joueurs à deviner le mot secret.</p>
-  </div>
+    <div id="grille" class="cards-container">
+      <div class="cards"></div>
+    </div>
 
-  <div id="grille">
+    <div id="maitremot" class="center-container">
+      <input type="text" id="hint" placeholder="Entrez un indice" class="input-field">
+      <select id="nbMots" class="input-field">
+        <option value="0">_</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+      </select>
+      <button id="btn_Definir" class="button">Valider</button>
+    </div>
 
-    
-    
-    <div class="cards"></div>
-
-
-  </div>
-
-  <div id="maitremot">
-
-    <input type="text" id="hint" placeholder="Entrez un indice">
-    <select id="nbMots">
-      <option value="0">_</option>
-      <option value="1">1 </option>
-      <option value="2">2 </option>
-      <option value="3">3 </option>
-      <option value="4">4 </option>
-      <option value="5">5 </option>
-    </select>
-    <button id="btn_Definir" >Valider</button>
-  </div>
-
-  <div id="chat">
-    <h2>Historique </h2>
-    <div id="chatContent"></div>
+    <div id="chat" class="chat-box">
+      <h2>Historique</h2>
+      <div id="chatContent"></div>
+    </div>
   </div>
   <script type="module" src="../js/maitremot.js"></script>
 </body>
-
 </html>

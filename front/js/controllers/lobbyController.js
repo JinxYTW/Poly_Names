@@ -9,6 +9,7 @@ export class LobbyController {
 
     if (roomId) {
       this.view.displayRoomLink(roomId);
+      //this.listenForPlayerJoin(roomId);
     } else {
       window.location.href = '../index.html';
       return;
@@ -22,7 +23,18 @@ export class LobbyController {
     this.view.bindStartGame(this.handleStartGame.bind(this, roomId));
   }
 
+  async listenForPlayerJoin(roomId) {
+    const sseClient = new SSEClient(`http://${window.location.hostname}:8080/api/sse`);
+    await sseClient.connect();
+    await sseClient.subscribe(`game_${roomId}`, (event) => {
+      if (event.data === "ready") {
+        this.view.enableStartButton();
+      }
+    });
+  }
+
   handleStartGame(roomId) {
     window.location.href = `selection.html?room=${roomId}`;
   }
+  
 }

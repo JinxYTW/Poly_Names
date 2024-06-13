@@ -34,6 +34,10 @@ public class WebServerResponse {
         this.send(200, gson.toJson(object));
     }
 
+    public void status(int statusCode, String message) {
+        this.send(statusCode, message);
+    }
+
     public void send(int statusCode, String message) {
         this.initCors();
 

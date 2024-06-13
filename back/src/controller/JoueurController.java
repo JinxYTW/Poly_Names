@@ -2,6 +2,7 @@ package controller;
 import java.util.ArrayList;
 
 import dao.JoueurDao;
+import database.PolyNameDatabase;
 import models.Joueur;
 
 import webserver.WebServerContext;
@@ -48,4 +49,41 @@ public class JoueurController {
         }
         return dictionary;
     } 
+
+    public void chooseRole(WebServerContext context, String role, String roomId) {
+        
+        System.out.println("chooseRoleController");
+        try {
+            
+    
+            if ("randomchoice".equals(role)) {
+                int number = (int) (Math.random() * 2);
+                if (number == 0) {
+                    role = "maitreintuition";
+                } else {
+                    role = "maitremot";
+                }
+            }
+    
+            // Mettre à jour la base de données ici
+
+            PolyNameDatabase myDatabase = new PolyNameDatabase();
+            String updatePlayer = "UPDATE Joueur SET role = ? WHERE id_partie = (SELECT id_partie FROM Partie WHERE unique_code = ?) AND pseudo = 'Host'";
+            java.sql.PreparedStatement prepStatUpdate = myDatabase.prepareStatement(updatePlayer);
+            prepStatUpdate.setString(1, role);
+            prepStatUpdate.setString(2, roomId);
+            prepStatUpdate.executeUpdate();
+
+
+    
+            Map<String, String> response = new HashMap<>();
+            response.put("role", role);
+            response.put("room", roomId);
+    
+            context.getResponse().json(response);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+    
+        }
+    }
 }

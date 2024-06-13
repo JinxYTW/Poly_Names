@@ -57,4 +57,22 @@ public class TourDao {
         }
         return res;
     }
+
+    public void addTour(String indice, int wordToFindNb, String uniqueCode) {
+        try {
+            PartieDao myPartieDao = new PartieDao();
+            Partie myPartie = myPartieDao.findByCode(uniqueCode);
+            int idPartie = myPartie.id_partie();
+
+            PolyNameDatabase myDatabase = new PolyNameDatabase();
+            String request = "INSERT INTO tour (indice, word_to_find_nb, id_partie) VALUES (?, ?, ?)";
+            PreparedStatement prepStat = myDatabase.prepareStatement(request);
+            prepStat.setString(1, indice);
+            prepStat.setInt(2, wordToFindNb);
+            prepStat.setInt(3, idPartie);
+            prepStat.executeUpdate();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
 }

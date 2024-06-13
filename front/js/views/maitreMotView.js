@@ -20,13 +20,13 @@ class MaitreMotView {
   }
 
   hideInstructions() {
-    console.log("Masquage des instructions"); 
+     
     this.instructionDiv.classList.add('hidden');
     this.grilleDiv.classList.remove('hidden');
   }
 
   showGrid() {
-    console.log("Affichage de la grille");
+    
     
     //this.grilleDiv.classList.add("visible");
     this.grilleDiv.style.display = 'block';
@@ -49,6 +49,15 @@ class MaitreMotView {
       cardElement.classList.add('card');
       cardElement.textContent = card.mot; 
       cardElement.dataset.index = card.position; 
+      
+      if (card.id_couleur === 1) {
+        cardElement.classList.add('blue');
+      } else if (card.id_couleur === 2) {
+        cardElement.classList.add('grey');
+      } else if (card.id_couleur === 3) {
+        cardElement.classList.add('black');
+      }
+
       this.cardsContainer.appendChild(cardElement);
     });
   }
