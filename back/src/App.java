@@ -6,9 +6,35 @@ import controller.PartieController;
 import controller.TourController;
 import webserver.WebServer;
 import webserver.WebServerContext;
+import webserver.WebServerResponse;
+import webserver.WebServerSSEEventType;
+
 
 public class App {
     public static void main(String[] args) throws Exception {
+
+        //-------------- SSE ----------------------------
+        WebServer webServer = new WebServer();
+        ConnectCallback connectCallback = new ConnectCallback();
+        SubscribeCallback subscribeCallback = new SubscribeCallback();
+        UnsubscribeCallback unsubscribeCallback = new UnsubscribeCallback();
+        webServer.getSSE().addEventListeners(WebServerSSEEventType.CONNECT, connectCallback);
+        webServer.getSSE().addEventListeners(WebServerSSEEventType.SUBSCRIBE, subscribeCallback);
+        webServer.getSSE().addEventListeners(WebServerSSEEventType.UNSUBSCRIBE, unsubscribeCallback);
+        webServer.getRouter().post("/id/:id/:channelId", (WebServerContext context) -> {
+            WebServerResponse response = context.getResponse();
+            int id = Integer.parseInt(context.getRequest().getParam("id"));
+            String channelId = context.getRequest().getParam("channelId");
+            System.out.println("id: " + id + " channelId: " + channelId);
+            context.getSSE().emit(channelId, "{\"id\":" + id + ", \"channelId\":\"" + channelId + "\"}");
+            response.ok("Enchère effectuée avec succès");
+
+        });
+
+
+        //-------------- Routes ----------------------------
+
+
         WebServer webserver = new WebServer();
         webserver.listen(8080);
 
@@ -25,18 +51,20 @@ public class App {
 
         PartieController my_controller= new PartieController();
         webserver.getRouter().get("/api/createLobby", (WebServerContext context) -> {
-            String uniqueCode = my_controller.createLobbyCode(context);
+            String uniqueCode=my_controller.createLobbyCode(context);
             my_controller_carte.genererCarte(uniqueCode);
-            webserver.getRouter().get("/api/" + uniqueCode, (WebServerContext codeContext) -> {my_controller.createLobby(codeContext, uniqueCode); });
         });
 
         
 
         
-
+        webserver.getRouter().post("/api/:uniqueCode", (WebServerContext context) -> {
+            String uniqueCode = context.getRequest().getParam( "uniqueCode");
+            my_controller.createLobby(context, uniqueCode);
+        });
         
 
-        webserver.getRouter().get("/api/joinLobby/:uniqueCode", (WebServerContext context) -> {
+        webserver.getRouter().post("/api/joinLobby/:uniqueCode", (WebServerContext context) -> {
             String uniqueCode = context.getRequest().getParam( "uniqueCode");
             my_controller.joinLobby(context, uniqueCode);
         });
@@ -83,6 +111,7 @@ public class App {
             System.out.println("uniqueCodeRouter : " + uniqueCode);
             my_controller_tour.submitHint(context, uniqueCode);
         });
+
 
 
 
