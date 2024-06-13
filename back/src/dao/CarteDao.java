@@ -103,5 +103,22 @@ public class CarteDao {
         }
         
     }
+
+    public void submitCard(String uniqueCode, int position) {
+        try {
+            PolyNameDatabase myDatabase = new PolyNameDatabase();
+            PartieDao myPartieDao = new PartieDao();
+            Partie partie = myPartieDao.findByCode(uniqueCode);
+            int id_partie = partie.id_partie();
+            
+            String request = "UPDATE Carte SET etat = true WHERE id_partie = ? AND position = ?";
+            PreparedStatement prepStat = myDatabase.prepareStatement(request);
+            prepStat.setInt(1, id_partie);
+            prepStat.setInt(2, position);
+            prepStat.executeUpdate();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
     
 }

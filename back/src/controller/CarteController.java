@@ -54,6 +54,20 @@ public class CarteController {
             System.out.println(e.getMessage());
         }
     }
+
+    public void submitCard(WebServerContext context, String uniqueCode, int position) {
+        try {
+            CarteDao myDao = new CarteDao();
+            myDao.submitCard(uniqueCode, position);
+            WebServerResponse myResponse = context.getResponse();
+            myResponse.ok("Carte soumise");
+            
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            WebServerResponse myResponse = context.getResponse();
+            myResponse.json("{\"status\":\"error\"}");
+        }
+    }
 }
 
     

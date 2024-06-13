@@ -1,8 +1,6 @@
 package controller;
 import java.util.ArrayList;
 
-import com.google.gson.JsonObject;
-
 import dao.TourDao;
 import models.Tour;
 

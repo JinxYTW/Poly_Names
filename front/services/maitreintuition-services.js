@@ -25,6 +25,25 @@ class MaitreIntuitionServices {
           return [];
         }
       }
+
+      async submitCard(uniqueCode, position) {
+        try {
+            const response = await fetch(`http://127.0.0.1:8080/api/submitCard/${uniqueCode}/${position}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ position })
+            });
+            if (!response.ok) {
+                throw new Error('Erreur lors de la soumission de la carte');
+            }
+            //Peut être des modifs à faire ici par la suite
+            return response.ok;
+        } catch (error) {
+            console.error("Erreur dans submitCard:", error);
+        }
+    }
 }
 
 export { MaitreIntuitionServices };

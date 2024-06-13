@@ -87,6 +87,13 @@ public class App {
             String uniqueCode = context.getRequest().getParam("uniqueCode");
             my_controller_carte.getCards(context,uniqueCode);
         });
+
+        webserver.getRouter().post("/api/submitCard/:uniqueCode/:position", (WebServerContext context) -> {
+            String uniqueCode = context.getRequest().getParam("uniqueCode");
+            int position = Integer.parseInt(context.getRequest().getParam("position"));
+            System.out.println("uniqueCodeRouter : " + uniqueCode);
+            my_controller_carte.submitCard(context, uniqueCode, position);
+        });
         
 
 
