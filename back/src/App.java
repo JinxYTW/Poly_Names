@@ -25,18 +25,20 @@ public class App {
 
         PartieController my_controller= new PartieController();
         webserver.getRouter().get("/api/createLobby", (WebServerContext context) -> {
-            String uniqueCode = my_controller.createLobbyCode(context);
+            String uniqueCode=my_controller.createLobbyCode(context);
             my_controller_carte.genererCarte(uniqueCode);
-            webserver.getRouter().get("/api/" + uniqueCode, (WebServerContext codeContext) -> {my_controller.createLobby(codeContext, uniqueCode); });
         });
 
         
 
         
-
+        webserver.getRouter().post("/api/:uniqueCode", (WebServerContext context) -> {
+            String uniqueCode = context.getRequest().getParam( "uniqueCode");
+            my_controller.createLobby(context, uniqueCode);
+        });
         
 
-        webserver.getRouter().get("/api/joinLobby/:uniqueCode", (WebServerContext context) -> {
+        webserver.getRouter().post("/api/joinLobby/:uniqueCode", (WebServerContext context) -> {
             String uniqueCode = context.getRequest().getParam( "uniqueCode");
             my_controller.joinLobby(context, uniqueCode);
         });
