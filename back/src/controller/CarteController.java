@@ -41,13 +41,28 @@ public class CarteController {
         return cartes;
     }
 
-    public void getCards(WebServerContext context,String uniqueCode) {
+    public void getCards(WebServerContext context,String uniqueCode,boolean couleurBool) {
         try{
             CarteDao myDao=new CarteDao();
-            ArrayList<Carte> cartes=myDao.genererCarte(uniqueCode);
-            System.out.println("Cartes générées pour le code unique " + uniqueCode + ": " + cartes);
+            ArrayList<Carte> cartes=myDao.findByCode(uniqueCode,couleurBool);
             WebServerResponse myResponse=context.getResponse();
             myResponse.json(cartes);
+        }
+        catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+    public void getCardsM(WebServerContext context,String uniqueCode) {
+        try{
+            getCards(context, uniqueCode,true);
+        }
+        catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+    public void getCardsI(WebServerContext context,String uniqueCode) {
+        try{
+            getCards(context, uniqueCode,false);
         }
         catch(Exception e){
             System.out.println(e.getMessage());
