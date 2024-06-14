@@ -39,14 +39,14 @@ class MaitreIntuitionView {
         console.log("Aucune carte à afficher");
         return;
       }
-
+  
       cards.forEach((card) => {
         const cardElement = document.createElement('div');
         cardElement.classList.add('card');
-        cardElement.textContent = card.mot
+        cardElement.textContent = card.mot;
         cardElement.dataset.index = card.position;
-        //Ajouter Couleur par def
-    
+  
+        // Ajouter Couleur par def
         // Créer le span pour le rond avec l'image d'index
         const indexBadge = document.createElement('span');
         indexBadge.classList.add('index-badge');
@@ -56,16 +56,30 @@ class MaitreIntuitionView {
         indexImage.alt = "Error";
         indexBadge.appendChild(indexImage);
         cardElement.appendChild(indexBadge);
-    
+  
         this.cardsContainer.appendChild(cardElement);
-
-        indexBadge.addEventListener('click',async (event) => {
+  
+        indexBadge.addEventListener('click', async (event) => {
           const idPosition = event.target.closest('span').dataset.idPosition;
           console.log("Span cliqué avec id_position:", idPosition);
-
+  
           const uniqueCode = window.location.search.split('=')[1];
           const maitreIntuitionServices = new MaitreIntuitionServices();
-          await maitreIntuitionServices.submitCard(uniqueCode, idPosition);
+          const response = await maitreIntuitionServices.submitCard(uniqueCode, idPosition);
+  
+          // Ajoutez la classe CSS en fonction de la réponse de l'API
+          // Vous pouvez ici ajuster en fonction des paramètres reçus par votre réponse API
+          const cardData = { id_couleur: 1 }; // Exemple : ici vous devez passer la vraie couleur
+          maitreIntuitionController.submitCard(
+            cardData.id_carte,
+            cardData.mot,
+            cardData.etat,
+            cardData.position,
+            cardData.id_couleur,
+            cardData.id_mot,
+            cardData.id_partie,
+            uniqueCode
+          );
         });
       });
     }
@@ -106,6 +120,16 @@ class MaitreIntuitionView {
       const hintElement = document.createElement('div');
       hintElement.textContent = `L'indice est ${hint}, et correspond à ${nbMots} mots`;
       this.chatContent.appendChild(hintElement);
+    }
+
+    updateCardColor(position, colorClass) {
+      const cardElement = this.cardsContainer.querySelector(`[data-index="${position}"]`);
+      if (cardElement) {
+        // Supprimez les classes de couleur existantes
+        cardElement.classList.remove('blue', 'grey', 'black');
+        // Ajoutez la nouvelle classe de couleur
+        cardElement.classList.add(colorClass);
+      }
     }
   
 }

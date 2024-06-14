@@ -45,8 +45,8 @@ class MaitreIntuitionController {
     }
   }
 
-  submitCard(id_carte,mot,etat,position,id_couleur,id_mot,id_partie,uniqueCode){ // à modifier --------------------
-    if (id_couleur==1){
+  async submitCard(id_carte, mot, etat, position, id_couleur, id_mot, id_partie, uniqueCode) {
+    if (id_couleur == 1) {
       console.log(id_carte);
       console.log(mot);
       console.log(etat);
@@ -54,10 +54,16 @@ class MaitreIntuitionController {
       console.log(id_couleur);
       console.log(id_mot);
       console.log(id_partie);
-    }
-    else if (id_couleur==2){
-      console.log("carte grise")
+
+      // Mise à jour de la classe de la carte
+      this.view.updateCardColor(position, 'blue'); // Appliquer la classe 'blue'
+    } else if (id_couleur == 2) {
+      console.log("carte grise");
+      this.view.updateCardColor(position, 'grey'); // Appliquer la classe 'grey'
       this.services.endTour(uniqueCode);
+    } else if (id_couleur == 3) {
+      console.log("carte noire");
+      this.view.updateCardColor(position, 'black'); // Appliquer la classe 'black'
     }
   }
   showIndice(indice,nbWord){ // à modifier --------------------
