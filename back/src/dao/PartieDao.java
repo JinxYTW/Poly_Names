@@ -169,10 +169,29 @@ public class PartieDao {
         try {
             
             PolyNameDatabase myDatabase = new PolyNameDatabase();
-            String deleteSQL = "DELETE FROM partie WHERE unique_code = ?";
-            PreparedStatement prepStatUpdate = myDatabase.prepareStatement(deleteSQL);
-            prepStatUpdate.setString(1, uniqueCode);
-            prepStatUpdate.executeUpdate();
+
+            String deleteJoueurSQL = "DELETE FROM joueur WHERE id_partie = (SELECT id_partie FROM partie WHERE unique_code = ?)";
+            PreparedStatement prepStatDeleteJoueur = myDatabase.prepareStatement(deleteJoueurSQL);
+            prepStatDeleteJoueur.setString(1, uniqueCode);
+            prepStatDeleteJoueur.executeUpdate();
+
+            
+            String deleteCarteSQL = "DELETE FROM carte WHERE id_partie = (SELECT id_partie FROM partie WHERE unique_code = ?)";
+            PreparedStatement prepStatDeleteCarte = myDatabase.prepareStatement(deleteCarteSQL);
+            prepStatDeleteCarte.setString(1, uniqueCode);
+            prepStatDeleteCarte.executeUpdate();
+
+            
+            String deleteTourSQL = "DELETE FROM tour WHERE id_partie = (SELECT id_partie FROM partie WHERE unique_code = ?)";
+            PreparedStatement prepStatDeleteTour = myDatabase.prepareStatement(deleteTourSQL);
+            prepStatDeleteTour.setString(1, uniqueCode);
+            prepStatDeleteTour.executeUpdate();
+
+            String deletePartieSQL = "DELETE FROM partie WHERE unique_code = ?";
+            PreparedStatement prepStatDeletePartie = myDatabase.prepareStatement(deletePartieSQL);
+            prepStatDeletePartie.setString(1, uniqueCode);
+            prepStatDeletePartie.executeUpdate();
+
             System.out.println("La partie avec le code unique " + uniqueCode + " a été supprimée avec succès.");
         } catch (Exception e) {
             System.out.println(e.getMessage());
