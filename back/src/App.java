@@ -70,11 +70,6 @@ public class App {
             my_controller.joinLobby(context, uniqueCode);
         });
 
-        webserver.getRouter().get("/api/updateScore/:uniqueCode", (WebServerContext context) -> {
-            String uniqueCode = context.getRequest().getParam("uniqueCode");
-            my_controller.updateScore(context, uniqueCode);
-        });
-
         webserver.getRouter().get("/api/getInfo/:uniqueCode", (WebServerContext context) -> {
             String uniqueCode = context.getRequest().getParam("uniqueCode");
             my_controller.getInfo(context, uniqueCode);

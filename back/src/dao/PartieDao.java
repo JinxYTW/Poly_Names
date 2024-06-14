@@ -129,27 +129,6 @@ public class PartieDao {
         return myPartie;
     }
 
-    public Partie updateScore(String uniqueCode) {
-        Partie myPartie = null;
-        System.out.println("uniqueCode : " + uniqueCode);
-        try {
-            myPartie = findByCode(uniqueCode);
-            System.out.println("myPartie : " + myPartie);
-            if (myPartie != null) {
-                PolyNameDatabase myDatabase = new PolyNameDatabase();
-                String requestUpdate = "UPDATE partie SET score = ? WHERE unique_code = ?";
-                PreparedStatement prepStatUpdate = myDatabase.prepareStatement(requestUpdate);
-                prepStatUpdate.setInt(1, myPartie.score() + 1);
-                prepStatUpdate.setString(2, uniqueCode);
-                prepStatUpdate.executeUpdate();
-
-                myPartie = findByCode(uniqueCode);
-            }
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-        return myPartie;
-    }
 
     public int getScore(String uniqueCode) {
         try {
