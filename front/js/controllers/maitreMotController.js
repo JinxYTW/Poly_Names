@@ -72,8 +72,6 @@ class MaitreMotController {
       console.log(id_partie);
     }
 
-    
-
     // Ajouter la classe contrastée à la carte sélectionnée
     const selectedCard = document.querySelector(`.card[data-index="${position}"]`);
     if (selectedCard) {

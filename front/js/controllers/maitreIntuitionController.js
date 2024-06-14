@@ -54,7 +54,7 @@ class MaitreIntuitionController {
       console.log(id_couleur);
       console.log(id_mot);
       console.log(id_partie);
-
+      
       // Mise à jour de la classe de la carte
       this.view.updateCardColor(position, 'blue'); 
     } else if (id_couleur == 2) {
