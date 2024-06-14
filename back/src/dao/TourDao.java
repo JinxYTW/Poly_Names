@@ -60,7 +60,7 @@ public class TourDao {
         return res;
     }
 
-    public void addTour(String indice, int wordToFindNb, String uniqueCode) {
+    public void addTour(String indice, int wordToFindNb, String uniqueCode, int tour) {
         try {
             PartieDao myPartieDao = new PartieDao();
             Partie myPartie = myPartieDao.findByCode(uniqueCode);
@@ -68,13 +68,15 @@ public class TourDao {
             int word_to_guess= wordToFindNb + 1;
 
             PolyNameDatabase myDatabase = new PolyNameDatabase();
-            String request = "INSERT INTO tour (indice, word_to_find_nb,word_to_guess, id_partie) VALUES (?,?, ?, ?)";
+            String request = "INSERT INTO tour (indice, word_to_find_nb,word_to_guess, id_partie, tour) VALUES (?,?,?, ?, ?)";
             PreparedStatement prepStat = myDatabase.prepareStatement(request);
             prepStat.setString(1, indice);
             prepStat.setInt(2, wordToFindNb);
             prepStat.setInt(3, word_to_guess);
             prepStat.setInt(4, idPartie);
+            prepStat.setInt(5, tour);
             prepStat.executeUpdate();
+            
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }

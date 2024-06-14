@@ -30,13 +30,15 @@ public class TourController {
     public void submitHint(WebServerContext context, String uniqueCode) {
         try {
             HintRequestBody requestBody = context.getRequest().extractBody(HintRequestBody.class);
+            
     
             // Extraction des valeurs spécifiques du JSON
-            String indice = requestBody.getIndice();
-            int wordToFindNb = requestBody.getWordToFindNb();
+            String indice = requestBody.indice();
+            int wordToFindNb = requestBody.wordToFindNb();
+            int tour=requestBody.tour();
     
             TourDao myDao = new TourDao();
-            myDao.addTour(indice, wordToFindNb, uniqueCode);
+            myDao.addTour(indice, wordToFindNb, uniqueCode,tour);
     
             WebServerResponse myResponse = context.getResponse();
             myResponse.ok("Indice ajouté");
