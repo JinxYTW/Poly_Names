@@ -138,6 +138,18 @@ public class PartieDao {
         }
         return -1;
     }
+    public void endGame(String uniqueCode){
+        try {
+            PolyNameDatabase myDatabase = new PolyNameDatabase();
+            String request = "UPDATE partie SET score = ? WHERE unique_code=?";
+            PreparedStatement prepStat = myDatabase.prepareStatement(request);
+            prepStat.setInt(1, -1); 
+            prepStat.setString(2, uniqueCode); 
+            prepStat.executeUpdate();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+}
 
     
-}

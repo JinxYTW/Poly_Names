@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import com.google.gson.JsonObject;
 
 import dao.CarteDao;
+import dao.PartieDao;
 import dao.TourDao;
 import models.Carte;
 
@@ -93,6 +94,14 @@ public class CarteController {
                 context.getSSE().emit("RetourneCarte",jsonObject);
                 if (myCarte.id_couleur()==1){
                     myTourDao.updateScore(uniqueCode, myTourDao.getMaxTour(uniqueCode));;
+                }
+                else if (myCarte.id_couleur()==3){
+                    PartieDao myPartieDao=new PartieDao();
+                    myPartieDao.endGame(uniqueCode);
+                    
+                    JsonObject jsonObjectEnd = new JsonObject();
+                    jsonObjectEnd.addProperty("unique_code", uniqueCode);
+                    context.getSSE().emit("endGame", jsonObjectEnd);
                 }
             }
             else{

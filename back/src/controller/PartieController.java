@@ -84,7 +84,7 @@ public class PartieController {
             System.out.println(e.getMessage());
         }
     }
-
+    
     public void getInfo(WebServerContext context, String uniqueCode){
         try {
             PartieDao myPartieDao = new PartieDao();

@@ -50,7 +50,9 @@ class MaitreMotController {
     player.updateScore(points);
     this.view.updateScore(this.player1.getScore(), this.player2.getScore());
   }
-
+  endGame(uniqueCode){ // à modifier --------------------
+    console.log("Fin de la partie ayant le code :"+uniqueCode);
+  }
   nextTurn() {
     this.turn.nextTurn();
     this.view.updateTurn(this.turn.getTurn());

@@ -59,15 +59,15 @@ class MaitreIntuitionController {
       console.log("carte grise")
       this.services.endTour(uniqueCode);
     }
-    else{
-      //fin de partie
-    }
   }
   showIndice(indice,nbWord){ // à modifier --------------------
     console.log(indice);
     console.log(nbWord);
     this.view.addHintToChat(indice,nbWord);
     
+  }
+  endGame(uniqueCode){ // à modifier --------------------
+    console.log("Fin de la partie ayant le code :"+uniqueCode);
   }
 
   handleScreenClick() {

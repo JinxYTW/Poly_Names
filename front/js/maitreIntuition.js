@@ -9,10 +9,12 @@ function roleGivenChallenger(data,myMaitreIntuitionController){
 function newIndice(data,myMaitreIntuitionController){
   myMaitreIntuitionController.showIndice(data.indice,data.wordToFindNb)
 }
+function endGameIntuition(data,myMaitreIntuitionController){
+  myMaitreIntuitionController.endGame(data.unique_code)
+}
 
 
 async function run(myMaitreIntuitionController){
-  localStorage.setItem("test","ça marche")
   const baseUrl = "localhost:8080"; 
 
   const sseClientWaiting = new SSEClient(baseUrl);
@@ -21,6 +23,7 @@ async function run(myMaitreIntuitionController){
       //await sseClient.subscribe("lobbyHost", fonctionHost).then(console.log("abonnement canal lobbyHost"));
       await sseClientWaiting.subscribe("RetourneCarte", (data) => roleGivenChallenger(data, myMaitreIntuitionController)).then(console.log("RetourneCarte up"));
       await sseClientWaiting.subscribe("newIndice", (data) => newIndice(data, myMaitreIntuitionController)).then(console.log("newIndice up"));
+      await sseClientWaiting.subscribe("endGame", (data) => endGameIntuition(data, myMaitreIntuitionController)).then(console.log("endGame up"));
       window.addEventListener('unload', () => {
         sseClientWaiting.disconnect();
       });
@@ -30,7 +33,6 @@ async function run(myMaitreIntuitionController){
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    localStorage.setItem('test', "test");
     const myMaitreIntuitionController = new MaitreIntuitionController();
     run(myMaitreIntuitionController);
 });
