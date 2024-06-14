@@ -42,7 +42,7 @@ class MaitreIntuitionView {
       // Appel pour récupérer le nom du joueur 1
       const player1Name = await this.maitreIntuitionServices.getPlayer1Name(uniqueCode);
       // Appel pour récupérer le nom du joueur 2
-      const player2Name = await this.maitreMotServices.getPlayer2Name(uniqueCode);
+      const player2Name = await this.maitreIntuitionServices.getPlayer2Name(uniqueCode);
   
       // Mise à jour des noms dans l'interface utilisateur
       this.playerName1.textContent = player1Name;
