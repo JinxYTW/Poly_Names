@@ -141,6 +141,7 @@ public class PartieDao {
     public void endGame(String uniqueCode){
         try {
             PolyNameDatabase myDatabase = new PolyNameDatabase();
+            System.out.println("fin de partie");
             String request = "UPDATE partie SET score = ? WHERE unique_code=?";
             PreparedStatement prepStat = myDatabase.prepareStatement(request);
             prepStat.setInt(1, -1); 
