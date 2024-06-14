@@ -194,5 +194,30 @@ public class CarteDao {
             System.out.println(e.getMessage());
         }
     }
-    
+    public Boolean isPartieFinish(String uniqueCode){
+        try {
+            PolyNameDatabase myDatabase = new PolyNameDatabase();
+            PartieDao myPartieDao = new PartieDao();
+            Partie partie = myPartieDao.findByCode(uniqueCode);
+            int id_partie = partie.id_partie();
+            
+
+            String request = "SELECT * FROM Carte WHERE id_couleur = ? AND etat = ? AND id_partie= ?";
+            
+            PreparedStatement prepStat = myDatabase.prepareStatement(request);
+            prepStat.setInt(1, 1);
+            prepStat.setBoolean(2, false);
+            prepStat.setInt(1, id_partie);
+            ResultSet result=prepStat.executeQuery();
+            if (!result.isBeforeFirst()) {
+                System.out.println("la partie est gagné ");
+                return true;
+            } else {return false;}
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return false;
+        }
+
+    }
 }

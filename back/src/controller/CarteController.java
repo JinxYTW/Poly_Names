@@ -98,6 +98,9 @@ public class CarteController {
                 }
                 if (myCarte.id_couleur()==1){
                     myTourDao.updateScore(uniqueCode, myTourDao.getMaxTour(uniqueCode));;
+                    if (myDao.isPartieFinish(uniqueCode)){
+                        System.out.println("whouou t'as gagné");
+                    }
                 }
                 else if(myCarte.id_couleur()==2){
                     context.getSSE().emit("lastMot", null);

@@ -1,7 +1,8 @@
 import { MaitreIntuitionServices } from '../../services/maitreintuition-services.js';
 
 class MaitreIntuitionView {
-    constructor() {
+    constructor(controller) {
+      this.controller=controller
       this.instructionDiv = document.getElementById('maitreintuitioninstruction');
       this.grilleDiv = document.getElementById('grille');
       this.cardsContainer = this.grilleDiv.querySelector('.cards');
@@ -103,7 +104,7 @@ class MaitreIntuitionView {
   
           
           const cardData = { id_couleur: 1 }; 
-          maitreIntuitionController.submitCard(
+          this.controller.submitCard(
             cardData.id_carte,
             cardData.mot,
             cardData.etat,

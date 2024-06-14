@@ -7,7 +7,7 @@ import { MaitreIntuitionServices } from '../../services/maitreintuition-services
 
 class MaitreIntuitionController {
     constructor() {
-    this.view = new MaitreIntuitionView();
+    this.view = new MaitreIntuitionView(this);
     this.grid = new Grid();
     this.player1 = new Player('Joueur 1');
     this.player2 = new Player('Joueur 2');
