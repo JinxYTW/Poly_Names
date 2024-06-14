@@ -92,8 +92,10 @@ public class PartieController {
             int score = myPartieDao.getScore(uniqueCode);
             int tour = myTourDao.getMaxTour(uniqueCode);
             WebServerResponse myResponse = context.getResponse();
-            String res="Score : "+score+" Tour : "+tour;
-            myResponse.json(res);
+            JsonObject jsonObject = new JsonObject();
+            jsonObject.addProperty("score", score);
+            jsonObject.addProperty("tour", tour);
+            myResponse.json(jsonObject);
             
         } catch (Exception e) {
             System.out.println(e.getMessage());

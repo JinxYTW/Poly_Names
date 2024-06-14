@@ -46,6 +46,14 @@ class MaitreMotController {
     this.view.showGrid();
   }
 
+   showButton(){
+    this.view.enableIndiceButton();
+  }
+
+  hideButton(){
+    this.view.disableIndiceButton();
+  }
+
   updateScore(player, points) {
     player.updateScore(points);
     this.view.updateScore(this.player1.getScore(), this.player2.getScore());
@@ -89,6 +97,7 @@ class MaitreMotController {
       console.log("Soumission de l'indice");
       const response = await this.services.submitHint(hint, nbMots, uniqueCode);
       console.log("Réponse de l'API:", response);
+      this.hideButton();
 
       console.log(response);
 

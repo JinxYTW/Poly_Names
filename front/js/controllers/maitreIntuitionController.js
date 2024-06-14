@@ -59,7 +59,7 @@ class MaitreIntuitionController {
       this.view.updateCardColor(position, 'blue'); 
     } else if (id_couleur == 2) {
       console.log("carte grise");
-      this.view.updateCardColor(position, 'grey'); 
+      this.view.updateCardColor(position, 'grey');
       this.services.endTour(uniqueCode);
     } else if (id_couleur == 3) {
       console.log("carte noire");

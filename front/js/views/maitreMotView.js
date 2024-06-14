@@ -60,6 +60,13 @@ class MaitreMotView {
     this.grilleDiv.classList.remove('hidden');
   }
 
+  enableIndiceButton() {
+    this.btn_definir.disabled = false;
+  }
+  disableIndiceButton() {
+    this.btn_definir.disabled = true;
+  }
+
   showGrid() {
     //this.grilleDiv.classList.add("visible");
     this.grilleDiv.style.display = 'block';
