@@ -67,4 +67,17 @@ public class TourController {
             myResponse.json("{\"status\":\"error\"}");
         }
     }
+    public void endTour(WebServerContext context,String uniqueCode){
+        try {
+            TourDao myDao = new TourDao();
+            myDao.endTour(uniqueCode);
+    
+            WebServerResponse myResponse = context.getResponse();
+            myResponse.ok("tour terminé");
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            WebServerResponse myResponse = context.getResponse();
+            myResponse.json("{\"status\":\"error\"}");
+        }
+    }
 }

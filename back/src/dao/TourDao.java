@@ -193,4 +193,19 @@ public void updateScore(String uniqueCode, int tour) {
         System.out.println(e.getMessage());
     }
 }
+public void endTour(String uniqueCode){
+    try {
+        PartieDao myPartieDao = new PartieDao();
+        Partie myPartie = myPartieDao.findByCode(uniqueCode);
+        int idPartie = myPartie.id_partie();
+        PolyNameDatabase myDatabase = new PolyNameDatabase();
+        String request = "UPDATE tour SET word_to_guess = ? WHERE id_partie=?";
+        PreparedStatement prepStat = myDatabase.prepareStatement(request);
+        prepStat.setInt(1, 0); 
+        prepStat.setInt(2, idPartie); 
+        prepStat.executeUpdate();
+    } catch (Exception e) {
+        System.out.println(e.getMessage());
+    }
+}
 }

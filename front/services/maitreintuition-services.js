@@ -56,6 +56,23 @@ class MaitreIntuitionServices {
             console.error("Erreur dans submitCard:", error);
         }
     }
+    async endTour(uniqueCode){
+      try {
+        const response = await fetch(`http://127.0.0.1:8080/api/endTour/${uniqueCode}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+        if (!response.ok) {
+            throw new Error('Erreur lors de la fin du tour');
+        }
+        //Peut être des modifs à faire ici par la suite
+        return response.ok;
+      } catch (error) {
+        console.error("Erreur dans endTour", error);
+      }
+    }
 }
 
 export { MaitreIntuitionServices };

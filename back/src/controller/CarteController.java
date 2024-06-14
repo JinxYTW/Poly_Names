@@ -89,12 +89,11 @@ public class CarteController {
                 jsonObject.addProperty("id_mot", myCarte.id_mot());
                 jsonObject.addProperty("id_partie", myCarte.id_partie());
                 jsonObject.addProperty("enoughWord", true);
+                jsonObject.addProperty("uniqueCode", uniqueCode);
                 context.getSSE().emit("RetourneCarte",jsonObject);
                 if (myCarte.id_couleur()==1){
                     myTourDao.updateScore(uniqueCode, myTourDao.getMaxTour(uniqueCode));;
                 }
-
-                
             }
             else{
                 WebServerResponse myResponse = context.getResponse();

@@ -41,16 +41,16 @@ public class App {
         
 
         DictionnaireController my_controller_dictionnaire= new DictionnaireController();
-        webserver.getRouter().get("/api/dictionnaire",(WebServerContext context) -> { my_controller_dictionnaire.findAll(context); } );
         CouleurController my_controller_couleur= new CouleurController();
-        webserver.getRouter().get("/api/couleur",(WebServerContext context) -> { my_controller_couleur.findAll(context); } );
         PartieController my_controller_partie= new PartieController();
-        webserver.getRouter().get("/api/partie",(WebServerContext context) -> { my_controller_partie.findAll(context); } );
-        
         CarteController my_controller_carte= new CarteController();
-
         PartieController my_controller= new PartieController();
         TourController myTourController= new TourController();
+
+        webserver.getRouter().get("/api/dictionnaire",(WebServerContext context) -> { my_controller_dictionnaire.findAll(context); } );
+        webserver.getRouter().get("/api/couleur",(WebServerContext context) -> { my_controller_couleur.findAll(context); } );
+        webserver.getRouter().get("/api/partie",(WebServerContext context) -> { my_controller_partie.findAll(context); } );
+        
         webserver.getRouter().get("/api/createLobby", (WebServerContext context) -> {
             String uniqueCode=my_controller.createLobbyCode(context);
             my_controller_carte.genererCarte(uniqueCode);
@@ -108,25 +108,30 @@ public class App {
 
 
 
-        JoueurController my_Controller3= new JoueurController();
-        webserver.getRouter().get("/api/detect",(WebServerContext context) -> { my_Controller3.detect(context); } );
+        JoueurController my_controller_joueur= new JoueurController();
+        webserver.getRouter().get("/api/detect",(WebServerContext context) -> { my_controller_joueur.detect(context); } );
 
         webserver.getRouter().get("/api/chooseRole/:role/:room", (WebServerContext context) -> {
             String role = context.getRequest().getParam("role");
             String roomId = context.getRequest().getParam("room");
             
             
-            my_Controller3.chooseRole(context, role, roomId);
+            my_controller_joueur.chooseRole(context, role, roomId);
         });
 
         webserver.getRouter().get("/api/getPlayer1Name/:uniqueCode", (WebServerContext context) -> {
             String uniqueCode = context.getRequest().getParam("uniqueCode");
-            my_Controller3.getPlayer1(context, uniqueCode);
+            my_controller_joueur.getPlayer1(context, uniqueCode);
         });
 
         webserver.getRouter().get("/api/getPlayer2Name/:uniqueCode", (WebServerContext context) -> {
             String uniqueCode = context.getRequest().getParam("uniqueCode");
-            my_Controller3.getPlayer2(context, uniqueCode);
+            my_controller_joueur.getPlayer2(context, uniqueCode);
+        });
+
+        webserver.getRouter().get("/api/endTour/:uniqueCode", (WebServerContext context) -> {
+            String uniqueCode = context.getRequest().getParam("uniqueCode");
+            myTourController.endTour(context, uniqueCode);
         });
 
         TourController my_controller_tour= new TourController();
