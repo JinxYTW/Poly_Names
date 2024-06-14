@@ -2,10 +2,12 @@ import { WaitingView } from "../views/waitingView.js";
 
 class WaitingController {
     constructor() {
-        this.waitingView = new WaitingView();
+        this.waitingView = new WaitingView(this);
     }
-    giveRoleChallenger(role){ // à modifier --------------------
-        console.log(role);
+
+    giveRoleChallenger(role) {
+        console.log("Role p2: " + role);
+        this.waitingView.giveRoleChallenger(role);
     }
 }
 
