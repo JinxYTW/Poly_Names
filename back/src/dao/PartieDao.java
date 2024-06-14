@@ -72,6 +72,17 @@ public class PartieDao {
             prepStatCreate.setInt(2, 0);
             prepStatCreate.setInt(3, 1); // Initialise le nombre de joueurs à 1
             prepStatCreate.executeUpdate();
+
+            Partie partieInitial= findByCode(uniqueCode);
+            String requestCreateTour = "INSERT INTO Tour (tour, indice, word_to_find_nb,word_to_guess,id_partie) VALUES (?, ?, ?,?,?)";
+            PreparedStatement prepStatCreateTour = myDatabase.prepareStatement(requestCreateTour);
+            prepStatCreateTour.setInt(1, 0);
+            prepStatCreateTour.setString(2, "initialisation");
+            prepStatCreateTour.setInt(3, 0); // Initialise le nombre de joueurs à 1
+            prepStatCreateTour.setInt(4, 0);
+            prepStatCreateTour.setInt(5, partieInitial.id_partie());
+            prepStatCreateTour.executeUpdate();
+            
     
             // Récupère la partie nouvellement créée
             myPartie = findByCode(uniqueCode);
