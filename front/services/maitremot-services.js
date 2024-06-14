@@ -104,6 +104,29 @@ console.error("Erreur dans getPlayer2Name:", error);
 return "";
 }
 }
+async getInfo(uniqueCode) {
+  try {
+    const response = await fetch(`http://127.0.0.1:8080/api/getInfo/${uniqueCode}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+
+    if (!response.ok) {
+      throw new Error('Erreur lors de la récupération des informations du jeu');
+    }
+
+    const data = await response.json();
+    console.log("Réponse API parsée Score:", data);
+    return data;
+
+  } catch (error) {
+    console.error('Erreur dans getInfo:', error);
+    throw error; // Remonte l'erreur pour la gestion ultérieure
+  }
+}
+
 }
 
 export { MaitreMotServices };

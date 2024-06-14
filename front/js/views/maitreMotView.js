@@ -8,8 +8,10 @@ class MaitreMotView {
     this.hint = document.getElementById('hint');
     this.nbMots = document.getElementById('nbMots');
     this.btn_definir = document.getElementById('btn_Definir');
+
     this.score = document.getElementById('score');
     this.turn = document.getElementById('turn');
+
     this.playerName1 = document.getElementById('playerName1');
     this.playerName2 = document.getElementById('playerName2');
     this.chat = document.getElementById('chat');
@@ -20,8 +22,24 @@ class MaitreMotView {
 
     // Appel pour mettre à jour les noms des joueurs
     this.updatePlayersNames();
+    this.updateGameInfo();
 
     this.hideGameElements();
+  }
+
+  async updateGameInfo() {
+    try {
+      const uniqueCode = window.location.search.split('=')[1];
+      const info = await this.maitreMotServices.getInfo(uniqueCode);
+      console.log("Info du jeu:", info);
+
+      // Mettre à jour l'interface utilisateur avec les informations reçues
+      this.turn.textContent = `Tour: ${info.tour}`;
+      this.score.textContent = `Score: ${info.score}`;
+
+    } catch (error) {
+      console.error('Erreur lors de la récupération des informations du jeu:', error);
+    }
   }
 
   async updatePlayersNames() {

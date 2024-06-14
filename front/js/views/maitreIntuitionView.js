@@ -11,9 +11,43 @@ class MaitreIntuitionView {
       this.playerName2 = document.getElementById('playerName2');
       this.chat = document.getElementById('chat');
       this.chatContent = document.getElementById('chatContent');
+
+      // Instance de MaitreMotServices
+    this.maitreIntuitionServices = new MaitreIntuitionServices();
+
+    // Appel pour mettre à jour les noms des joueurs
+    this.updatePlayersNames();
+    this.updateGameInfo();
   
       this.hideGameElements();
     }
+    async updateGameInfo() {
+      try {
+        const uniqueCode = window.location.search.split('=')[1];
+        const info = await this.maitreIntuitionServices.getInfo(uniqueCode);
+  
+        // Mettre à jour l'interface utilisateur avec les informations reçues
+        this.turn.textContent = `Tour: ${info.tour}`;
+        this.score.textContent = `Score: ${info.score}`;
+  
+      } catch (error) {
+        console.error('Erreur lors de la récupération des informations du jeu:', error);
+      }
+    }
+  
+    async updatePlayersNames() {
+      const uniqueCode = window.location.search.split('=')[1]; // Obtenez uniqueCode depuis l'URL
+  
+      // Appel pour récupérer le nom du joueur 1
+      const player1Name = await this.maitreIntuitionServices.getPlayer1Name(uniqueCode);
+      // Appel pour récupérer le nom du joueur 2
+      const player2Name = await this.maitreIntuitionServices.getPlayer2Name(uniqueCode);
+  
+      // Mise à jour des noms dans l'interface utilisateur
+      this.playerName1.textContent = player1Name;
+      this.playerName2.textContent = player2Name;
+    }
+
   
     hideInstructions() {
       
