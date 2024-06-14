@@ -220,6 +220,12 @@ button:disabled {
   color: #fff; 
 }
 
+.card.white { 
+  background-color: rgba(255, 255, 255, 0.7); 
+  border: 2px solid rgba(255, 255, 255, 1);
+  color: #333; 
+}
+
 /* Effets de survol */
 .card:hover {
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);

@@ -201,4 +201,5 @@ INSERT INTO Dictionnaire (texte) VALUES
 INSERT INTO Couleur (texte) VALUES 
 ('Bleu'),
 ('Gris'),
-('Noir');
+('Noir'),
+('Blanc');

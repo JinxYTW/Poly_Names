@@ -11,7 +11,7 @@ class MaitreIntuitionServices {
           }
 
 
-          const response = await fetch(`http://127.0.0.1:8080/api/getCartes/${uniqueCode}`,{
+          const response = await fetch(`http://127.0.0.1:8080/api/getCartesI/${uniqueCode}`,{
             method: 'GET',
             headers: {
               'Content-Type': 'application/json'

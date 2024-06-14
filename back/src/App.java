@@ -120,12 +120,12 @@ public class App {
             my_Controller3.chooseRole(context, role, roomId);
         });
 
-        webserver.getRouter().get("/api/getPlayer1/:uniqueCode", (WebServerContext context) -> {
+        webserver.getRouter().get("/api/getPlayer1Name/:uniqueCode", (WebServerContext context) -> {
             String uniqueCode = context.getRequest().getParam("uniqueCode");
             my_Controller3.getPlayer1(context, uniqueCode);
         });
 
-        webserver.getRouter().get("/api/getPlayer2/:uniqueCode", (WebServerContext context) -> {
+        webserver.getRouter().get("/api/getPlayer2Name/:uniqueCode", (WebServerContext context) -> {
             String uniqueCode = context.getRequest().getParam("uniqueCode");
             my_Controller3.getPlayer2(context, uniqueCode);
         });

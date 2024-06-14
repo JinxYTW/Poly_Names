@@ -10,7 +10,7 @@ class MaitreMotServices {
         console.log("Données stockées trouvées:", storedData);
         return JSON.parse(storedData);
       }
-      const response = await fetch(`http://127.0.0.1:8080/api/getCartes/${uniqueCode}`,{
+      const response = await fetch(`http://127.0.0.1:8080/api/getCartesM/${uniqueCode}`,{
         method: 'GET',
         headers: {
           'Content-Type': 'application/json'
@@ -84,7 +84,7 @@ catch (error) {
 
 async getPlayer2Name(uniqueCode) {
   try {
-    const response = await fetch(`http:////127.0.0.1:8080/api/getPlayer1Name/${uniqueCode}`, {
+    const response = await fetch(`http:////127.0.0.1:8080/api/getPlayer2Name/${uniqueCode}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json'
