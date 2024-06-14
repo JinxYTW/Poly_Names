@@ -3,6 +3,7 @@ import { MaitreIntuitionController} from './controllers/maitreIntuitionControlle
 
 function roleGivenChallenger(data,myMaitreIntuitionController){
   if(data.enoughWord==true){
+    console.log(data.enoughWord)
     myMaitreIntuitionController.submitCard(data.id_carte,data.mot,data.eta,data.position,data.id_couleur,data.id_mot,data.id_partie)
   }
 }

@@ -49,7 +49,6 @@ public class JoueurDao {
 
             while (results.next()){
                 res=results.getString("pseudo");
-                System.out.println("Player 1"+res);
                 }
                 return res;
                 
@@ -85,7 +84,6 @@ public class JoueurDao {
             JoueurDao myJoueurDao=new JoueurDao();
             PartieDao myPartieDao=new PartieDao();
             if (pseudo.equals("Host")){
-                System.out.println("pseudo :"+pseudo);
                 PolyNameDatabase myDatabase = new PolyNameDatabase();
                 String updatePlayer = "UPDATE Joueur SET role = ? WHERE id_partie = (SELECT id_partie FROM Partie WHERE unique_code = ?) AND pseudo = ?";
                 java.sql.PreparedStatement prepStatUpdate = myDatabase.prepareStatement(updatePlayer);
@@ -106,7 +104,6 @@ public class JoueurDao {
     }
     public void AddPlayer(String pseudo, String role, int id_partie){
         try{
-            System.out.println(pseudo);
             PolyNameDatabase myDatabase = new PolyNameDatabase();
             String requestAddPlayer = "INSERT INTO joueur (pseudo, role, id_partie) VALUES (?, ?, ?)";
             PreparedStatement prepStatAddPlayer = myDatabase.prepareStatement(requestAddPlayer);
@@ -114,7 +111,7 @@ public class JoueurDao {
             prepStatAddPlayer.setString(2, role); 
             prepStatAddPlayer.setInt(3,id_partie);
             prepStatAddPlayer.executeUpdate();  
-
+            /*
             String request="SELECT role FROM joueur WHERE id_partie = ?";
             PreparedStatement prepStat=myDatabase.prepareStatement(request);
             prepStat.setInt(1, id_partie);
@@ -123,7 +120,7 @@ public class JoueurDao {
                 System.out.print("valeur de test : ");
                 System.out.println(results.getString("role"));
                 }
-            
+            */
         }
         catch(Exception e){
             System.out.println(e.getMessage());

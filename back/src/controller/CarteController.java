@@ -38,7 +38,6 @@ public class CarteController {
         catch(Exception e){
             System.out.println(e.getMessage());
             
-            System.out.println("là");
         }
         return cartes;
     }
@@ -91,7 +90,7 @@ public class CarteController {
                 jsonObject.addProperty("id_partie", myCarte.id_partie());
                 jsonObject.addProperty("enoughWord", true);
                 context.getSSE().emit("RetourneCarte",jsonObject);
-                if (myCarte.id_couleur()==2){
+                if (myCarte.id_couleur()==1){
                     myTourDao.updateScore(uniqueCode, myTourDao.getMaxTour(uniqueCode));;
                 }
 
