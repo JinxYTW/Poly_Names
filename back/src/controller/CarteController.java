@@ -91,6 +91,10 @@ public class CarteController {
                 jsonObject.addProperty("id_partie", myCarte.id_partie());
                 jsonObject.addProperty("enoughWord", true);
                 context.getSSE().emit("RetourneCarte",jsonObject);
+                if (myCarte.id_couleur()==2){
+                    myTourDao.updateScore(uniqueCode, myTourDao.getMaxTour(uniqueCode));;
+                }
+
                 
             }
             else{

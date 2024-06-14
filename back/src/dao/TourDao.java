@@ -143,4 +143,57 @@ public class TourDao {
             return false;
         }
     }
+    public int getScoreUpdateValue(String uniqueCode, int tour) {
+        int res=-1;
+        try {        
+
+            PartieDao myPartieDao=new PartieDao();
+            Partie myPartie=myPartieDao.findByCode(uniqueCode);
+            int id =myPartie.id_partie();
+            if (myPartie != null) {
+                PolyNameDatabase myDatabase = new PolyNameDatabase();
+                String request = "SELECT word_to_find_nb,word_to_guess FROM tour WHERE id_partie = ? AND tour= ?";
+                PreparedStatement prepStat = myDatabase.prepareStatement(request);
+                prepStat.setInt(1, id);
+                prepStat.setInt(1, tour);
+                ResultSet results = prepStat.executeQuery();   
+                while (results.next()){
+                    final int word_to_find_nb=results.getInt("word_to_find_nb");
+                    final int word_to_guess=results.getInt("word_to_guess");
+                    if (word_to_guess==0){
+                        res=(word_to_find_nb+1)^2;
+                    }
+                    else{
+                        res=(word_to_find_nb+1)-word_to_guess;
+                    }
+                    }
+                } 
+                return res;
+            }
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return res;
+    }
+
+public void updateScore(String uniqueCode, int tour) {
+    System.out.println("uniqueCode : " + uniqueCode);
+    try {
+        
+        PartieDao myPartieDao=new PartieDao();
+        Partie myPartie=myPartieDao.findByCode(uniqueCode);
+        System.out.println("myPartie : " + myPartie);
+        if (myPartie != null) {
+            PolyNameDatabase myDatabase = new PolyNameDatabase();
+            String requestUpdate = "UPDATE partie SET score = ? WHERE unique_code = ?";
+            PreparedStatement prepStatUpdate = myDatabase.prepareStatement(requestUpdate);
+            prepStatUpdate.setInt(1, myPartie.score() + getScoreUpdateValue(uniqueCode, tour));
+            prepStatUpdate.setString(2, uniqueCode);
+            prepStatUpdate.executeUpdate();
+
+        }
+    } catch (Exception e) {
+        System.out.println(e.getMessage());
+    }
+}
 }
