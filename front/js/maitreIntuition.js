@@ -12,6 +12,9 @@ function newIndice(data,myMaitreIntuitionController){
 function endGameIntuition(data,myMaitreIntuitionController){
   myMaitreIntuitionController.endGame(data.unique_code)
 }
+function victoire(data,myMaitreIntuitionController){
+  console.log("victoire")
+}
 
 
 async function run(myMaitreIntuitionController){
@@ -24,6 +27,7 @@ async function run(myMaitreIntuitionController){
       await sseClientWaiting.subscribe("RetourneCarte", (data) => RetourneCarte(data, myMaitreIntuitionController)).then(console.log("RetourneCarte up"));
       await sseClientWaiting.subscribe("newIndice", (data) => newIndice(data, myMaitreIntuitionController)).then(console.log("newIndice up"));
       await sseClientWaiting.subscribe("endGame", (data) => endGameIntuition(data, myMaitreIntuitionController)).then(console.log("endGame up"));
+      await sseClientWaiting.subscribe("victoire", (data) => victoire(data, myMaitreIntuitionController)).then(console.log("victoire up"));
       window.addEventListener('unload', () => {
         sseClientWaiting.disconnect();
       });

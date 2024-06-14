@@ -207,7 +207,7 @@ public class CarteDao {
             PreparedStatement prepStat = myDatabase.prepareStatement(request);
             prepStat.setInt(1, 1);
             prepStat.setBoolean(2, false);
-            prepStat.setInt(1, id_partie);
+            prepStat.setInt(3, id_partie);
             ResultSet result=prepStat.executeQuery();
             if (!result.isBeforeFirst()) {
                 System.out.println("la partie est gagné ");
