@@ -92,8 +92,15 @@ public class CarteController {
                 jsonObject.addProperty("enoughWord", true);
                 jsonObject.addProperty("uniqueCode", uniqueCode);
                 context.getSSE().emit("RetourneCarte",jsonObject);
+                System.out.println(myTourDao.getWordToGuess(uniqueCode));
+                if (myTourDao.getWordToGuess(uniqueCode)==0){
+                    context.getSSE().emit("lastMot", null);
+                }
                 if (myCarte.id_couleur()==1){
                     myTourDao.updateScore(uniqueCode, myTourDao.getMaxTour(uniqueCode));;
+                }
+                else if(myCarte.id_couleur()==2){
+                    context.getSSE().emit("lastMot", null);
                 }
                 else if (myCarte.id_couleur()==3){
                     PartieDao myPartieDao=new PartieDao();

@@ -63,6 +63,31 @@ public class TourDao {
             return res;
         }
     }
+    public int getWordToGuess(String uniqueCode){
+        int res=-1;
+        try{
+            PartieDao myPartieDao=new PartieDao();
+            Partie myPartie=myPartieDao.findByCode(uniqueCode);
+            int id =myPartie.id_partie();
+            int tour=getMaxTour(uniqueCode);
+            PolyNameDatabase my_Database= new PolyNameDatabase();
+            String request="SELECT * FROM tour WHERE id_partie=? AND tour=? ";
+            PreparedStatement prepStat=my_Database.prepareStatement(request);
+            prepStat.setInt(1, id);
+            prepStat.setInt(2, tour);
+            ResultSet results = prepStat.executeQuery();   
+            while (results.next()){
+                res=results.getInt("word_to_guess");
+                }
+            return res;
+            }
+        
+        catch(Exception e){
+            System.out.println(e.getMessage());
+            return res;
+        }
+    }
+    
     public int getMaxTour(String uniqueCode) {
         int res=-1;
         try {            
