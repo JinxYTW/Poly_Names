@@ -33,7 +33,7 @@ class MaitreMotController {
       console.log("Cartes: ", cards);
       this.view.renderGrid(this.grid.getAllCards());
   
-      this.view.updatePlayersName(this.player1.getName(), this.player2.getName());
+      this.view.updatePlayersNames(this.player1.getName(), this.player2.getName());
       this.view.updateScore(this.player1.getScore(), this.player2.getScore());
       this.view.updateTurn(this.turn.getTurn());
     } else {

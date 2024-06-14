@@ -62,7 +62,7 @@ public class CarteDao {
                     res.add(myRecord);
                 }
                 else{
-                    Carte myRecord= new Carte(id_carte,mot,etat,position,2,id_mot,id_partie);
+                    Carte myRecord= new Carte(id_carte,mot,etat,position,4,id_mot,id_partie);
                     res.add(myRecord);
                 }
                 

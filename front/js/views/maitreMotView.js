@@ -72,6 +72,9 @@ class MaitreMotView {
       } else if (card.id_couleur === 3) {
         cardElement.classList.add('black');
       }
+      else if (card.id_couleur === 4) {
+        cardElement.classList.add('white');
+      }
 
       this.cardsContainer.appendChild(cardElement);
     });
