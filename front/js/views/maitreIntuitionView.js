@@ -67,9 +67,8 @@ class MaitreIntuitionView {
           const maitreIntuitionServices = new MaitreIntuitionServices();
           const response = await maitreIntuitionServices.submitCard(uniqueCode, idPosition);
   
-          // Ajoutez la classe CSS en fonction de la réponse de l'API
-          // Vous pouvez ici ajuster en fonction des paramètres reçus par votre réponse API
-          const cardData = { id_couleur: 1 }; // Exemple : ici vous devez passer la vraie couleur
+          
+          const cardData = { id_couleur: 1 }; 
           maitreIntuitionController.submitCard(
             cardData.id_carte,
             cardData.mot,
