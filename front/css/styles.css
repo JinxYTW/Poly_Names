@@ -167,6 +167,11 @@ button:disabled {
   margin: 20px auto;
 }
 
+.above-cards {
+  position: relative;
+  margin-bottom: 17%; /* Espacement sous l'élément surélevé */
+}
+
 .cards {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
@@ -225,6 +230,16 @@ button:disabled {
   border: 2px solid rgba(255, 255, 255, 1);
   color: #333; 
 }
+
+.card.contrast {
+  filter: brightness(1.5) hue-rotate(45deg) saturate(200%) sepia(20%);
+  border: 3px solid gold; 
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.8); 
+}
+
+
+
+
 
 /* Effets de survol */
 .card:hover {
