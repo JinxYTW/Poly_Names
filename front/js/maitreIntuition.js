@@ -12,7 +12,7 @@ function newIndice(data,myMaitreIntuitionController){
 function endGameIntuition(data,myMaitreIntuitionController){
   myMaitreIntuitionController.endGame(data.unique_code)
 }
-function victoire(data,myMaitreIntuitionController){
+function victoire(data,myMaitreIntuitionController){ // à modifier ------------
   console.log("victoire")
 }
 

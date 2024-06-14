@@ -12,6 +12,9 @@ function lastMot(data,myMaitreMotController){
 function endGameMot(data,myMaitreMotController){
   myMaitreMotController.endGame(data.unique_code)
 }
+function victoire(data,myMaitreMotController){ // à modifier ------------
+  console.log("victoire")
+}
 
 async function run(myMaitreMotController){
   const baseUrl = "localhost:8080"; 
@@ -23,6 +26,7 @@ async function run(myMaitreMotController){
       await sseClientWaiting.subscribe("RetourneCarte", (data) => RetourneCarte(data, myMaitreMotController)).then(console.log("RetourneCarte up"));
       await sseClientWaiting.subscribe("endGame", (data) => endGameMot(data, myMaitreMotController)).then(console.log("endGame up"));
       await sseClientWaiting.subscribe("lastMot", (data) => lastMot(data, myMaitreMotController)).then(console.log("lastMot up"));
+      await sseClientWaiting.subscribe("victoire", (data) => victoire(data, myMaitreMotController)).then(console.log("victoire up"));
       window.addEventListener('unload', () => {
         sseClientWaiting.disconnect();
       });
