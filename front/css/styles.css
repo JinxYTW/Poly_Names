@@ -169,7 +169,7 @@ button:disabled {
 
 .above-cards {
   position: relative;
-  margin-bottom: 17%; /* Espacement sous l'élément surélevé */
+  margin-bottom: 12%; /* Espacement sous l'élément surélevé */
 }
 
 .cards {

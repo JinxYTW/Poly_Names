@@ -16,6 +16,8 @@ class MaitreIntuitionController {
 
     this.view.bindScreenClick(this.handleScreenClick.bind(this));
 
+    document.getElementById('endTourButton').addEventListener('click', () => this.endTour(uniqueCode));
+  
 
     const uniqueCode = window.location.search.split('=')[1];
     console.log("Code unique MaitreIntuition: ",uniqueCode);
@@ -74,6 +76,7 @@ class MaitreIntuitionController {
   }
   endGame(uniqueCode){ // à modifier --------------------
     console.log("Fin de la partie ayant le code :"+uniqueCode);
+    window.location.href = 'gameover.html';
   }
 
   handleScreenClick() {
@@ -89,6 +92,19 @@ class MaitreIntuitionController {
   nextTurn() {
     this.turn.nextTurn();
     this.view.updateTurn(this.turn.getTurn());
+  }
+
+  async endTour(uniqueCode) {
+    try {
+      const response = await this.services.endTour(uniqueCode);
+      if (response) {
+        console.log('Tour terminé avec succès');
+      } else {
+        console.error('Erreur lors de la fin du tour');
+      }
+    } catch (error) {
+      console.error('Erreur lors de l\'appel à endTour:', error);
+    }
   }
 
  

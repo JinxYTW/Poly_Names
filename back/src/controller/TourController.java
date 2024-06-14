@@ -73,6 +73,7 @@ public class TourController {
             myDao.endTour(uniqueCode);
     
             WebServerResponse myResponse = context.getResponse();
+            context.getSSE().emit("lastMot", null);
             myResponse.ok("tour terminé");
         } catch (Exception e) {
             System.out.println(e.getMessage());

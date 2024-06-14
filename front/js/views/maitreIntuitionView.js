@@ -12,6 +12,7 @@ class MaitreIntuitionView {
       this.playerName2 = document.getElementById('playerName2');
       this.chat = document.getElementById('chat');
       this.chatContent = document.getElementById('chatContent');
+      this.endTourButton=document.getElementById('endTourButton');
 
       // Instance de MaitreMotServices
     this.maitreIntuitionServices = new MaitreIntuitionServices();
@@ -139,6 +140,7 @@ class MaitreIntuitionView {
       this.playerName2.classList.add('hidden');
       this.chat.classList.add('hidden');
       this.chatContent.classList.add('hidden');
+      this.endTourButton.classList.add('hidden');
     }
   
     showGameElements() {
@@ -148,6 +150,7 @@ class MaitreIntuitionView {
       this.playerName2.classList.remove('hidden');
       this.chat.classList.remove('hidden');
       this.chatContent.classList.remove('hidden');
+      this.endTourButton.classList.remove('hidden');
     }
 
     addHintToChat(hint, nbMots) {

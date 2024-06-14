@@ -60,6 +60,7 @@ class MaitreMotController {
   }
   endGame(uniqueCode){ // à modifier --------------------
     console.log("Fin de la partie ayant le code :"+uniqueCode);
+    window.location.href = 'gameover.html';
   }
   async submitCard(id_carte, mot, etat, position, id_couleur, id_mot, id_partie, uniqueCode) {
     if (id_couleur == 1) {
