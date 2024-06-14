@@ -6,7 +6,7 @@ class WaitingController {
     }
 
     giveRoleChallenger(role) {
-        console.log("Role p2: " + role);
+        
         this.waitingView.giveRoleChallenger(role);
     }
 }

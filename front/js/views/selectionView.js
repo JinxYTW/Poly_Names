@@ -13,7 +13,7 @@ class SelectionView {
   }
 
   async chooseRole(role) {
-    console.log('chooseRoleView');
+    
     try {
       const { selectedRole, room } = await this.selectionServices.chooseRole(role);
       

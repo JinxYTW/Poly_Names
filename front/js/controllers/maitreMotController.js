@@ -23,14 +23,13 @@ class MaitreMotController {
   }
 
   async loadAndDisplayCards(uniqueCode) {
-    console.log("Chargement et affichage des cartes");
+    
     const cards = await this.services.getCartes(uniqueCode);
-    console.log("Type des cartes reçues:", typeof cards);
-    console.log("Cartes reçues:", cards);
+    
     
     if (Array.isArray(cards)) {
       this.grid.setCards(cards);
-      console.log("Cartes: ", cards);
+      
       this.view.renderGrid(this.grid.getAllCards());
   
       this.view.updatePlayersNames(this.player1.getName(), this.player2.getName());
@@ -91,19 +90,19 @@ class MaitreMotController {
 
   async handleHintSubmission() {
     const hint = this.view.hint.value;
-    console.log("Indice soumis:", hint);
+    
     const nbMots = this.view.nbMots.value;
-    console.log("Nombre de mots soumis:", nbMots);
+    
     const uniqueCode = window.location.search.split('=')[1];
-    console.log("Code unique MaitreMot: ",uniqueCode);
+    
 
     if (hint && nbMots > 0) {
-      console.log("Soumission de l'indice");
+      
       const response = await this.services.submitHint(hint, nbMots, uniqueCode);
-      console.log("Réponse de l'API:", response);
+      
       this.hideButton();
 
-      console.log(response);
+      
 
       if (response.status === "success") {
         this.view.addHintToChat(hint, nbMots);

@@ -20,7 +20,7 @@ class MaitreIntuitionController {
   
 
     const uniqueCode = window.location.search.split('=')[1];
-    console.log("Code unique MaitreIntuition: ",uniqueCode);
+    
     this.loadAndDisplayCards(uniqueCode);
     
     
@@ -29,14 +29,13 @@ class MaitreIntuitionController {
 
 
   async loadAndDisplayCards(uniqueCode) {
-    console.log("Chargement et affichage des cartes");
+    
     const cards = await this.services.getCartes(uniqueCode);
-    console.log("Type des cartes reçues:", typeof cards);
-    console.log("Cartes reçues:", cards);
+    
     
     if (Array.isArray(cards)) {
       this.grid.setCards(cards);
-      console.log("Cartes: ", cards);
+      
       this.view.renderGrid(this.grid.getAllCards());
   
       this.view.updatePlayersName(this.player1.getName(), this.player2.getName());
@@ -50,28 +49,21 @@ class MaitreIntuitionController {
   async submitCard(id_carte, mot, etat, position, id_couleur, id_mot, id_partie, uniqueCode) {
     this.view.updateGameInfo()
     if (id_couleur == 1) {
-      console.log(id_carte);
-      console.log(mot);
-      console.log(etat);
-      console.log(position);
-      console.log(id_couleur);
-      console.log(id_mot);
-      console.log(id_partie);
+      
 
       // Mise à jour de la classe de la carte
       this.view.updateCardColor(position, 'blue'); 
     } else if (id_couleur == 2) {
-      console.log("carte grise");
+      
       this.view.updateCardColor(position, 'grey');
       this.services.endTour(uniqueCode);
     } else if (id_couleur == 3) {
-      console.log("carte noire");
+      
       this.view.updateCardColor(position, 'black'); 
     }
   }
   showIndice(indice,nbWord){ 
-    console.log(indice);
-    console.log(nbWord);
+    
     this.view.addHintToChat(indice,nbWord);
     
   }

@@ -98,7 +98,7 @@ class MaitreIntuitionView {
   
         indexBadge.addEventListener('click', async (event) => {
           const idPosition = event.target.closest('span').dataset.idPosition;
-          console.log("Span cliqué avec id_position:", idPosition);
+          
   
           const uniqueCode = window.location.search.split('=')[1];
           const maitreIntuitionServices = new MaitreIntuitionServices();

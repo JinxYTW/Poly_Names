@@ -4,10 +4,9 @@ class SelectionServices {
   }
 
   async chooseRole(role) {
-    console.log("ok")
-    console.log('role:', role);
+    
     try {
-      console.log("ok2")  
+       
       const roomId = this.getRoomIdFromURL();
       const response = await fetch(`http://127.0.0.1:8080/api/chooseRole/${role}/${roomId}`);
       if (!response.ok) {

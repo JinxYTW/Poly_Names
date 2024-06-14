@@ -1,6 +1,5 @@
 import controller.CarteController;
-import controller.CouleurController;
-import controller.DictionnaireController;
+
 import controller.JoueurController;
 import controller.PartieController;
 import controller.TourController;
@@ -40,16 +39,12 @@ public class App {
 
         
 
-        DictionnaireController my_controller_dictionnaire= new DictionnaireController();
-        CouleurController my_controller_couleur= new CouleurController();
-        PartieController my_controller_partie= new PartieController();
+        
         CarteController my_controller_carte= new CarteController();
         PartieController my_controller= new PartieController();
         TourController myTourController= new TourController();
 
-        webserver.getRouter().get("/api/dictionnaire",(WebServerContext context) -> { my_controller_dictionnaire.findAll(context); } );
-        webserver.getRouter().get("/api/couleur",(WebServerContext context) -> { my_controller_couleur.findAll(context); } );
-        webserver.getRouter().get("/api/partie",(WebServerContext context) -> { my_controller_partie.findAll(context); } );
+        
         
         webserver.getRouter().get("/api/createLobby", (WebServerContext context) -> {
             String uniqueCode=my_controller.createLobbyCode(context);
@@ -77,22 +72,22 @@ public class App {
 
 
         webserver.getRouter().get("/api/getCartes/:uniqueCode", (WebServerContext context) -> {
-            System.out.println("uniqueCodeRouter : " + context.getRequest().getParam("uniqueCode"));
+            
             String uniqueCode = context.getRequest().getParam("uniqueCode");
             my_controller_carte.getCards(context,uniqueCode,false);
         });
         webserver.getRouter().get("/api/getIndice/:uniqueCode", (WebServerContext context) -> {
-            System.out.println("uniqueCodeRouter : " + context.getRequest().getParam("uniqueCode"));
+            
             String uniqueCode = context.getRequest().getParam("uniqueCode");
             myTourController.getIndice(context,uniqueCode);
         });
         webserver.getRouter().get("/api/getCartesM/:uniqueCode", (WebServerContext context) -> {
-            System.out.println("uniqueCodeRouter : " + context.getRequest().getParam("uniqueCode"));
+            
             String uniqueCode = context.getRequest().getParam("uniqueCode");
             my_controller_carte.getCardsM(context,uniqueCode);
         });
         webserver.getRouter().get("/api/getCartesI/:uniqueCode", (WebServerContext context) -> {
-            System.out.println("uniqueCodeRouter : " + context.getRequest().getParam("uniqueCode"));
+            
             String uniqueCode = context.getRequest().getParam("uniqueCode");
             my_controller_carte.getCardsI(context,uniqueCode);
         });
@@ -100,7 +95,7 @@ public class App {
         webserver.getRouter().post("/api/submitCard/:uniqueCode/:position", (WebServerContext context) -> {
             String uniqueCode = context.getRequest().getParam("uniqueCode");
             int position = Integer.parseInt(context.getRequest().getParam("position"));
-            System.out.println("uniqueCodeRouter : " + uniqueCode);
+            
             my_controller_carte.submitCard(context, uniqueCode, position);
         });
         

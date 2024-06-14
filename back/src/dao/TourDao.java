@@ -4,7 +4,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
-import javax.swing.text.StyledEditorKit.BoldAction;
+
 
 import database.PolyNameDatabase;
 import models.Partie;
@@ -183,7 +183,7 @@ public class TourDao {
                 while (results.next()){
                     final int word_to_find_nb=results.getInt("word_to_find_nb");
                     final int word_to_guess=results.getInt("word_to_guess");
-                    System.out.println("word to find : "+word_to_find_nb+"  word to guess: "+word_to_guess);
+                    
                     if (word_to_guess==0){
                         res=(word_to_find_nb+1)*(word_to_find_nb+1);
                     }
