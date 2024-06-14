@@ -4,6 +4,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
+import javax.swing.text.StyledEditorKit.BoldAction;
+
 import database.PolyNameDatabase;
 import models.Partie;
 import models.Tour;
@@ -75,6 +77,38 @@ public class TourDao {
             prepStat.executeUpdate();
         } catch (Exception e) {
             System.out.println(e.getMessage());
+        }
+    }
+    public Boolean decrementeWordtoGuess( String uniqueCode) {
+        try {
+            PartieDao myPartieDao = new PartieDao();
+            Partie myPartie = myPartieDao.findByCode(uniqueCode);
+            int idPartie = myPartie.id_partie();
+            int res=0;
+
+            PolyNameDatabase myDatabase = new PolyNameDatabase();
+            String request = "SELECT word_to_guess FROM tour WHERE id_partie";
+            PreparedStatement prepStat = myDatabase.prepareStatement(request);
+            prepStat.setInt(1, idPartie);
+            ResultSet results= prepStat.executeQuery();
+            while (results.next()){
+                final int word_to_guess=results.getInt("word_to_guess");
+                res=word_to_guess;
+                }
+            if (res==0){
+                return false;
+            }
+            else{
+                String requestUpdate = "UPDATE tour SET word_to_guess = ? WHERE unique_code = ?";
+                PreparedStatement prepStatUpdate = myDatabase.prepareStatement(requestUpdate);
+                prepStatUpdate.setInt(1, res- 1);
+                prepStatUpdate.setString(2, uniqueCode);
+                prepStatUpdate.executeUpdate();
+                return true;
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return false;
         }
     }
 }

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import com.google.gson.JsonObject;
 
 import dao.CarteDao;
+import dao.TourDao;
 import models.Carte;
 
 import webserver.WebServerContext;
@@ -72,21 +73,36 @@ public class CarteController {
 
     public void submitCard(WebServerContext context, String uniqueCode, int position) {
         try {
-            CarteDao myDao = new CarteDao();
-            myDao.submitCard(uniqueCode, position);
-            Carte myCarte=myDao.findByCodeAndPosition(uniqueCode,position,true);
-            WebServerResponse myResponse = context.getResponse();
-            myResponse.ok("Carte soumise");
-        
-            JsonObject jsonObject = new JsonObject();
-            jsonObject.addProperty("id_carte", myCarte.id_carte());
-            jsonObject.addProperty("mot", myCarte.mot());
-            jsonObject.addProperty("etat", myCarte.etat());
-            jsonObject.addProperty("position", myCarte.position());
-            jsonObject.addProperty("id_couleur", myCarte.id_couleur());
-            jsonObject.addProperty("id_mot", myCarte.id_mot());
-            jsonObject.addProperty("id_partie", myCarte.id_partie());
-            context.getSSE().emit("RetourneCarte",jsonObject);
+            TourDao myTourDao = new TourDao();
+            if (myTourDao.decrementeWordtoGuess(uniqueCode)){
+                CarteDao myDao = new CarteDao();
+                myDao.submitCard(uniqueCode, position);
+                Carte myCarte=myDao.findByCodeAndPosition(uniqueCode,position,true);
+                WebServerResponse myResponse = context.getResponse();
+                myResponse.ok("Carte soumise");
+            
+                JsonObject jsonObject = new JsonObject();
+                jsonObject.addProperty("id_carte", myCarte.id_carte());
+                jsonObject.addProperty("mot", myCarte.mot());
+                jsonObject.addProperty("etat", myCarte.etat());
+                jsonObject.addProperty("position", myCarte.position());
+                jsonObject.addProperty("id_couleur", myCarte.id_couleur());
+                jsonObject.addProperty("id_mot", myCarte.id_mot());
+                jsonObject.addProperty("id_partie", myCarte.id_partie());
+                jsonObject.addProperty("enoughWord", true);
+                context.getSSE().emit("RetourneCarte",jsonObject);
+                
+            }
+            else{
+                WebServerResponse myResponse = context.getResponse();
+                myResponse.json("Plus de mot disponible à deviner");
+                
+            
+                JsonObject jsonObject = new JsonObject();
+                jsonObject.addProperty("enoughWord", true);
+                context.getSSE().emit("RetourneCarte",jsonObject);
+                
+            }
             
         } catch (Exception e) {
             System.out.println(e.getMessage());

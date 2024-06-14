@@ -2,7 +2,9 @@ import { SSEClient } from '../libs/sse-client.js';
 import { MaitreIntuitionController} from './controllers/maitreIntuitionController.js';
 
 function roleGivenChallenger(data,myMaitreIntuitionController){
+  if(data.enoughWord==true){
     myMaitreIntuitionController.submitCard(data.id_carte,data.mot,data.eta,data.position,data.id_couleur,data.id_mot,data.id_partie)
+  }
 }
 
 async function run(myMaitreIntuitionController){
