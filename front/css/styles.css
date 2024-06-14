@@ -167,6 +167,11 @@ button:disabled {
   margin: 20px auto;
 }
 
+.above-cards {
+  position: relative;
+  margin-bottom: 17%; /* Espacement sous l'élément surélevé */
+}
+
 .cards {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
