@@ -4,6 +4,7 @@ import { Player } from '../models/player.js';
 import { Turn } from '../models/turn.js';
 import { MaitreIntuitionServices } from '../../services/maitreintuition-services.js';
 
+
 class MaitreIntuitionController {
     constructor() {
     this.view = new MaitreIntuitionView();
@@ -56,6 +57,8 @@ class MaitreIntuitionController {
   showIndice(indice,nbWord){ // à modifier --------------------
     console.log(indice);
     console.log(nbWord);
+    this.view.addHintToChat(indice,nbWord);
+    
   }
 
   handleScreenClick() {

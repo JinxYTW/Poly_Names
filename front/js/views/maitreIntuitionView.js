@@ -101,6 +101,12 @@ class MaitreIntuitionView {
       this.chat.classList.remove('hidden');
       this.chatContent.classList.remove('hidden');
     }
+
+    addHintToChat(hint, nbMots) {
+      const hintElement = document.createElement('div');
+      hintElement.textContent = `L'indice est ${hint}, et correspond à ${nbMots} mots`;
+      this.chatContent.appendChild(hintElement);
+    }
   
 }
   
