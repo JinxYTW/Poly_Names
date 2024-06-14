@@ -24,6 +24,7 @@ class MaitreIntuitionView {
     }
     async updateGameInfo() {
       try {
+        console.log("les scores devrait être mis à jour")
         const uniqueCode = window.location.search.split('=')[1];
         const info = await this.maitreIntuitionServices.getInfo(uniqueCode);
   

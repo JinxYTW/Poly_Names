@@ -61,7 +61,8 @@ class MaitreMotController {
   endGame(uniqueCode){ // à modifier --------------------
     console.log("Fin de la partie ayant le code :"+uniqueCode);
   }
-  async submitCard(id_carte, mot, etat, position, id_couleur, id_mot, id_partie, uniqueCode) {
+  async submitCard(id_carte, mot, etat, position, id_couleur, id_mot, id_partie, uniqueCode) {    
+    this.view.updateGameInfo()
     if (id_couleur == 1) {
       console.log(id_carte);
       console.log(mot);

@@ -46,6 +46,7 @@ class MaitreIntuitionController {
   }
 
   async submitCard(id_carte, mot, etat, position, id_couleur, id_mot, id_partie, uniqueCode) {
+    this.view.updateGameInfo()
     if (id_couleur == 1) {
       console.log(id_carte);
       console.log(mot);
@@ -54,7 +55,7 @@ class MaitreIntuitionController {
       console.log(id_couleur);
       console.log(id_mot);
       console.log(id_partie);
-      
+
       // Mise à jour de la classe de la carte
       this.view.updateCardColor(position, 'blue'); 
     } else if (id_couleur == 2) {
