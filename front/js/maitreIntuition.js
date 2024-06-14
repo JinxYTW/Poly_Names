@@ -14,6 +14,7 @@ function endGameIntuition(data,myMaitreIntuitionController){
 }
 function victoire(data,myMaitreIntuitionController){ // à modifier ------------
   console.log("victoire")
+  myMaitreIntuitionController.victoire(data.unique_code)
 }
 
 

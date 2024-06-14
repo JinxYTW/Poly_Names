@@ -14,6 +14,7 @@ function endGameMot(data,myMaitreMotController){
 }
 function victoire(data,myMaitreMotController){ // à modifier ------------
   console.log("victoire")
+  myMaitreMotController.victoire(data.unique_code)
 }
 
 async function run(myMaitreMotController){

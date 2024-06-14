@@ -69,15 +69,20 @@ class MaitreIntuitionController {
       this.view.updateCardColor(position, 'black'); 
     }
   }
-  showIndice(indice,nbWord){ // à modifier --------------------
+  showIndice(indice,nbWord){ 
     console.log(indice);
     console.log(nbWord);
     this.view.addHintToChat(indice,nbWord);
     
   }
-  endGame(uniqueCode){ // à modifier --------------------
+  endGame(uniqueCode){ 
     console.log("Fin de la partie ayant le code :"+uniqueCode);
     window.location.href = 'gameover.html';
+  }
+
+  victoire(uniqueCode){
+    console.log("victoire")
+    window.location.href = 'victoire.html';
   }
 
   handleScreenClick() {

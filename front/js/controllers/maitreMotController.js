@@ -58,9 +58,13 @@ class MaitreMotController {
     player.updateScore(points);
     this.view.updateScore(this.player1.getScore(), this.player2.getScore());
   }
-  endGame(uniqueCode){ // à modifier --------------------
+  endGame(uniqueCode){ 
     console.log("Fin de la partie ayant le code :"+uniqueCode);
     window.location.href = 'gameover.html';
+  }
+  victoire(){
+    console.log("victoire")
+    window.location.href = 'victoire.html';
   }
   async submitCard(id_carte, mot, etat, position, id_couleur, id_mot, id_partie, uniqueCode) {    
     this.view.updateGameInfo()
