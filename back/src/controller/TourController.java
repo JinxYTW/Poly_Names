@@ -35,10 +35,9 @@ public class TourController {
             // Extraction des valeurs spécifiques du JSON
             String indice = requestBody.indice();
             int wordToFindNb = requestBody.wordToFindNb();
-            int tour=requestBody.tour();
     
             TourDao myDao = new TourDao();
-            myDao.addTour(indice, wordToFindNb, uniqueCode,tour);
+            myDao.addTour(indice, wordToFindNb, uniqueCode);
     
             WebServerResponse myResponse = context.getResponse();
             myResponse.ok("Indice ajouté");

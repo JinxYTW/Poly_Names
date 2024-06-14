@@ -102,7 +102,7 @@ public class PartieController {
             PartieDao myPartieDao = new PartieDao();
             TourDao myTourDao= new TourDao();
             int score = myPartieDao.getScore(uniqueCode);
-            int tour = myTourDao.getTour(uniqueCode);
+            int tour = myTourDao.getMaxTour(uniqueCode);
             WebServerResponse myResponse = context.getResponse();
             String res="Score : "+score+" Tour : "+tour;
             myResponse.json(res);

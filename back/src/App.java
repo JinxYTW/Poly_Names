@@ -50,6 +50,7 @@ public class App {
         CarteController my_controller_carte= new CarteController();
 
         PartieController my_controller= new PartieController();
+        TourController myTourController= new TourController();
         webserver.getRouter().get("/api/createLobby", (WebServerContext context) -> {
             String uniqueCode=my_controller.createLobbyCode(context);
             my_controller_carte.genererCarte(uniqueCode);
@@ -78,8 +79,6 @@ public class App {
             String uniqueCode = context.getRequest().getParam("uniqueCode");
             my_controller.getInfo(context, uniqueCode);
         });
-
-
 
 
         webserver.getRouter().get("/api/getCartes/:uniqueCode", (WebServerContext context) -> {

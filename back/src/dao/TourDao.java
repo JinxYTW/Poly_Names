@@ -35,7 +35,7 @@ public class TourDao {
             return res;
         }
     }
-    public int getTour(String uniqueCode) {
+    public int getMaxTour(String uniqueCode) {
         int res=-1;
         try {            
             PartieDao myPartieDao=new PartieDao();
@@ -43,12 +43,12 @@ public class TourDao {
             int id =myPartie.id_partie();
             if (myPartie != null) {
                 PolyNameDatabase myDatabase = new PolyNameDatabase();
-                String request = "SELECT * FROM tour WHEN id_partie== ?";
+                String request = "SELECT MAX(tour) AS max_tour FROM tour WHERE id_partie = ?";
                 PreparedStatement prepStat = myDatabase.prepareStatement(request);
                 prepStat.setInt(1, id);
                 ResultSet results = prepStat.executeQuery();   
                 while (results.next()){
-                    final int tour=results.getInt("tour");
+                    final int tour=results.getInt("max_tour");
                     res=tour;
                     }
                 } 
@@ -60,13 +60,15 @@ public class TourDao {
         return res;
     }
 
-    public void addTour(String indice, int wordToFindNb, String uniqueCode, int tour) {
+    public void addTour(String indice, int wordToFindNb, String uniqueCode) {
         try {
             PartieDao myPartieDao = new PartieDao();
             Partie myPartie = myPartieDao.findByCode(uniqueCode);
             int idPartie = myPartie.id_partie();
             int word_to_guess= wordToFindNb + 1;
-
+            int tour=getMaxTour(uniqueCode)+1;
+            System.out.println(tour);
+            System.out.println(getMaxTour(uniqueCode));
             PolyNameDatabase myDatabase = new PolyNameDatabase();
             String request = "INSERT INTO tour (indice, word_to_find_nb,word_to_guess, id_partie, tour) VALUES (?,?,?, ?, ?)";
             PreparedStatement prepStat = myDatabase.prepareStatement(request);
@@ -76,7 +78,7 @@ public class TourDao {
             prepStat.setInt(4, idPartie);
             prepStat.setInt(5, tour);
             prepStat.executeUpdate();
-            
+
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
