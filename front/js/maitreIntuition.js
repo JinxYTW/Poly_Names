@@ -1,7 +1,7 @@
 import { SSEClient } from '../libs/sse-client.js';
 import { MaitreIntuitionController} from './controllers/maitreIntuitionController.js';
 
-function roleGivenChallenger(data,myMaitreIntuitionController){
+function RetourneCarte(data,myMaitreIntuitionController){
   if(data.enoughWord==true){
     myMaitreIntuitionController.submitCard(data.id_carte,data.mot,data.eta,data.position,data.id_couleur,data.id_mot,data.id_partie,data.uniqueCode)
   }
@@ -21,7 +21,7 @@ async function run(myMaitreIntuitionController){
   try {
       await sseClientWaiting.connect();
       //await sseClient.subscribe("lobbyHost", fonctionHost).then(console.log("abonnement canal lobbyHost"));
-      await sseClientWaiting.subscribe("RetourneCarte", (data) => roleGivenChallenger(data, myMaitreIntuitionController)).then(console.log("RetourneCarte up"));
+      await sseClientWaiting.subscribe("RetourneCarte", (data) => RetourneCarte(data, myMaitreIntuitionController)).then(console.log("RetourneCarte up"));
       await sseClientWaiting.subscribe("newIndice", (data) => newIndice(data, myMaitreIntuitionController)).then(console.log("newIndice up"));
       await sseClientWaiting.subscribe("endGame", (data) => endGameIntuition(data, myMaitreIntuitionController)).then(console.log("endGame up"));
       window.addEventListener('unload', () => {
