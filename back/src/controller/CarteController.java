@@ -100,6 +100,9 @@ public class CarteController {
                     myTourDao.updateScore(uniqueCode, myTourDao.getMaxTour(uniqueCode));;
                     if (myDao.isPartieFinish(uniqueCode)){
                         System.out.println("whouou t'as gagné");
+                                
+                        JsonObject myJson = new JsonObject();
+                        context.getSSE().emit("victoire", myJson);
                     }
                 }
                 else if(myCarte.id_couleur()==2){
