@@ -1,9 +1,15 @@
 package dao;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.UUID;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 import com.google.gson.JsonObject;
 
@@ -147,6 +153,27 @@ public class PartieDao {
             prepStat.setInt(1, -1); 
             prepStat.setString(2, uniqueCode); 
             prepStat.executeUpdate();
+            schedulePartieDeletion(uniqueCode);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    public void schedulePartieDeletion(String uniqueCode) {
+        ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
+
+        scheduler.schedule(() -> deletePartie(uniqueCode), 5, TimeUnit.SECONDS);
+
+        scheduler.shutdown();
+    }
+    public void deletePartie(String uniqueCode){
+        try {
+            
+            PolyNameDatabase myDatabase = new PolyNameDatabase();
+            String deleteSQL = "DELETE FROM partie WHERE unique_code = ?";
+            PreparedStatement prepStatUpdate = myDatabase.prepareStatement(deleteSQL);
+            prepStatUpdate.setString(1, uniqueCode);
+            prepStatUpdate.executeUpdate();
+            System.out.println("La partie avec le code unique " + uniqueCode + " a été supprimée avec succès.");
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
