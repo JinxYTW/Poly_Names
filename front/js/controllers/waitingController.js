@@ -4,7 +4,7 @@ class WaitingController {
     constructor() {
         this.waitingView = new WaitingView();
     }
-    giveRoleChallenger(role){
+    giveRoleChallenger(role){ // à modifier --------------------
         console.log(role);
     }
 }

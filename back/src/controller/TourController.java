@@ -1,6 +1,8 @@
 package controller;
 import java.util.ArrayList;
 
+import com.google.gson.JsonObject;
+
 import dao.TourDao;
 import models.Tour;
 
@@ -41,6 +43,24 @@ public class TourController {
     
             WebServerResponse myResponse = context.getResponse();
             myResponse.ok("Indice ajouté");
+            
+            JsonObject jsonObject = new JsonObject();
+            jsonObject.addProperty("indice", indice);
+            jsonObject.addProperty("wordToFindNb", wordToFindNb);
+            context.getSSE().emit("newIndice",jsonObject);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            WebServerResponse myResponse = context.getResponse();
+            myResponse.json("{\"status\":\"error\"}");
+        }
+    }
+    public void getIndice(WebServerContext context, String uniqueCode) {
+        try {
+            TourDao myDao = new TourDao();
+            Tour myTour=myDao.getIndice(uniqueCode);
+    
+            WebServerResponse myResponse = context.getResponse();
+            myResponse.json(myTour);
         } catch (Exception e) {
             System.out.println(e.getMessage());
             WebServerResponse myResponse = context.getResponse();

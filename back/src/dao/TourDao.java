@@ -35,6 +35,34 @@ public class TourDao {
             return res;
         }
     }
+    public Tour getIndice(String uniqueCode){
+        Tour res= new Tour(0, null, 0, 0);
+        try{
+            PartieDao myPartieDao=new PartieDao();
+            Partie myPartie=myPartieDao.findByCode(uniqueCode);
+            int id =myPartie.id_partie();
+            int tour=getMaxTour(uniqueCode);
+            PolyNameDatabase my_Database= new PolyNameDatabase();
+            String request="SELECT * FROM tour WHERE id_partie=? AND tour=? ";
+            PreparedStatement prepStat=my_Database.prepareStatement(request);
+            prepStat.setInt(1, id);
+            prepStat.setInt(2, tour);
+            ResultSet results = prepStat.executeQuery();   
+            while (results.next()){
+                final int id_tour=results.getInt("id_tour");
+                final String indice= results.getString("indice");
+                final int word_to_find_nb=results.getInt("word_to_find_nb");
+                final int id_partie=results.getInt("id_partie");
+                Tour myRecord = new Tour(id_tour,indice,word_to_find_nb,id_partie);
+                res=myRecord;
+                }
+                return res;
+            }
+        catch(Exception e){
+            System.out.println(e.getMessage());
+            return res;
+        }
+    }
     public int getMaxTour(String uniqueCode) {
         int res=-1;
         try {            
