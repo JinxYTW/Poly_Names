@@ -53,6 +53,17 @@ class MaitreMotController {
   endGame(uniqueCode){ // à modifier --------------------
     console.log("Fin de la partie ayant le code :"+uniqueCode);
   }
+  async submitCard(id_carte, mot, etat, position, id_couleur, id_mot, id_partie, uniqueCode) {
+    if (id_couleur == 1) {
+      console.log(id_carte);
+      console.log(mot);
+      console.log(etat);
+      console.log(position);
+      console.log(id_couleur);
+      console.log(id_mot);
+      console.log(id_partie);
+    }
+  }
   nextTurn() {
     this.turn.nextTurn();
     this.view.updateTurn(this.turn.getTurn());

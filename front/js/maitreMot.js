@@ -1,6 +1,11 @@
 import { MaitreMotController } from './controllers/maitreMotController.js';
 import { SSEClient } from '../libs/sse-client.js';
 
+function RetourneCarte(data,myMaitreMotController){
+  if(data.enoughWord==true){
+    myMaitreMotController.submitCard(data.id_carte,data.mot,data.eta,data.position,data.id_couleur,data.id_mot,data.id_partie,data.uniqueCode)
+  }
+}
 function endGameMot(data,myMaitreMotController){
   myMaitreMotController.endGame(data.unique_code)
 }
@@ -13,6 +18,7 @@ async function run(myMaitreMotController){
       await sseClientWaiting.connect();
       //await sseClient.subscribe("lobbyHost", fonctionHost).then(console.log("abonnement canal lobbyHost"));
       await sseClientWaiting.subscribe("endGame", (data) => endGameMot(data, myMaitreMotController)).then(console.log("endGame up"));
+      await sseClientWaiting.subscribe("RetourneCarte", (data) => RetourneCarte(data, myMaitreMotController)).then(console.log("RetourneCarte up"));
       window.addEventListener('unload', () => {
         sseClientWaiting.disconnect();
       });
